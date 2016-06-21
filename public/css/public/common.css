@@ -1,0 +1,270 @@
+@charset "utf-8";
+/*--base style--*/
+*{margin:0;padding:0;
+-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+-webkit-touch-callout: none;}
+body{
+	color:#333;
+	background:#f5f5f5;
+	font-size: 14px;
+	line-height: 1.5;
+}
+body,input,textarea,button{
+	font:12px/1.5 "Microsoft Yahei",arial,sans-serif;
+	-webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+li{list-style-type: none;}
+a{text-decoration: none;}
+/*--common style--*/
+.hide{
+	display: none !important; 
+}
+.fl{
+	float:left;
+}
+.fr{
+	float: right;
+}
+.f1{
+	flex: 1;
+}
+.tc{
+	text-align: center;
+}
+.w50{
+	width: 50px;
+}
+.w80{
+	width: 80px;
+}
+
+/*head*/
+.header{
+	position: fixed;
+	z-index: 99;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+	background: #0382D4;
+	font-size: 18px;
+	color: #fff;
+}
+/*main*/
+.main{
+	width: 100%;
+	padding: 40px 0 60px 0;
+}
+/*index*/
+.sections{
+	width: 96%;
+	margin: 20px 2%;
+}
+.sections a{
+	display: block;
+	margin: 10px 0;
+	width: 100%;
+	height: 40px;
+	border: 1px solid #2096DA;
+	background: #2DA1E4;
+	color: #fff;
+	font-size: 18px;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 3px;
+}
+.sections a:hover{
+	background: #2880B3;
+}
+/*user*/
+.response-list,
+.request-list,
+.user-list{
+	padding-bottom: 40px;
+}
+.response-list li,
+.request-list li,
+.user-list li{
+	display: flex;
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+}
+.response-list li span,
+.request-list li span,
+.user-list li span{
+	display: inline-block;
+	vertical-align: top;
+	padding: 0 5px;
+	height: 32px;
+	line-height: 32px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.response-list li a,
+.request-list li a,
+.user-list li button{
+	display: inline-block;
+	line-height: 28px;
+	height: 28px;
+	padding: 0 10px;
+	color: #fff;
+	background-color: #336699;
+	border-radius: 3px;
+	border:none;
+}
+.response-list li a{
+	background-color: #44B384;
+}
+.response-list{
+	width: 110%;
+	margin:-10px;
+	background-color: #fff;
+	padding-bottom: 0;
+}
+/*form*/
+.form{
+	width: 96%;
+	margin: 20px 2%;
+}
+.form input,
+.form select{
+	padding: 0 5px;
+	height: 32px;
+	line-height: 32px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+.form button{
+	height: 32px;
+	line-height: 32px;
+}
+.form a{
+	display: block;
+	color: #0382D4;
+	text-align: center;
+}
+.form.login-form{
+	width: 80%;
+	margin: 20px 10%;
+}
+.form.login-form input,
+.form.login-form button,
+.form.login-form a{
+	margin: 10px 0;
+	width: 100%;
+}
+.form.data-form .btn-a{
+	color: #fff;
+	height: 32px;
+	line-height: 32px;
+	background: #0382D4;
+	border-radius: 5px;
+}
+.form.data-form .btn-a:hover{
+	background: #2880B3;
+}
+.form.data-form .form-line{
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #ccc;
+}
+.form.data-form .line-title{
+	padding: 0 10px;
+	height: 32px;
+	line-height: 32px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	background: #62ACDC;
+	font-size: 16px;
+	color: #fff;
+	border-radius: 3px;
+}
+.form.data-form .form-pit{
+	margin-top: 10px;
+	padding:10px;
+	background: #fff;
+	border-radius: 5px;
+}
+.form.data-form .form-subpit{
+	margin: 10px 0;
+	width: 100%;
+	overflow: hidden;
+}
+.form.data-form .form-subpit label{
+	display: block;
+	float:left;
+	width: 30%;
+	height: 32px;
+	line-height: 32px;
+}
+.form.data-form .form-subpit input,
+.form.data-form .form-subpit select{
+	float: left;
+	width: 70%;
+}
+.form.data-form .memo{
+	display: block;
+	margin: 10px 0 0 0;
+	padding: 0 5px;
+    width: 100%;
+    height: 72px;
+    line-height: 24px;
+    resize: vertical;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+.form.data-form button{
+	width: 100%;
+	height: 32px;
+}
+.form.data-form .addbtn{
+	margin-top: 10px;
+}
+.form-calc{
+	margin: 10px 0;
+}
+.form-calc div,
+.form-calc label{
+	line-height: 24px;
+}
+.form.data-form .full{
+	margin: 5px 0;
+	width: 100%;
+}
+/*transition*/
+.sections a{
+	-webkit-transition:all 0.3s ease;
+	-moz-transition:all 0.3s ease;
+	-o-transition:all 0.3s ease;
+	transition:all 0.3s ease;
+}
+.toptab{
+	margin: 30px 10% 0 10%;
+	overflow: hidden;
+}
+.toptab li{
+	display:block;
+	float: left;
+	width: 50%;
+	box-sizing: border-box;
+	line-height: 32px;
+	text-align: center; 
+	color: #0382D4;
+	border: 1px solid #0382D4;
+	cursor: pointer;
+	transition: all .3s ease;
+	-webkit-transition: all .3s ease;
+	-moz-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	-ms-transition: all .3s ease;
+}
+.toptab li.on,
+.toptab li:hover{
+	color: #fff;
+	background-color: #0382D4;
+}

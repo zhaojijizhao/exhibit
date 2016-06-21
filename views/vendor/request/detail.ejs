@@ -1,0 +1,247 @@
+<% include ../../layout/head.ejs %>
+<div class="main" id="main">
+	<form class="form data-form">
+		<div class="form-line">
+			<div class="line-title">会议基本信息</div>
+			<div class="form-pit">
+				<div class="form-subpit">
+					<label>所在城市</label>
+					<select id="city" disabled >
+						<option <%if(detail.info.cid==1){%>selected<%}%> cid="1">北京</option>
+						<option <%if(detail.info.cid==2){%>selected<%}%> cid="2">上海</option>
+						<option <%if(detail.info.cid==3){%>selected<%}%> cid="3">深圳</option>
+						<option <%if(detail.info.cid==4){%>selected<%}%> cid="4">广州</option>
+					</select>
+				</div>
+				<div class="form-subpit">
+					<label>会议名字</label>
+					<input id="name" type="text" placeholder="请输入会议名字" value="<%=detail.info.name%>" readonly />
+				</div>
+				<div class="form-subpit">
+					<label>会议日期</label>
+					<input id="datetime" type="date" placeholder="请选择会议日期" value="<%=detail.info.datetime%>" readonly />
+				</div>
+				<div class="form-subpit">
+					<label>会议地点</label>
+					<input id="place" type="text" placeholder="请输入会议举办地点" value="<%=detail.info.place%>" readonly />
+				</div>
+				<div class="form-subpit">
+					<label>会议代理人</label>
+					<input id="agent" type="text" placeholder="请输入会议代理人" value="<%=detail.info.agent%>" readonly />
+				</div>
+			</div>
+		</div>
+		<div class="form-line" id="hotel">
+			<div class="line-title">酒店信息</div>
+			<%if(detail.hotel.length>0){
+				for(var i in detail.hotel){
+				var v=detail.hotel[i];%>
+				<div class="form-pit">
+					<div class="form-subpit">
+						<label>开始时间</label>
+						<input class="date_start" type="date" placeholder="请选择开始日期" value="<%=v.date_start%>" readonly />
+					</div>
+					<div class="form-subpit">
+						<label>结束时间</label>
+						<input class="date_end" type="date" placeholder="请选择结束日期" value="<%=v.date_end%>" readonly />
+					</div>
+					<div class="form-subpit">
+						<label>房型</label>
+						<select class="type" disabled>
+							<option <%if(v.type_id==1){%>selected<%}%> type_id="1">大床房</option>
+							<option <%if(v.type_id==2){%>selected<%}%> type_id="2">双床房</option>
+							<option <%if(v.type_id==3){%>selected<%}%> type_id="3">行政房</option>
+							<option <%if(v.type_id==4){%>selected<%}%> type_id="4">套房</option>
+						</select>
+					</div>
+					<div class="form-subpit">
+						<label>人数</label>
+						<input class="people" type="tel" placeholder="请输入人数" value="<%=v.people%>" readonly/>
+					</div>
+					<div class="form-subpit">
+						<label>天数</label>
+						<input class="days" type="tel" placeholder="请输入天数" value="<%=v.days%>" readonly/>
+					</div>
+				</div>
+			<%}}%>
+			<textarea class="memo" placeholder="请输入备注信息"><%=detail.hotel_memo%></textarea>
+		</div>
+		<div class="form-line" id="dinner">
+			<div class="line-title">用餐信息</div>
+			<%if(detail.dinner.length>0){
+				for(var i in detail.dinner){
+				var v=detail.dinner[i];%>
+				<div class="form-pit">
+					<div class="form-subpit">
+						<label>用餐日期</label>
+						<input class="date" type="date" placeholder="请选择用餐日期" value="<%=v.date%>" readonly />
+					</div>
+					<div class="form-subpit">
+						<label>选择餐厅形式</label>
+						<select class="type" disabled >
+							<option <%if(v.type_id==1){%>selected<%}%> type_id="1">无指定餐厅</option>
+							<option <%if(v.type_id==2){%>selected<%}%> type_id="2">自助</option>
+							<option <%if(v.type_id==3){%>selected<%}%> type_id="3">围桌</option>
+						</select>
+					</div>
+					<div class="form-subpit">
+						<label>人数</label>
+						<input class="people" type="tel" placeholder="请输入人数" value="<%=v.people%>" readonly />
+					</div>
+					<div class="form-subpit">
+						<label>天数</label>
+						<input class="days" type="tel" placeholder="请输入天数" value="<%=v.days%>" readonly />
+					</div>
+				</div>
+			<%}}%>
+			<textarea class="memo" placeholder="请输入备注信息" readonly ><%=detail.dinner_memo%></textarea>
+		</div>
+		<div class="form-line" id="car">
+			<div class="line-title">用车信息</div>
+			<%if(detail.car.length>0){
+				for(var i in detail.car){
+				var v=detail.car[i];%>
+				<div class="form-pit">
+					<div class="form-subpit">
+						<label>用车日期</label>
+						<input class="date" type="date" placeholder="请选择用车日期"  value="<%=detail.info.date%>" readonly />
+					</div>
+					<div class="form-subpit">
+						<label>选择车型</label>
+						<select class="type" disabled>
+							<option <%if(v.type_id==1){%>selected<%}%> type_id="1">轿车（3座）</option>
+							<option <%if(v.type_id==2){%>selected<%}%> type_id="2">商务车（5座）</option>
+							<option <%if(v.type_id==3){%>selected<%}%> type_id="3">中巴车（33座）</option>
+							<option <%if(v.type_id==4){%>selected<%}%> type_id="4">大巴车（45座）</option>
+							<option <%if(v.type_id==5){%>selected<%}%> type_id="5">大巴车（53座）</option>
+						</select>
+					</div>
+					<div class="form-subpit">
+						<label>人数</label>
+						<input class="people" type="tel" placeholder="请输入人数" value="<%=detail.info.people%>" readonly />
+					</div>
+					<div class="form-subpit">
+						<label>天数</label>
+						<input class="days" type="tel" placeholder="请输入天数" value="<%=detail.info.days%>" readonly />
+					</div>
+				</div>
+			<%}}%>
+			<textarea class="memo" placeholder="请输入备注信息" readonly><%=detail.car_memo%></textarea>
+		</div>
+		<div class="form-line" id="area">
+			<div class="line-title">会场信息</div>
+			<%if(detail.area.length>0){
+				for(var i in detail.area){
+				var v=detail.area[i];%>
+				<div class="form-pit">
+					<div class="form-subpit">
+						<label>会场使用日期</label>
+						<input class="date" type="date" placeholder="请选择会场使用日期" value="<%=detail.info.date%>" readonly />
+					</div>
+					<div class="form-subpit">
+						<label>选择会场类型</label>
+						<select class="type" disabled>
+							<option <%if(v.type_id==1){%>selected<%}%> type_id="1">剧院</option>
+							<option <%if(v.type_id==2){%>selected<%}%> type_id="2">课桌</option>
+							<option <%if(v.type_id==3){%>selected<%}%> type_id="3">U型</option>
+							<option <%if(v.type_id==4){%>selected<%}%> type_id="4">鱼骨</option>
+						</select>
+					</div>
+					<div class="form-subpit">
+						<label>选择会场类型</label>
+						<select class="tearest_need" disabled>
+							<option <%if(!v.need){%>selected<%}%> need="0">否</option>
+							<option <%if(v.need){%>selected<%}%> need="1">是</option>
+						</select>
+					</div>
+					<div class="form-subpit">
+						<label>人数</label>
+						<input class="people" type="tel" placeholder="请输入人数" value="<%=detail.info.people%>" readonly />
+					</div>
+					<div class="form-subpit">
+						<label>天数</label>
+						<input class="days" type="tel" placeholder="请输入天数" value="<%=detail.info.days%>" readonly />
+					</div>
+				</div>
+			<%}}%>
+			<textarea class="memo" placeholder="请输入备注信息" readonly><%=detail.area_memo%></textarea>
+		</div>
+		<div class="form-line" id="other">
+			<div class="line-title">其他</div>
+			<%if(detail.other.length>0){
+				for(var i in detail.other){
+				var v=detail.other[i];%>
+				<div class="form-pit">
+					<div class="form-subpit">
+						<label>物料类型</label>
+						<select class="type" disabled>
+							<option <%if(v.type_id==1){%>selected<%}%> type_id="1">摄影/摄像</option>
+							<option <%if(v.type_id==2){%>selected<%}%> type_id="2">胸牌制作</option>
+							<option <%if(v.type_id==3){%>selected<%}%> type_id="3">X展架/易拉宝 </option>
+							<option <%if(v.type_id==4){%>selected<%}%> type_id="4">背景板</option>
+							<option <%if(v.type_id==5){%>selected<%}%> type_id="5">横幅</option>
+							<option <%if(v.type_id==6){%>selected<%}%> type_id="6">资料打印</option>
+							<option <%if(v.type_id==7){%>selected<%}%> type_id="7">礼品制作</option>
+						</select>
+					</div>
+					<div class="form-subpit">
+						<label>是否需要</label>
+						<select class="need" disabled>
+							<option <%if(!v.need){%>selected<%}%> need="0">否</option>
+							<option <%if(v.need){%>selected<%}%> need="1">是</option>
+						</select>
+					</div>
+				</div>
+			<%}}%>
+			<textarea class="memo" placeholder="请输入备注信息" readonly><%=detail.other_memo%></textarea>
+		</div>
+		<div class="form-line" id="with">
+			<div class="line-title">陪同人员</div>
+			<div class="form-pit">
+				<div class="form-subpit">	
+					<label>是否需要陪同</label>
+					<select class="with_need" disabled>
+						<option <%if(!detail.with.with_need){%>selected<%}%> need="0">否</option>
+						<option <%if(detail.with.with_need){%>selected<%}%> need="1">是</option>
+					</select>
+				</div>
+				<div class="form-subpit">	
+					<label>陪同天数</label>
+					<input class="with_people" type="tel" placeholder="请填写陪同天数" value="<%=detail.with.with_people%>" readonly />
+				</div>
+				<div class="form-subpit">	
+					<label>是否需要地接</label>
+					<select class="catch_need" disabled >
+						<option <%if(!detail.with.catch_need){%>selected<%}%> need="0">否</option>
+						<option <%if(detail.with.catch_need){%>selected<%}%> need="1">是</option>
+					</select>
+				</div>
+				<div class="form-subpit">	
+					<label>地接天数</label>
+					<input class="catch_people" type="tel" placeholder="请填写地接天数" value="<%=detail.with.catch_people%>" readonly />
+				</div>
+			</div>
+		</div>
+		<div class="form-line" id="invoice">
+			<div class="line-title">发票</div>
+			<div class="form-pit">
+				<div class="form-subpit">	
+					<label>是否需要发票</label>
+					<select class="need" disabled>
+						<option <%if(!detail.inv.need){%>selected<%}%> need="0">否</option>
+						<option <%if(detail.inv.need){%>selected<%}%> need="1">是</option>
+					</select>
+				</div>
+				<div class="form-subpit">	
+					<label>发票类型</label>
+					<select class="t ype" disabled >
+						<option <%if(detail.inv.type_id==1){%>selected<%}%>  type_id="1">普通发票</option>
+						<option <%if(detail.inv.type_id==2){%>selected<%}%>  type_id="2">增值税发票</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<a class="btn-a" href="/vendor/response/creat/<%=detail._id%>">填写报价</a>
+	</form>
+</div>
+<% include ../../layout/foot.ejs %>

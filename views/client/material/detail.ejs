@@ -1,0 +1,38 @@
+<% include ../../layout/head.ejs %>
+<div class="main" id="main">
+	<form class="form data-form">
+		<input type="hidden" id="eid" value="<%=detail._id%>" />
+		<div class="form-line" id="other">
+			<div class="line-title">物料信息</div>
+			<%if(detail.other.length>0){
+				for(var i in detail.other){
+				var v=detail.other[i];%>
+				<div class="form-pit">
+					<div class="form-subpit">
+						<label>物料类型</label>
+						<select class="type">
+							<option <%if(v.type_id==1){%>selected<%}%> type_id="1">摄影/摄像</option>
+							<option <%if(v.type_id==2){%>selected<%}%> type_id="2">胸牌制作</option>
+							<option <%if(v.type_id==3){%>selected<%}%> type_id="3">X展架/易拉宝 </option>
+							<option <%if(v.type_id==4){%>selected<%}%> type_id="4">背景板</option>
+							<option <%if(v.type_id==5){%>selected<%}%> type_id="5">横幅</option>
+							<option <%if(v.type_id==6){%>selected<%}%> type_id="6">资料打印</option>
+							<option <%if(v.type_id==7){%>selected<%}%> type_id="7">礼品制作</option>
+						</select>
+					</div>
+					<div class="form-subpit">
+						<label>是否需要</label>
+						<select class="need">
+							<option <%if(!v.need){%>selected<%}%> need="0">否</option>
+							<option <%if(v.need){%>selected<%}%> need="1">是</option>
+						</select>
+					</div>
+				</div>
+			<%}}%>
+			<button class="addbtn">添加一项</button>
+			<textarea class="memo" placeholder="请输入备注信息"><%=detail.other_memo%></textarea>
+		</div>
+		<button id="save">添加物料</button>
+	</form>
+</div>
+<% include ../../layout/foot.ejs %>

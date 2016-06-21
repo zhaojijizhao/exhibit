@@ -1,0 +1,15 @@
+<% include ../layout/head.ejs %>
+<div class="main" id="main">
+	<ul class="toptab">
+		<li class="on">客户登录</li>
+		<li>供应商登录</li>
+	</ul>
+	<input type="hidden" id="type" value="client"/>
+	<form class="form login-form">
+		<input type="text" id="name" placeholder="请输入名字" />
+		<input type="password" id="psw" placeholder="请输入密码"  />
+		<button id="login">登录</button>
+		<a href="/normal/sign">注册</a>
+	</form>
+</div>
+<% include ../layout/foot.ejs %>

@@ -1,0 +1,16 @@
+<% include ./layout/head.ejs %>
+<input type="hidden" id="page" value="<%=page%>">
+<div class="out">
+	<div class="in">
+		<div class="main" id="main">
+			<div class="hotsearch">
+				<label for="search-clientname">企业名字：<input type="text" id="search-clientname"  value="<%=clientname%>" /></label>
+				<label for="search-clientname">会议名字：<input type="text" id="search-projectname" value="<%=projectname%>" /></label>
+				<button id="search">搜索</button>
+			</div>
+			<div id="list"></div>
+			<div id="page"></div>
+		</div>
+	</div>
+</div>
+<% include ./layout/foot.ejs %>

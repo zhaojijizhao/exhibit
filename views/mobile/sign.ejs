@@ -1,0 +1,28 @@
+<% include ./layout/head.ejs %>
+<div class="main" id="main">
+	<div class="out">
+		<div class="in">
+			<ul class="toptab">
+				<li class="on">客户入口</li>
+				<li>供应商入口</li>
+			</ul>
+			<div class="all-form">
+				<div class="form login-form">
+					<p>注册成为客户</p>
+					<input type="text" id="clientName" placeholder="请输入姓名"/>
+					<input type="tel" id="clientCell" placeholder="请输入手机号"/>
+					<input type="password" id="clientPsw" placeholder="请输入密码" />
+					<button id="signClient">注册</button>
+				</div>
+				<div class="form login-form hide">
+					<p>注册成为供应商</p>
+					<input type="text" id="vendorName" placeholder="请输入姓名"/>
+					<input type="tel" id="vendorCell" placeholder="请输入手机号"/>
+					<input type="password" id="vendorPsw" placeholder="请输入密码" />
+					<button id="signVendor">注册</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<% include ./layout/foot.ejs %>

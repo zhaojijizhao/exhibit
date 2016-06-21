@@ -1,0 +1,659 @@
+var database = require('./database');
+
+
+//state
+//0已创建
+//1已发送 可以修改
+//2已确认 不可修改
+//3已成交 
+
+//用户信息
+var user = new database.Schema({
+	name:{
+		type:String,
+		validate:/.+/
+	},
+	cell:{
+		type:Number,
+		validate:/.+/
+	},
+	psw:{
+		type:String,
+		validate:/.+/
+	},
+	created_at:{
+		type:Date,
+		default: Date.now
+	},
+	receive:[String]
+});
+//需求商
+var clienter = new database.Schema({
+	name:{
+		type:String,
+		validate:/.+/
+	},
+	type:{
+		type:String,
+		default:"client"
+	},
+	cell:{
+		type:Number,
+		validate:/.+/
+	},
+	psw:{
+		type:String,
+		validate:/.+/
+	},
+	created_at:{
+		type:Date,
+		default: Date.now
+	},
+	receive:[String]
+});
+//供应商
+var vendorer = new database.Schema({
+	name:{
+		type:String,
+		validate:/.+/
+	},
+	type:{
+		type:String,
+		default:"vendor"
+	},
+	cell:{
+		type:Number,
+		validate:/.+/
+	},
+	psw:{
+		type:String,
+		validate:/.+/
+	},
+	created_at:{
+		type:Date,
+		default: Date.now
+	},
+	receive:[String]
+});
+
+//展会需求
+//展会信息
+var exhibitInfo = new database.Schema({
+	cid:{
+		type:Number,
+		validate:/.+/
+	},
+	cname:{
+		type:String,
+		validate:/.+/
+	},
+	clientname:{
+		type:String,
+		validate:/.+/
+	},
+	name:{
+		type:String,
+		validate:/.+/
+	},
+	datetime:{
+		type:Date,
+		default: Date.now
+	},
+	place:{
+		type:String,
+		validate:/.+/
+	},
+	agent:{
+		type:String
+	},
+	agentcell:{
+		type:Number,
+		validate:/.+/
+	},
+	created_at:{
+		type:Date,
+		default: Date.now
+	}
+});
+//展会住宿
+var exhibitHotel = new database.Schema({
+	date_start:{
+		type:Date,
+		default: Date.now
+	},
+	date_end:{
+		type:Date,
+		default: Date.now
+	},
+	type_id:{
+		type:Number,
+		validate:/.+/
+	},
+	type_name:{
+		type:String,
+		validate:/.+/
+	},
+	name:{
+		type:String
+	},
+	room:{
+		type:Number,
+		validate:/.+/
+	},
+	days:{
+		type:Number,
+		validate:/.+/
+	}
+});
+//展会用餐
+var exhibitDinner = new database.Schema({
+	date_start:{
+		type:Date,
+		default: Date.now
+	},
+	date_end:{
+		type:Date,
+		default: Date.now
+	},
+	type_id:{
+		type:Number,
+		validate:/.+/
+	},
+	type_name:{
+		type:String,
+		validate:/.+/
+	},
+	people:{
+		type:Number,
+		validate:/.+/
+	},
+	days:{
+		type:Number,
+		validate:/.+/
+	}
+});
+//展会用车
+var exhibitCar = new database.Schema({
+	type_id:{
+		type:Number,
+		validate:/.+/
+	},
+	type_name:{
+		type:String,
+		validate:/.+/
+	},
+	people:{
+		type:Number,
+		validate:/.+/
+	},
+	days:{
+		type:Number,
+		validate:/.+/
+	}
+});
+//会场服务
+var exhibitAreaService = new database.Schema({
+	servicetype_id:{
+		type:Number,
+		validate:/.+/
+	},
+	servicetype_name:{
+		type:String,
+		validate:/.+/
+	}
+});
+//展会会场
+var exhibitArea = new database.Schema({
+	date_start:{
+		type:Date,
+		default: Date.now
+	},
+	date_end:{
+		type:Date,
+		default: Date.now
+	},
+	type_id:{
+		type:Number,
+		validate:/.+/
+	},
+	type_name:{
+		type:String,
+		validate:/.+/
+	},
+	exhibitAreaService:[exhibitAreaService],
+	people:{
+		type:Number,
+		validate:/.+/
+	},
+	days:{
+		type:Number,
+		validate:/.+/
+	}
+});
+//展会物料
+var exhibitOther = new database.Schema({
+	type_id:{
+		type:Number,
+		validate:/.+/
+	},
+	type_name:{
+		type:String,
+		validate:/.+/
+	},
+	num:{
+		type:Number
+	}
+});
+//展会陪同
+var exhibitWith = new database.Schema({
+	with_need:{
+		type:Boolean,
+		default:false
+	},
+	with_people:{
+		type:Number
+	},
+	catch_need:{
+		type:Boolean,
+		default:false
+	},
+	catch_people:{
+		type:Number
+	}
+});
+//展会发票
+var exhibitInvoice = new database.Schema({
+	need:{
+		type:Boolean,
+		default:false
+	},
+	type_id:{
+		type:Number
+	},
+	type_name:{
+		type:String
+	}
+});
+//汇总
+var exhibit = new database.Schema({
+	uid:{
+		type:String,
+		default:"zzzz"
+	},
+	info:exhibitInfo,
+	hotel:[exhibitHotel],
+	hotel_memo:{
+		type:String
+	},
+	dinner:[exhibitDinner],
+	dinner_memo:{
+		type:String
+	},
+	car:[exhibitCar],
+	car_memo:{
+		type:String
+	},
+	area:[exhibitArea],
+	area_memo:{
+		type:String
+	},
+	other:[exhibitOther],
+	other_memo:{
+		type:String
+	},
+	with:exhibitWith,
+	inv:exhibitInvoice,
+	offer_id:{
+		type:String
+	},
+	state:{
+		type:Number,
+		validate:/.+/,
+		default:0
+	},
+	created_at:{
+		type:Date,
+		default: Date.now
+	}
+});
+
+//报价信息
+//展会信息
+var offerInfo = new database.Schema({
+	cid:{
+		type:Number,
+		validate:/.+/
+	},
+	cname:{
+		type:String,
+		validate:/.+/
+	},
+	clientname:{
+		type:String,
+		validate:/.+/
+	},
+	name:{
+		type:String,
+		validate:/.+/
+	},
+	datetime:{
+		type:Date,
+		default: Date.now
+	},
+	place:{
+		type:String,
+		validate:/.+/
+	},
+	agent:{
+		type:String
+	},
+	agentcell:{
+		type:Number,
+		validate:/.+/
+	},
+	created_at:{
+		type:Date,
+		default: Date.now
+	}
+});
+//展会住宿
+var offerHotel = new database.Schema({
+	date_start:{
+		type:Date,
+		default: Date.now
+	},
+	date_end:{
+		type:Date,
+		default: Date.now
+	},
+	type_id:{
+		type:Number,
+		validate:/.+/
+	},
+	type_name:{
+		type:String,
+		validate:/.+/
+	},
+	price:{
+		type:Number
+	},
+	name:{
+		type:String
+	},
+	room:{
+		type:Number,
+		validate:/.+/
+	},
+	days:{
+		type:Number,
+		validate:/.+/
+	},
+	total:{
+		type:Number
+	}
+});
+//展会用餐
+var offerDinner = new database.Schema({
+	date_start:{
+		type:Date,
+		default: Date.now
+	},
+	date_end:{
+		type:Date,
+		default: Date.now
+	},
+	type_id:{
+		type:Number,
+		validate:/.+/
+	},
+	type_name:{
+		type:String,
+		validate:/.+/
+	},
+	price:{
+		type:Number
+	},
+	people:{
+		type:Number,
+		validate:/.+/
+	},
+	days:{
+		type:Number,
+		validate:/.+/
+	},
+	total:{
+		type:Number
+	}
+});
+//展会用车
+var offerCar = new database.Schema({
+	type_id:{
+		type:Number,
+		validate:/.+/
+	},
+	type_name:{
+		type:String,
+		validate:/.+/
+	},
+	price:{
+		type:Number
+	},
+	people:{
+		type:Number,
+		validate:/.+/
+	},
+	days:{
+		type:Number,
+		validate:/.+/
+	},
+	total:{
+		type:Number
+	}
+});
+//服务类型
+var offerAreaService = new database.Schema({
+	servicetype_id:{
+		type:Number,
+		validate:/.+/
+	},
+	servicetype_name:{
+		type:String,
+		validate:/.+/
+	},
+	price:{
+		type:Number
+	}
+});
+//展会会场
+var offerArea = new database.Schema({
+	date_start:{
+		type:Date,
+		default: Date.now
+	},
+	date_end:{
+		type:Date,
+		default: Date.now
+	},
+	type_id:{
+		type:Number,
+		validate:/.+/
+	},
+	type_name:{
+		type:String,
+		validate:/.+/
+	},
+	offerAreaService:[offerAreaService],
+	price:{
+		type:Number
+	},
+	people:{
+		type:Number,
+		validate:/.+/
+	},
+	days:{
+		type:Number,
+		validate:/.+/
+	},
+	total:{
+		type:Number
+	}
+});
+//展会物料
+var offerOther = new database.Schema({
+	type_id:{
+		type:Number,
+		validate:/.+/
+	},
+	type_name:{
+		type:String,
+		validate:/.+/
+	},
+	price:{
+		type:Number
+	},
+	num:{
+		type:Number
+	},
+	total:{
+		type:Number
+	}
+});
+//展会陪同
+var offerWith = new database.Schema({
+	with_need:{
+		type:Boolean,
+		default:false
+	},
+	with_people:{
+		type:Number
+	},
+	with_price:{
+		type:Number
+	},
+	with_total:{
+		type:Number
+	},
+	catch_need:{
+		type:Boolean,
+		default:false
+	},
+	catch_people:{
+		type:Number
+	},
+	catch_price:{
+		type:Number
+	},
+	catch_total:{
+		type:Number
+	}
+});
+//展会服务费
+var offerFee = new database.Schema({
+	percent:{
+		type:Number,
+		default:0
+	},
+	memo:{
+		type:String
+	},
+	total:{
+		type:Number
+	}
+});
+//展会发票
+var offerInvoice = new database.Schema({
+	need:{
+		type:Boolean,
+		default:false
+	},
+	type_id:{
+		type:Number
+	},
+	type_name:{
+		type:String
+	}
+});
+//汇总
+var offer = new database.Schema({
+	uid:{
+		type:String,
+		default:"zzzzz"
+	},
+	uname:{
+		type:String,
+		default:"unknow"
+	},
+	info:offerInfo,
+	hotel:[offerHotel],
+	hotel_all:{
+		type:Number
+	},
+	hotel_memo:{
+		type:String
+	},
+	dinner:[offerDinner],
+	dinner_all:{
+		type:Number
+	},
+	dinner_memo:{
+		type:String
+	},
+	car:[offerCar],
+	car_all:{
+		type:Number
+	},
+	car_memo:{
+		type:String
+	},
+	area:[offerArea],
+	area_all:{
+		type:Number
+	},
+	area_memo:{
+		type:String
+	},
+	other:[offerOther],
+	other_all:{
+		type:Number
+	},
+	other_memo:{
+		type:String
+	},
+	with:offerWith,
+	fee:offerFee,
+	inv:offerInvoice,
+	total:{
+		type:Number,
+		validate:/.+/,
+		default:0
+	},
+	exhibit_id:{
+		type:String,
+		validate:/.+/
+	},
+	state:{
+		type:Number,
+		validate:/.+/,
+		default:0
+	},
+	created_at:{
+		type:Date,
+		default: Date.now
+	}
+});
+
+var userModel = database.mongoose.model('user',user);
+var clienterModel = database.mongoose.model('clienter',clienter);
+var vendorerModel = database.mongoose.model('vendorer',vendorer);
+var exhibitModel = database.mongoose.model('exhibit',exhibit);
+var offerModel = database.mongoose.model('offer',offer);
+
+var collection = {
+	user:userModel,
+	clienter:clienterModel,
+	vendorer:vendorerModel,
+	exhibit:exhibitModel,
+	offer:offerModel
+}
+
+module.exports = collection;
