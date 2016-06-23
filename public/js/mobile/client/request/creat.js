@@ -1,5 +1,5 @@
-require(['/js/public/base.js'],function(Base){
-	Base.setRequirejs();
+require(['../../../../js/public/base.js'],function(Base){
+	Base.setRequirejs(1);
 	require(['jquery','underscore','backbone','helper'],
 		function($,_,Backbone,Helper){
 			var view = Backbone.View.extend({
@@ -12,12 +12,12 @@ require(['/js/public/base.js'],function(Base){
 					})
 					if(!Helper.islogin()){
 						alert('请先登录');
-						location.href = "/mobile/login";
+						location.href = "../../../mobile/login.html";
 					}
 					this.user = Helper.getlogin();
 					if(this.user.type!="client"){
 						alert('请先登录客户账号');
-						location.href = "/mobile/login";
+						location.href = "../../../mobile/login.html";
 					}
 					var temp = _.template(Helper.template.mobileLoginTemplate);
 					$(".nav .vendor").remove();
@@ -25,7 +25,7 @@ require(['/js/public/base.js'],function(Base){
 					$("#exit").bind("click",function(e){
 						e.preventDefault();
 						Helper.deletelogin();
-						location.href="/mobile/index";
+						location.href="../../../mobile/index.html";
 					});
 				},
 				el:$("#main"),
@@ -35,6 +35,7 @@ require(['/js/public/base.js'],function(Base){
 				},
 				render:function(){
 					$('body').append(_.template($("#infopop").html())());
+					$("#city,.city").html(_.template($('#citytpl').html())({city:Helper.city}));
 					$('.next').on('click',_.bind(this.next,this));
 					$('.prev').on('click',_.bind(this.prev,this));
 					$('.finish').on('click',_.bind(this.finish,this));
@@ -50,7 +51,10 @@ require(['/js/public/base.js'],function(Base){
 					var popname = target.closest(".pop").attr("name");
 					$(".pop").remove();
 					var next = $("#"+popname).next().html();
-					$('body').append(_.template(next)());
+					if(popname != "invoicepop"){
+						$('body').append(_.template(next)());
+					}
+					$(".city").html(_.template($('#citytpl').html())({city:Helper.city}));
 					$('.next').on('click',_.bind(this.next,this));
 					$('.prev').on('click',_.bind(this.prev,this));
 					$('.finish').on('click',_.bind(this.finish,this));
@@ -67,6 +71,7 @@ require(['/js/public/base.js'],function(Base){
 					$(".pop").remove();
 					var prev = $("#"+popname).prev().html();
 					$('body').append(_.template(prev)());
+					$(".city").html(_.template($('#citytpl').html())({city:Helper.city}));
 					$('.next').on('click',_.bind(this.next,this));
 					$('.prev').on('click',_.bind(this.prev,this));
 					$('.finish').on('click',_.bind(this.finish,this));
@@ -107,9 +112,9 @@ require(['/js/public/base.js'],function(Base){
 						var formline = $("#"+popname.split('pop')[0]); 
 						var fp = $(formline.find(".form-pit")[0]).clone();
 						formline.find(".form-pit").remove();
-						_.each(v.find(".form-pit"),function(v1,k1){
+						_.each(target.find(".form-pit"),function(v,k){
 							var temp = fp.clone();
-							_.each(target.find("input,textarea"),function(v,k){
+							_.each($(v).find("input,textarea"),function(v1,k1){
 								if($(v1).attr("type")!="date"){
 									temp.find("."+$(v1).attr("class")).val($(v1).val());
 								}else{
@@ -117,10 +122,10 @@ require(['/js/public/base.js'],function(Base){
 									temp.find("."+$(v1).attr("class")).val(d);
 								}
 							});
-							_.each(v.find("select"),function(v1,k1){
-								var i = $(v1).find("option:selected").index();
-								temp.find("."+$(v1).attr("class")).find('option').removeAttr("selected");
-								$(temp.find("."+$(v1).attr("class")).find('option')[i]).attr('selected','selected');
+							_.each($(v).find("select"),function(v2,k2){
+								var i = $(v2).find("option:selected").index();
+								temp.find("."+$(v2).attr("class")).find('option').removeAttr("selected");
+								$(temp.find("."+$(v2).attr("class")).find('option')[i]).attr('selected','selected');
 							});
 							formline.find(".line-title").after(temp);
 						});
@@ -215,7 +220,7 @@ require(['/js/public/base.js'],function(Base){
 						}
 					};
 					$.ajax({
-						url: "/api/exhibit",
+						url: Helper.requestUrl + "exhibit",
 						type: "post",
 						data: data,
 						dataType:"json",
@@ -234,7 +239,7 @@ require(['/js/public/base.js'],function(Base){
 					var selfthis = this;
 					var self = this.$el;
 					$.ajax({
-						url: "/api/user/vendorlist",
+						url: Helper.requestUrl + "user/vendorlist",
 						type: "get",
 						dataType:"json",
 						success:function(data){
@@ -244,7 +249,7 @@ require(['/js/public/base.js'],function(Base){
 						},
 						error:function(){
 							alert('获取用户列表失败');
-							location.href = "location/index";
+							location.href = "../../../mobile/index.html";
 						}
 					});
 				},
@@ -255,14 +260,14 @@ require(['/js/public/base.js'],function(Base){
 					var data = {
 						exhibit_id:selfthis.data._id
 					};
-					var url = "/api/exhibit/send"+(!!uid?"/byuid/"+uid:"");
+					var url = Helper.requestUrl + "exhibit/send"+(!!uid?"/byuid/"+uid:"");
 					$.ajax({
 						url: url,
 						type: "post",
 						data:data,
 						success:function(data){
 							alert("发送成功");
-							location.href = "/mobile/index";
+							location.href = "../../../mobile/index.html";
 						},
 						error:function(){
 							alert("发送失败");

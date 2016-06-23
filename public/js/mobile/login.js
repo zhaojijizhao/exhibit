@@ -1,4 +1,4 @@
-require(['/js/public/base.js'],function(Base){
+require(['../../js/public/base.js'],function(Base){
 	Base.setRequirejs();
 	require(['jquery','underscore','backbone','helper'],
 		function($,_,Backbone,Helper){
@@ -36,14 +36,14 @@ require(['/js/public/base.js'],function(Base){
 						}
 					};
 					$.ajax({
-						url: "/api/clientlogin",
+						url: Helper.requestUrl + "clientlogin",
 						type: "post",
 						data: data,
 						dataType:"json",
 						success:function(data){
 							alert("登录成功");
 							Helper.setlogin(data[0]);
-							location.href = "/mobile/index";
+							location.href = "../mobile/index.html";
 						},
 						error:function(){
 							alert("登录失败");
@@ -59,14 +59,14 @@ require(['/js/public/base.js'],function(Base){
 						}
 					};
 					$.ajax({
-						url: "/api/vendorlogin",
+						url: Helper.requestUrl + "vendorlogin",
 						type: "post",
 						data: data,
 						dataType:"json",
 						success:function(data){
 							alert("登录成功");
 							Helper.setlogin(data[0]);
-							location.href = "/mobile/index";
+							location.href = "../mobile/index.html";
 						},
 						error:function(){
 							alert("登录失败");

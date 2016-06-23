@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>建正会展</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="renderer" content="webkit" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"  /> 
+	<meta name="format-detection" content="telephone=no"  /> 
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta http-equiv="cleartype" content="on" />
+	<meta name="HandheldFriendly" content="true">
+	<meta name="MobileOptimized" content="320">
+	<meta name="screen-orientation" content="portrait">
+	<meta name="x5-orientation" content="portrait">
+	<meta name="full-screen" content="yes">
+	<meta name="x5-fullscreen" content="true">
+	<meta name="browsermode" content="application">
+	<meta name="x5-page-mode" content="app">
+	<meta name="msapplication-tap-highlight" content="no">
+	<link rel="stylesheet" href="../../css/mobile/common.css">
+</head>
+<body>
+	<div class="out graybg">
+		<div class="in">
+			<div class="toptitle">
+				<div class="soicon" id="slideout"></div>
+				建正会展
+			</div>
+		</div>
+	</div>
+	<div class="out rbnav">
+		<div class="in header">
+			<div class="siout">
+				<div class="siicon" id="slidein"></div>
+			</div>
+			<ul class="toplink">
+				<li><a href="./login.html">登录</a></li>
+				<li><a href="./sign.html">注册</a></li>
+				<li><a href="./collect.html">收藏我们</a></li>
+			</ul>
+		</div>
+		<div class="in">
+			<ul class="nav">
+				<li><a href="./index.html">首页</a></li>
+				<li><a href="./show.html">展示</a></li>
+				<li><a href="./client/request/creat.html">发布需求</a></li>
+
+				<li><a href="./client/request/list.html">我的需求</a></li>
+				<li><a href="./client/response/list.html">收到报价</a></li>
+				<li><a href="./vendor/request/list.html">所有需求</a></li>
+				<li><a href="./vendor/response/list.html">我的报价</a></li>
+
+				<li><a href="./hot.html">热门区域</a></li>
+				<li><a href="./design.html">定制</a></li>
+				<li><a href="./video.html">视频会议</a></li>
+				<li><a href="./room.html">虚拟会议室</a></li>
+				<li><a href="./about.html">关于我们</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="out">
+		<div class="in">
+			<div class="main" id="main">
+			</div>
+		</div>
+	</div>
+	<script type="text/template" id="maintpl">
+		<table class="form result-table">
+			<tr>
+				<td colspan="5">
+					<img src='../img/mobile/ll.png' />
+				</td>
+			</tr>
+			<tr class="b">
+				<td>TO:</td>
+				<td></td>
+				<td>From:</td>
+				<td colspan='2'></td>
+			</tr>
+			<tr class="b">
+				<td>收件人:</td>
+				<td></td>
+				<td>发送:</td>
+				<td colspan='2'></td>
+			</tr>
+			<tr class="b">
+				<td>Tel:</td>
+				<td></td>
+				<td>Tel:</td>
+				<td colspan='2'></td>
+			</tr>
+			<tr class="b">
+				<td>Fax:</td>
+				<td></td>
+				<td>Fax:</td>
+				<td colspan='2'></td>
+			</tr>
+			<tr class="b">
+				<td>E-mail:</td>
+				<td></td>
+				<td>E-mail:</td>
+				<td colspan='2'></td>
+			</tr>
+			<tr>
+				<td width='10%'>&nbsp;</td>
+				<td width='50%'></td>
+				<td width='12%'></td>
+				<td width='14%'></td>
+				<td width='14%'></td>
+			</tr>
+			<tr>
+				<td colspan="5">您好！！</td>
+			</tr>
+			<tr>
+				<td colspan="5">感谢您对我公司的大力支持。</td>
+			</tr>
+			<tr>
+				<td colspan="5">根据贵公司的要求，我公司制定的会议结算单分列如后，请查阅，如有问题，请随时与我联系。</td>
+			</tr>
+			<tr class="b">
+				<td></td>
+				<td class="tc">内容</td>
+				<td class="tc">单价</td>
+				<td class="tc">人数/数量</td>
+				<td class="tc">总价</td>
+			</tr>
+			<tr class="b">
+				<td class="tc">1</td>
+				<td>住宿</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<%if(detail.hotel.length>0){
+				for(var i in detail.hotel){
+				var v=detail.hotel[i];%>
+				<tr>
+					<td></td>
+					<td><%=new Date(v.date_start).toLocaleDateString()%>-<%=new Date(v.date_end).toLocaleDateString()%><%=v.type_name%></td>
+					<td class="tr"><%=v.price%></td>
+					<td class="tr"><%=v.room%></td>
+					<td class="tr"><%=v.total%></td>
+				</tr>
+			<%}}%>
+			<tr class="b">
+				<td></td>
+				<td class="tr">小计</td>
+				<td colspan="3" class="tr sky"><%=detail.hotel_all%></td>
+			</tr>
+			<tr class="b">
+				<td class="tc">2</td>
+				<td>会场</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<%if(detail.area.length>0){
+				for(var i in detail.area){
+				var v=detail.area[i];%>
+				<tr>
+					<td></td>
+					<td><%=new Date(v.date_start).toLocaleDateString()%>-<%=new Date(v.date_end).toLocaleDateString()%><%=v.type_name%></td>
+					<td class="tr"><%=v.price%></td>
+					<td class="tr"><%=v.people%></td>
+					<td class="tr"><%=v.total%></td>
+				</tr>
+			<%}}%>
+			<tr class="b">
+				<td></td>
+				<td class="tr">小计</td>
+				<td colspan="3" class="tr sky"><%=detail.area_all%></td>
+			</tr>
+			<tr class="b">
+				<td class="tc">3</td>
+				<td>用餐</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<%if(detail.dinner.length>0){
+				for(var i in detail.dinner){
+				var v=detail.dinner[i];%>
+				<tr>
+					<td></td>
+					<td><%=new Date(v.date_start).toLocaleDateString()%>-<%=new Date(v.date_end).toLocaleDateString()%><%=v.type_name%></td>
+					<td class="tr"><%=v.price%></td>
+					<td class="tr"><%=v.people%></td>
+					<td class="tr"><%=v.total%></td>
+				</tr>
+			<%}}%>
+			<tr class="b">
+				<td></td>
+				<td class="tr">小计</td>
+				<td colspan="3" class="tr sky"><%=detail.dinner_all%></td>
+			</tr>
+			<tr class="b">
+				<td class="tc">4</td>
+				<td>用车</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<%if(detail.car.length>0){
+				for(var i in detail.car){
+				var v=detail.car[i];%>
+				<tr>
+					<td></td>
+					<td><%=new Date(v.date_start).toLocaleDateString()%>-<%=new Date(v.date_end).toLocaleDateString()%><%=v.type_name%></td>
+					<td class="tr"><%=v.price%></td>
+					<td class="tr"><%=v.people%></td>
+					<td class="tr"><%=v.total%></td>
+				</tr>
+			<%}}%>
+			<tr class="b">
+				<td></td>
+				<td class="tr">小计</td>
+				<td colspan="3" class="tr sky"><%=detail.car_all%></td>
+			</tr>
+			<tr class="b">
+				<td class="tc">5</td>
+				<td>物料</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<%var items = ["摄影/摄像","胸牌制作","X展架/易拉宝","背景板","横幅","资料打印","礼品制作"];
+				if(detail.other.length>0){
+				for(var i in detail.other){
+				var v=detail.other[i];%>
+				<tr>
+					<td></td>
+					<td><%=items[v.type_id]%></td>
+					<td class="tr"><%=v.total%></td>
+					<td class="tr">1</td>
+					<td class="tr"><%=v.total%></td>
+				</tr>
+			<%}}%>
+			<tr class="b">
+				<td></td>
+				<td class="tr">小计</td>
+				<td colspan="3" class="tr sky"><%=detail.other_all%></td>
+			</tr>
+			<tr class="b">
+				<td class="tc">6</td>
+				<td>陪同费用</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<%if(detail.with.with_need){%>
+				<tr>
+					<td></td>
+					<td>陪同人员</td>
+					<td></td>
+					<td><%=detail.with.with_people%></td>
+					<td><%=detail.with.with_total%></td>
+				</tr>
+			<%}%>
+			<%if(detail.with.catch_need){%>
+				<tr>
+					<td></td>
+					<td>地接人员</td>
+					<td></td>
+					<td><%=detail.with.catch_people%></td>
+					<td><%=detail.with.catch_total%></td>
+				</tr>
+			<%}%>
+			<% var with_all = 0;
+				if(detail.with.with_total){
+					with_all += detail.with.with_total;
+				}
+				if(detail.with.catch_need){
+					with_all += detail.with.catch_need;
+				}%>
+			<tr class="b">
+				<td></td>
+				<td class="tr">小计</td>
+				<td colspan="3" class="tr sky"><%=detail.with_all%></td>
+			</tr>
+			<tr class="b">
+				<td class="tc">7</td>
+				<td>服务费:按照总活动金额%计算</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<%var feeptype = ["不收","6%","12%"];%>
+			<tr>
+				<td></td>
+				<td></td>
+				<td class="tr"><%=detail.total-detail.fee.total%></td>
+				<td class="tr"><%=feeptype[detail.fee.percent]%></td>
+				<td class="tr"><%=detail.fee.total%></td>
+			</tr>
+			<tr class="b">
+				<td></td>
+				<td class="tr">小计</td>
+				<td colspan="3" class="tr sky"><%=detail.fee.total%></td>
+			</tr>
+			<tr class="b">
+				<td></td>
+				<td colspan="2" class="tr">费用总计：</td>
+				<td colspan="2" class="tr sky"><%=detail.total%></td>
+			</tr>
+		</table>
+	</script>
+	<script type="text/javascript" defer async="true" data-main="../../js/mobile/result.js" src="../../lib/require.js"></script>
+</body>
+</html>

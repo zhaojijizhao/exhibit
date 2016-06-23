@@ -1,5 +1,5 @@
-require(['/js/public/base.js'],function(Base){
-	Base.setRequirejs();
+require(['../../../../js/public/base.js'],function(Base){
+	Base.setRequirejs(1);
 	require(['jquery','underscore','backbone','helper'],
 		function($,_,Backbone,Helper){
 			var view = Backbone.View.extend({
@@ -12,12 +12,12 @@ require(['/js/public/base.js'],function(Base){
 					})
 					if(!Helper.islogin()){
 						alert('请先登录');
-						location.href = "/mobile/login";
+						location.href = "../../../mobile/login.html";
 					}
 					this.user = Helper.getlogin();
 					if(this.user.type!="client"){
 						alert('请先登录客户账号');
-						location.href = "/mobile/login";
+						location.href = "../../../mobile/login.html";
 					}
 					var temp = _.template(Helper.template.mobileLoginTemplate);
 					$(".nav .vendor").remove();
@@ -25,7 +25,7 @@ require(['/js/public/base.js'],function(Base){
 					$("#exit").bind("click",function(e){
 						e.preventDefault();
 						Helper.deletelogin();
-						location.href="/mobile/index";
+						location.href="../../../mobile/index.html";
 					});
 				},
 				el:$("#main"),
@@ -34,6 +34,20 @@ require(['/js/public/base.js'],function(Base){
 					'click #save':'save'
 				},
 				render:function(){
+					var detail= {};
+					$.ajax({
+						url: Helper.requestUrl + "exhibit/" + Helper.searchParam().id,
+						type: "get",
+						dataType:"json",
+						success:function(data){
+							detail = data;
+							$("#main").html(_.template($("#maintpl").html())({detail:data}));
+							$("#city,.city").html(_.template($('#citytpl').html())({city:Helper.city,detail:detail}));
+						},
+						error:function(){
+							alert("获取详情失败");
+						}
+					});
 				},
 				change:function(e){
 					e.preventDefault();
@@ -92,6 +106,7 @@ require(['/js/public/base.js'],function(Base){
 					var target=$("#"+$(e.target).closest(".form-line").attr("id")+"pop").html();
 					$(".pop").remove();
 					$('body').append(_.template(target)());
+					$(".city").html(_.template($('#citytpl').html())({city:Helper.city}));
 					$('.change').on('click',_.bind(this.change,this));
 					$('.plusbtn').on('click',_.bind(this.addone,this));
 					$('.close').on('click',function(){
@@ -184,7 +199,7 @@ require(['/js/public/base.js'],function(Base){
 						}
 					};
 					$.ajax({
-						url: "/api/exhibit/"+self.find("#eid").val(),
+						url: Helper.requestUrl + "exhibit/"+self.find("#eid").val(),
 						type: "put",
 						data: data,
 						dataType:"json",
@@ -202,7 +217,7 @@ require(['/js/public/base.js'],function(Base){
 					var selfthis = this;
 					var self = this.$el;
 					$.ajax({
-						url: "/api/user/vendorlist",
+						url: Helper.requestUrl + "user/vendorlist",
 						type: "get",
 						dataType:"json",
 						success:function(data){
@@ -212,7 +227,7 @@ require(['/js/public/base.js'],function(Base){
 						},
 						error:function(){
 							alert('获取用户列表失败');
-							location.href = "/mobile/index";
+							location.href = "../../../mobile/index.html";
 						}
 					});
 				},
@@ -223,14 +238,14 @@ require(['/js/public/base.js'],function(Base){
 					var data = {
 						exhibit_id:selfthis.data._id
 					};
-					var url = "/api/exhibit/send"+(!!uid?"/byuid/"+uid:"");
+					var url = Helper.requestUrl + "exhibit/send"+(!!uid?"/byuid/"+uid:"");
 					$.ajax({
 						url: url,
 						type: "post",
 						data:data,
 						success:function(data){
 							alert("发送成功");
-							location.href = "/mobile/index";
+							location.href = "../../../mobile/index.html";
 						},
 						error:function(){
 							alert("发送失败");

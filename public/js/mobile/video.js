@@ -1,4 +1,4 @@
-require(['/js/public/base.js'],function(Base){
+require(['../../js/public/base.js'],function(Base){
 	Base.setRequirejs();
 	require(['jquery','underscore','backbone','helper'],
 		function($,_,Backbone,Helper){
@@ -17,7 +17,7 @@ require(['/js/public/base.js'],function(Base){
 						$("#exit").bind("click",function(e){
 							e.preventDefault();
 							Helper.deletelogin();
-							location.href="/mobile/index";
+							location.href="../mobile/index.html";
 						});
 						if(this.user.type=="client"){
 							$(".nav .vendor").remove();

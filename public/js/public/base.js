@@ -1,7 +1,7 @@
 define([],function(){
-	function setRequirejs(){
-		requirejs.config({
-			baseUrl:"/",
+	function setRequirejs(type){
+		var config = {
+			baseUrl:"../../",
 			paths:{
 				jquery:"lib/jquery",
 				underscore:"lib/underscore",
@@ -17,7 +17,13 @@ define([],function(){
 					exports:'$'
 				}
 			}
-		});
+		};
+		
+		if(type == 1){
+			config.baseUrl = "../../../../";
+		}
+
+		requirejs.config(config);
 	}
 	var base = {
 		setRequirejs:setRequirejs

@@ -1,5 +1,5 @@
-require(['/js/public/base.js'],function(Base){
-	Base.setRequirejs();
+require(['../../../../js/public/base.js'],function(Base){
+	Base.setRequirejs(1);
 	require(['jquery','underscore','backbone','helper'],
 		function($,_,Backbone,Helper){
 			var view = Backbone.View.extend({
@@ -12,12 +12,12 @@ require(['/js/public/base.js'],function(Base){
 					})
 					if(!Helper.islogin()){
 						alert('请先登录');
-						location.href = "/mobile/login";
+						location.href = "../../../mobile/login.html";
 					}
 					this.user = Helper.getlogin();
 					if(this.user.type!="vendor"){
 						alert('请先登录供应商账号');
-						location.href = "/mobile/login";
+						location.href = "../../../mobile/login.html";
 					}
 					var temp = _.template(Helper.template.mobileLoginTemplate);
 					$(".nav .client").remove();
@@ -25,7 +25,7 @@ require(['/js/public/base.js'],function(Base){
 					$("#exit").bind("click",function(e){
 						e.preventDefault();
 						Helper.deletelogin();
-						location.href="/mobile/index";
+						location.href="../../../mobile/index.html";
 					});
 				},
 				el:$("#main"),
@@ -34,9 +34,9 @@ require(['/js/public/base.js'],function(Base){
 				render:function(){
 					var selfthis = this;
 					var self = this.$el;
-					var page = $("#page").val()||1;
+					var page = Helper.searchParam().page || 1;
 					$.ajax({
-						url:'/api/offer/byuid/'+this.user._id+'/'+page,
+						url:Helper.requestUrl + 'offer/byuid/'+this.user._id+'/'+page,
 						type:'get',
 						dataType:'json',
 						success:function(data){
@@ -46,13 +46,13 @@ require(['/js/public/base.js'],function(Base){
 							self.find("#page").html(pageTemp({
 								count:parseInt(data.count),
 								limit:parseInt(data.limit),
-								page:parseInt($("#page").val()),
-								baseurl:'/mobile/vendor/response/'
+								page:Helper.searchParam().page || 1,
+								baseurl:'../../../mobile/vendor/response.html'
 							}));
 						},
 						error:function(){
 							alert("加载数据失败");
-							location.href = "/mobile/index";
+							location.href = "../../../mobile/index.html";
 						}
 					});
 				}

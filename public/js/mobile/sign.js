@@ -1,4 +1,4 @@
-require(['/js/public/base.js'],function(Base){
+require(['../../js/public/base.js'],function(Base){
 	Base.setRequirejs();
 	require(['jquery','underscore','backbone','helper'],
 		function($,_,Backbone,Helper){
@@ -37,13 +37,13 @@ require(['/js/public/base.js'],function(Base){
 						}
 					};
 					$.ajax({
-						url: "/api/clientuser",
+						url: Helper.requestUrl + "clientuser",
 						type: "post",
 						data: data,
 						dataType:'json',
 						success:function(data){
 							alert("注册成功");
-							location.href = "/mobile/login"
+							location.href = "../mobile/login.html"
 						},
 						error:function(){
 							alert("注册失败");
@@ -60,13 +60,13 @@ require(['/js/public/base.js'],function(Base){
 						}
 					};
 					$.ajax({
-						url: "/api/vendoruser",
+						url: Helper.requestUrl + "vendoruser",
 						type: "post",
 						data: data,
 						dataType:'json',
 						success:function(data){
 							alert("注册成功");
-							location.href = "/mobile/login"
+							location.href = "../mobile/login.html"
 						},
 						error:function(){
 							alert("注册失败");
