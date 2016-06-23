@@ -14,7 +14,7 @@ require(['../../js/public/base.js'],function(Base){
 						this.user = Helper.getlogin();
 						var temp = _.template(Helper.template.mobileLoginTemplate);
 						$(".toplink").html(temp(this.user));
-						$("#exit").bind("click",function(e){
+						$("#exit").on("click",function(e){
 							e.preventDefault();
 							Helper.deletelogin();
 							location.href="../mobile/index.html";

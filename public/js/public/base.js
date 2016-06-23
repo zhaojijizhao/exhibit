@@ -3,10 +3,10 @@ define([],function(){
 		var config = {
 			baseUrl:"../../",
 			paths:{
-				jquery:"lib/jquery",
-				underscore:"lib/underscore",
-				backbone:"lib/backbone",
-				text:"lib/text",
+				jquery:"lib/jquery/dist/jquery.min",
+				underscore:"lib/underscore/underscore-min",
+				backbone:"lib/backbone/backbone-min",
+				text:"lib/text/text",
 				public:'js/public',
 				client:'js/client',
 				vendor:'js/vendor',
