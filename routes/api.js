@@ -322,23 +322,39 @@ router.post('/exhibit/send', function(req, res, next) {
 
 //确认需求交易
 router.post('/exhibit/confirm/:id', function(req, res, next) {
-	collection.exhibit.findById(req.params.id,
-		function(err,data){
-			this.todo = data;
-			if(err){
-				res.json(err,500);
-			}else{
-				this.todo.set({state:3});
-				this.todo.save(function(err){
-					if(err){
-						res.json(err,500);
-					}else{
-						res.json(this.todo);
-					}
-				});
+
+	var pingpp = require('pingpp')('sk_test_ibbTe5jLGCi5rzfH4OqPW9KC');//pingappapikey
+	pingpp.setPrivateKeyPath(__dirname + "/your_rsa_private_key.pem");
+	pingpp.charges.create({
+        subject: "Your Subject",
+        body: "Your Body",
+        amount: 100,//订单总金额, 人民币单位：分（如订单总金额为 1 元，此处请填 100）
+        order_no: "123456789",
+        channel: "wx",
+        currency: "cny",
+        client_ip: "127.0.0.1",
+        app: {id: "app_1Gqj58ynP0mHeX1q"}
+    }, function(err, charge) {
+        collection.exhibit.findById(req.params.id,
+			function(err,data){
+				this.todo = data;
+				if(err){
+					res.json(err,500);
+				}else{
+					this.todo.set({state:3});
+					this.todo.save(function(err){
+						if(err){
+							res.json(err,500);
+						}else{
+							res.json(charge);
+						}
+					});
+				}
 			}
-		}
-	);
+		);
+    }); 
+
+	
 });
 
 
