@@ -2,6 +2,41 @@ require(['/js/public/base.js'],function(Base){
 	Base.setRequirejs();
 	require(['jquery','underscore','backbone','helper'],
 		function($,_,Backbone,Helper){
+
+			var temp = '<ul>\
+						<% if(list.length>0){\
+							_.each(list,function(v,k){%>\
+							<li>\
+								<span class="roll-cname"><%=v.info.cname%></span>\
+								<span class="roll-name"><%=v.info.name%></span>\
+								<span class="roll-detail"><a class="detail" href="/online/vendor/request/detail/<%=v._id%>">查看详情</a></span>\
+							</li>\
+						<%});\
+					}%>\
+				</ul>';
+			var mock = [
+				{
+					info:{
+						cname: "上海",
+						name: "见证会展"
+					},
+					id:1
+				},
+				{
+					info:{
+						cname: "北京",
+						name: "阿斯顿发生的发会展"
+					},
+					id:2
+				},
+				{
+					info:{
+						cname: "深证",
+						name: "见啊啊啊会展"
+					},
+					id:3
+				}
+			];
 			var view = Backbone.View.extend({
 				initialize:function(){
 					if(Helper.islogin()){
@@ -26,6 +61,28 @@ require(['/js/public/base.js'],function(Base){
 				events:{
 				},
 				render:function(){
+					var _this = this;
+					$.ajax({
+						url: '/api/exhibit/list/1',
+						type: 'get',
+						dataType: 'json',
+						success:function(data){
+							data.content = mock;
+							if(data.content){
+								if(data.content.length < 14 && data.content.length > 0){
+									var len =  data.content.length;
+									for(var i = 0 ; i < 14 - len ; i++){
+										data.content.push(data.content[i]);
+									}
+								}
+								if(data.content.length >= 14){
+									data.content.splice(13,data.content.length-14);
+								}
+								data.content = data.content.concat(data.content.slice(0,6));
+							}
+							_this.$el.find("#r1").html(_.template(temp)({list:data.content}));
+						}
+					});
 				}
 			});
 			var page = new view();
