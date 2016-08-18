@@ -14,29 +14,6 @@ require(['/js/public/base.js'],function(Base){
 						<%});\
 					}%>\
 				</ul>';
-			var mock = [
-				{
-					info:{
-						cname: "上海",
-						name: "见证会展"
-					},
-					id:1
-				},
-				{
-					info:{
-						cname: "北京",
-						name: "阿斯顿发生的发会展"
-					},
-					id:2
-				},
-				{
-					info:{
-						cname: "深证",
-						name: "见啊啊啊会展"
-					},
-					id:3
-				}
-			];
 			var view = Backbone.View.extend({
 				initialize:function(){
 					if(Helper.islogin()){
@@ -67,7 +44,6 @@ require(['/js/public/base.js'],function(Base){
 						type: 'get',
 						dataType: 'json',
 						success:function(data){
-							data.content = mock;
 							if(data.content){
 								if(data.content.length < 14 && data.content.length > 0){
 									var len =  data.content.length;
