@@ -1442,7 +1442,11 @@ define(['jquery','underscore','backbone'],
 									<%if(list.length>0){%>\
 										<% _.each(list,function(v,k){%>\
 											<li>\
-												<span class="f1 w50"><%=v.uname%></span>\
+												<%if(v.state==2){%>\
+													<span class="f1 w50"><%=v.uname%>(已确认)</span>\
+												<%}else{%>\
+													<span class="f1 w50"> </span>\
+												<%}%>\
 												<span class="f1">报价得分：90分</span>\
 												<span class="f1">服务满意度：90分</span>\
 												<span class="f1">报价：<span class="red"><%=v.total%></span>元</span>\
