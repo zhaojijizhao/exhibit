@@ -95,6 +95,45 @@ router.post('/vendoruser', function(req, res, next) {
 	});
 });
 
+//子账号
+router.post('/accountcreat', function(req, res, next) {
+	var total = 0;
+	var succ = [];
+	function creat(num){
+		var todo = new collection.vendorer(req.body.user[num]);
+		todo.save(function(err){
+			total ++;
+			if(err){
+			}else{
+				succ.push(num);
+			}
+			if(total == req.body.user.length){
+				res.json({
+					succ: succ
+				});
+			}
+		});
+	}
+	for(var i = 0; i < req.body.user.length; i++){
+		(function(num){
+			creat(num);
+		})(i)
+	}
+});
+
+router.get('/accountget/:id', function(req, res, next) {
+	var id = req.params.id;
+	collection.vendorer.find({cid:id},function(err,data){
+			this.todo = data;
+			if(err){
+				res.json(err,500);
+			}else{
+				res.json(this.todo);
+			}
+		}
+	);
+});
+
 
 //获取用户列表
 router.get('/user/list', function(req, res, next) {

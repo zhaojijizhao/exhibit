@@ -271,7 +271,7 @@ router.get('/hot/:page/:clientname/:projectname', function(req, res, next) {
   if(pn=='nil'){
     pn = '';
   }
-  res.render('./online/hot', { 
+  res.render('./online/hot', {
     nav:'热门区域',
     path: 'online/hot',
     title: '建正会展--热门区域',
@@ -290,17 +290,36 @@ router.get('/result/:id', function(req, res, next) {
         if(data.state!=2){
           res.json(err,500);
         }else{
-          res.render('./online/result', { 
-            nav:'报价报表',
-            path: 'online/result',
-            title: '建正会展--报价报表',
-            detail:data,
-            city:staticmodel.city
+          collection.vendorer.find({_id:data.uid},function(usererr,userdata){
+            if(err){
+              res.json(err,500);
+            }else{
+              if(userdata.length>0){
+                res.render('./online/result', {
+                  nav:'报价报表',
+                  path: 'online/result',
+                  title: '建正会展--报价报表',
+                  detail:data,
+                  vendor:userdata,
+                  city:staticmodel.city
+                });
+              }else{
+                res.json(err,500);
+              }
+            }
           });
         }
       }
     }
   );
+});
+
+router.get('/account', function(req, res, next) {
+  res.render('./online/account', {
+    nav:'子账号',
+    path: 'online/account',
+    title: '建正会展--子账号'
+  });
 });
 
 module.exports = router;

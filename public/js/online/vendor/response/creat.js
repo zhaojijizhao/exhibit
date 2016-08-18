@@ -96,7 +96,7 @@ require(['/js/public/base.js'],function(Base){
 						otherall += total;
 						totalall += total;
 					});
-					
+
 					this.$el.find('#other .all').text(otherall.toFixed(2));
 
 					with_total = parseFloat(this.$el.find("#with .with_price").val()||0)*parseFloat(this.$el.find("#with .with_people").val()||0);

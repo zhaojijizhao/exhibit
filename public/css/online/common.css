@@ -1132,3 +1132,23 @@ a{text-decoration: none;color: #666;}
 	width: 670px;
     height: 260px;
 }
+.account-table{
+	margin: 20px 0;
+	width: 300px;
+	border-collapse: collapse;
+}
+.account-table td{
+	padding: 0 10px;
+	height: 24px;
+	border:1px solid #ddd;
+}
+.account-table thead td,
+.account-table tr:nth-child(even) td{
+	background-color: #eee;
+}
+.form-btn{
+	width: 120px;
+	height: 32px;
+	line-height: 32px;
+	cursor: pointer;
+}

@@ -57,6 +57,9 @@ var vendorer = new database.Schema({
 		type:String,
 		validate:/.+/
 	},
+	cid:{
+		type:String
+	},
 	type:{
 		type:String,
 		default:"vendor"
