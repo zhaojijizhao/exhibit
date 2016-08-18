@@ -1,7 +1,7 @@
 define([],function(){
 	function setRequirejs(type){
 		var config = {
-			baseUrl:"../../",
+			baseUrl:"/",
 			paths:{
 				jquery:"lib/jquery/dist/jquery.min",
 				underscore:"lib/underscore/underscore-min",
@@ -26,7 +26,7 @@ define([],function(){
 		};
 		
 		if(type == 1){
-			config.baseUrl = "../../../../";
+			config.baseUrl = "/";
 		}
 
 		requirejs.config(config);

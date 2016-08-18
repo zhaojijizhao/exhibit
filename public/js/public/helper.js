@@ -1353,7 +1353,7 @@ define(['jquery','underscore','backbone'],
 										<li>\
 											<span class="fl w50"><%=v.info.cname%></span>\
 											<span class="f1"><%=v.info.name%></span>\
-											<span class="fr w80 tc"><a class="detail" href="/client/request/detail.html?id=<%=v._id%>">查看详情</a></span>\
+											<span class="fr w80 tc"><a class="detail" href="/client/request/detail/<%=v._id%>">查看详情</a></span>\
 										</li>\
 									<%});%>\
 								</ul>',
@@ -1364,9 +1364,9 @@ define(['jquery','underscore','backbone'],
 											<span class="f1"><%=v.info.name%></span>\
 											<%if(v.state==2){%>\
 												<span class="f1 red">已确认</span>\
-												<span class="fr w80 tc"><a class="orange" href="/online/result.html?id=<%=v.offer_id%>">查看报表</a></span>\
+												<span class="fr w80 tc"><a class="orange" href="/online/result/<%=v.offer_id%>">查看报表</a></span>\
 											<%}%>\
-											<span class="fr w80 tc"><a class="detail" href="/online/client/request/detail.html?id=<%=v._id%>">查看详情</a></span>\
+											<span class="fr w80 tc"><a class="detail" href="/online/client/request/detail/<%=v._id%>">查看详情</a></span>\
 										</li>\
 									<%});%>\
 								</ul>',
@@ -1377,9 +1377,9 @@ define(['jquery','underscore','backbone'],
 											<span class="f1"><%=v.info.name%></span>\
 											<%if(v.state==2){%>\
 												<span class="f1 red">已确认</span>\
-												<span class="fr w80 tc"><a class="orange" href="../../../mobile/result.html?id=<%=v.offer_id%>">查看报表</a></span>\
+												<span class="fr w80 tc"><a class="orange" href="../../../mobile/result/<%=v.offer_id%>">查看报表</a></span>\
 											<%}%>\
-											<span class="fr w80 tc"><a class="detail" href="../../../mobile/client/request/detail.html?id=<%=v._id%>">查看详情</a></span>\
+											<span class="fr w80 tc"><a class="detail" href="../../../mobile/client/request/detail/<%=v._id%>">查看详情</a></span>\
 										</li>\
 									<%});%>\
 								</ul>',
@@ -1388,7 +1388,7 @@ define(['jquery','underscore','backbone'],
 										<li>\
 											<span class="fl w50"><%=v.info.cname%></span>\
 											<span class="f1"><%=v.info.name%></span>\
-											<span class="fr w80 tc"><a class="detail" href="/client/material/detail.html?id=<%=v._id%>">添加物料</a></span>\
+											<span class="fr w80 tc"><a class="detail" href="/client/material/detail/<%=v._id%>">添加物料</a></span>\
 										</li>\
 									<%});%>\
 								</ul>',
@@ -1397,7 +1397,7 @@ define(['jquery','underscore','backbone'],
 										<li>\
 											<span class="fl w50"><%=v.info.cname%></span>\
 											<span class="f1"><%=v.info.name%></span>\
-											<span class="fr w80 tc"><a class="detail" href="/vendor/request/detail.html?id=<%=v._id%>">查看详情</a></span>\
+											<span class="fr w80 tc"><a class="detail" href="/vendor/request/detail/<%=v._id%>">查看详情</a></span>\
 										</li>\
 									<%});%>\
 								</ul>',
@@ -1406,7 +1406,7 @@ define(['jquery','underscore','backbone'],
 										<li>\
 											<span class="fl w50"><%=v.info.cname%></span>\
 											<span class="f1"><%=v.info.name%></span>\
-											<span class="fr w80 tc"><a class="detail" href="/online/vendor/request/detail.html?<%=v._id%>">查看详情</a></span>\
+											<span class="fr w80 tc"><a class="detail" href="/online/vendor/request/detail/<%=v._id%>">查看详情</a></span>\
 										</li>\
 									<%});%>\
 								</ul>',
@@ -1415,7 +1415,7 @@ define(['jquery','underscore','backbone'],
 										<li>\
 											<span class="fl w50"><%=v.info.cname%></span>\
 											<span class="f1"><%=v.info.name%></span>\
-											<span class="fr w80 tc"><a class="detail" href="../../../mobile/vendor/request/detail.html?id=<%=v._id%>">查看详情</a></span>\
+											<span class="fr w80 tc"><a class="detail" href="../../../mobile/vendor/request/detail/<%=v._id%>">查看详情</a></span>\
 										</li>\
 									<%});%>\
 								</ul>',
@@ -1434,7 +1434,7 @@ define(['jquery','underscore','backbone'],
 											<span class="fl w50"><%=v.info.cname%></span>\
 											<span class="f1"><%=v.info.name%></span>\
 											<span class="f1">报价：<%=v.total%>元</span>\
-											<span class="fr w80 tc"><a class="response" href="/client/response/detail.html?id=<%=v._id%>" >查看详情</a></span>\
+											<span class="fr w80 tc"><a class="response" href="/client/response/detail/<%=v._id%>" >查看详情</a></span>\
 										</li>\
 									<%});%>\
 								</li></ul>',
@@ -1446,7 +1446,7 @@ define(['jquery','underscore','backbone'],
 												<span class="f1">报价得分：90分</span>\
 												<span class="f1">服务满意度：90分</span>\
 												<span class="f1">报价：<span class="red"><%=v.total%></span>元</span>\
-												<span class="fr w80 tc"><a class="response" target="blank" href="/online/client/response/detail.html?id=<%=v._id%>" >查看详情</a></span>\
+												<span class="fr w80 tc"><a class="response" target="blank" href="/online/client/response/detail/<%=v._id%>" >查看详情</a></span>\
 											</li>\
 										<%});%>\
 									<%}else{%>\
@@ -1461,7 +1461,7 @@ define(['jquery','underscore','backbone'],
 												<span class="f1">报价得分<br/>90分</span>\
 												<span class="f1">服务满意度<br/>90分</span>\
 												<span class="f1">报价<br/><span class="red"><%=v.total%></span>元</span>\
-												<span class="fr w80 tc"><a class="response" href="../../../mobile/client/response/detail.html?id=<%=v._id%>" >查看详情</a></span>\
+												<span class="fr w80 tc"><a class="response" href="../../../mobile/client/response/detail/<%=v._id%>" >查看详情</a></span>\
 											</li>\
 										<%});%>\
 									<%}else{%>\
@@ -1490,9 +1490,9 @@ define(['jquery','underscore','backbone'],
 												<span class="f1">报价：<%=v.total%>元</span>\
 												<%if(v.state==2){%>\
 													<span class="f1 red">已确认</span>\
-													<span class="fr w80 tc"><a class="orange" href="/online/result.html?id=<%=v._id%>">查看报表</a></span>\
+													<span class="fr w80 tc"><a class="orange" href="/online/result/<%=v._id%>">查看报表</a></span>\
 												<%}%>\
-												<span class="fr w80 tc"><a class="response" href="/online/vendor/response/detail.html?id=<%=v._id%>" >查看详情</a></span>\
+												<span class="fr w80 tc"><a class="response" href="/online/vendor/response/detail/<%=v._id%>" >查看详情</a></span>\
 											</li>\
 										<%});%>\
 									<%}else{%>\
@@ -1508,9 +1508,9 @@ define(['jquery','underscore','backbone'],
 												<span class="f1">报价：<%=v.total%>元</span>\
 												<%if(v.state==2){%>\
 													<span class="f1 red">已确认</span>\
-													<span class="fr w80 tc"><a class="orange" href="../../../mobile/result.html?id=<%=v._id%>">查看报表</a></span>\
+													<span class="fr w80 tc"><a class="orange" href="../../../mobile/result/<%=v._id%>">查看报表</a></span>\
 												<%}%>\
-												<span class="fr w80 tc"><a class="response" href="../../../mobile/vendor/response/detail.html?id=<%=v._id%>" >查看详情</a></span>\
+												<span class="fr w80 tc"><a class="response" href="../../../mobile/vendor/response/detail/<%=v._id%>" >查看详情</a></span>\
 											</li>\
 										<%});%>\
 									<%}else{%>\
