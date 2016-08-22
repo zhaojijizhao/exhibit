@@ -28,6 +28,16 @@ router.get('/sign', function(req, res, next) {
   });
 });
 
+router.get('/quicksign', function(req, res, next) {
+  res.render('./online/quicksign', { 
+    nav:'首页',
+    path:'online/quicksign',
+    title: '建正会展--一键注册' 
+  });
+});
+
+
+
 router.get('/client/creat', function(req, res, next) {
   res.render('./online/client/request/creat', { 
     nav:'发布需求',

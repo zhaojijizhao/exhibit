@@ -97,9 +97,12 @@ a{text-decoration: none;color: #666;}
 .nav li a{
 	display: block;
 	margin-right: 10px;
-	width: 80px;
+	width: 85px;
 	text-align: center;
-	line-height: 32px;
+	line-height: 36px;
+	font-size: 16px;
+  color: #000;
+  font-weight: bold;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	background: #fff;
@@ -1064,7 +1067,7 @@ a{text-decoration: none;color: #666;}
 	background: linear-gradient(to bottom, #fff 0%,#fff 50%,#eee 100%);
 	border-bottom: 1px solid #ddd;
 }
-.roll-area .roll li span{
+.roll-area .roll li>span{
 	display: block;
 	line-height: 20px;
 	height: 20px;
@@ -1072,10 +1075,15 @@ a{text-decoration: none;color: #666;}
 	white-space: nowrap;
 	text-overflow:ellipsis;
 }
+.roll-area .roll li>span>span{
+	font-size: 12px;
+	color: #999;
+}
 .roll-area .roll li .roll-name{
 	font-size: 14px;
 }
 .roll-area .roll li .roll-detail a{
+	font-size: 12px;
 	color: #2880b3;
 }
 .roll-area .roll li .roll-detail a:hover{
@@ -1152,4 +1160,35 @@ a{text-decoration: none;color: #666;}
 	height: 32px;
 	line-height: 32px;
 	cursor: pointer;
+}
+.three-part .roll-area{
+	width:130px;
+}
+.three-part .quicklink{
+	float: left;
+	margin-top: 20px;
+	margin-right: 10px;
+	width: 130px;
+	height: 531px;
+}
+.three-part .quicklink a{
+	display: block;
+	padding: 15px 0;
+	box-sizing: border-box;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 18px;
+	width: 130px;
+	height: 90px;
+	color: #fff;
+	background-color: #f60;
+	background-image: -webkit-linear-gradient(top,#fc8b00,#d50303);
+	background-image: linear-gradient(top,#fc8b00,#d50303);
+	border: 1px solid #f60;
+	border-radius: 5px;
+}
+.three-part .quicklink a:hover{
+  background-image: -webkit-linear-gradient(top,#ffb55a,#d13939);
+  background-image: -webkit-linear-gradient(top,#ffb55a,#d13939);
+  border: 1px solid #ffc299;
 }
