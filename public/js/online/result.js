@@ -8,15 +8,7 @@ require(['/js/public/base.js'],function(Base){
 						alert('请先登录');
 						location.href = "/online/login";
 					}
-					this.user = Helper.getlogin();
-					var temp = _.template(Helper.template.onlineLoginTemplate);
-					$(".nav .vendor").remove();
-					$(".toplink").html(temp(this.user));
-					$("#exit").bind("click",function(e){
-						e.preventDefault();
-						Helper.deletelogin();
-						location.href="/online/index";
-					});
+					_.bind(Helper.initHead, this)(Helper);
 				},
 				el:$("#main"),
 				events:{

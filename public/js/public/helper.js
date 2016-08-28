@@ -1304,6 +1304,36 @@ define(['jquery','underscore','backbone'],
 		var helper={
 			requestUrl:"http://121.43.62.242:3000/api/",
 			city: city,
+			initHead:function(helper){
+				if(helper.islogin()){
+					this.user = helper.getlogin();
+					var temp = _.template(helper.template.onlineLoginTemplate);
+					$(".toplink").html(temp(this.user));
+					$("#exit").bind("click",function(e){
+						e.preventDefault();
+						helper.deletelogin();
+						location.href="/online/index";
+					});
+					if(this.user.type=="client"){
+						$(".nav .vendor").remove();
+					}else if(this.user.type=="vendor"){
+						$(".nav .client").remove();
+					}
+				}else{
+					$(".nav .client,.nav .vendor").remove();
+				}
+			},
+			initUnloginHead:function(helper){
+				helper.deletelogin();
+				$(".nav .client,.nav .vendor").remove();
+				$('.toptab li').bind("click",function(){
+					var i = $(this).index();
+					$('.toptab li').removeClass('on');
+					$(this).addClass('on');
+					$('.all-form .form').addClass('hide');
+					$($('.all-form .form')[i]).removeClass('hide');
+				});
+			},
 			searchParam:function(){
 				var search = location.search.split('?',2)[1];
 				var result = {};
@@ -1523,8 +1553,8 @@ define(['jquery','underscore','backbone'],
 								</ul>',
 				onlineLoginTemplate:'<ul class="toplink fr">\
 									<li>欢迎您:<%=name%>&nbsp;<%=cell%></li>\
+									<li><a href="/online/profile/<%=_id%>">用户中心</a></li>\
 									<li><a id="exit" href="#">退出</a></li>\
-									<li><a href="/online/collect.html">收藏我们</a></li>\
 								</ul>',
 				mobileLoginTemplate:'\
 									<li><%=name%></li>\

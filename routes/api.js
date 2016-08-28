@@ -95,6 +95,47 @@ router.post('/vendoruser', function(req, res, next) {
 	});
 });
 
+//用户更新信息
+router.post('/clientupdate', function(req, res, next) {
+	collection.clienter.findById(req.body.user._id,
+		function(err,data){
+			var todo = data;
+			if(err){
+				res.json(err,500);
+			}else{
+				todo.set(req.body.user);
+				todo.save(function(err){
+					if(err){
+						res.json(err,500);
+					}else{
+						res.json(todo);
+					}
+				});
+			}
+		}
+	);
+});
+
+router.post('/vendorupdate', function(req, res, next) {
+	collection.clienter.findById(req.body.user._id,
+		function(err,data){
+			var todo = data;
+			if(err){
+				res.json(err,500);
+			}else{
+				todo.set(req.body.user);
+				todo.save(function(err){
+					if(err){
+						res.json(err,500);
+					}else{
+						res.json(todo);
+					}
+				});
+			}
+		}
+	);
+});
+
 //子账号
 router.post('/accountcreat', function(req, res, next) {
 	var total = 0;

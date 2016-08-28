@@ -4,15 +4,7 @@ require(['/js/public/base.js'],function(Base){
 		function($,_,Backbone,Helper){
 			var view = Backbone.View.extend({
 				initialize:function(){
-					Helper.deletelogin();
-					$(".nav .client,.nav .vendor").remove();
-					$('.toptab li').bind("click",function(){
-						var i = $(this).index();
-						$('.toptab li').removeClass('on');
-						$(this).addClass('on');
-						$('.all-form .form').addClass('hide');
-						$($('.all-form .form')[i]).removeClass('hide');
-					});
+					_.bind(Helper.initUnloginHead, this)(Helper);
 				},
 				el:$("#main"),
 				events:{
@@ -27,7 +19,7 @@ require(['/js/public/base.js'],function(Base){
 						user:{
 							name:this.$el.find("#clientName").val(),
 							cell:this.$el.find("#clientCell").val(),
-							psw:this.$el.find("#clientPsw").val()							
+							psw:this.$el.find("#clientPsw").val()
 						}
 					};
 					$.ajax({

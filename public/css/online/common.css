@@ -1192,3 +1192,36 @@ a{text-decoration: none;color: #666;}
   background-image: -webkit-linear-gradient(top,#ffb55a,#d13939);
   border: 1px solid #ffc299;
 }
+.safe input,.safe button,
+.profile input,.profile button{
+	margin: 10px 0;
+}
+.safe label,
+.profile label{
+	display: inline-block;
+	width: 120px;
+	padding-right:20px;
+	text-align: right;
+}
+.safe input[type=radio],
+.profile input[type=radio]{
+	margin:0;
+	width: auto;
+	vertical-align: middle;
+}
+.safe>li,
+.proin>li{
+	display: none;
+}
+.safe>li.on,
+.proin>li.on{
+	display: block;
+}
+.safe p{
+	margin-top: 20px;
+	font-size: 16px;
+	width: 120px;
+	font-weight: bold;
+	text-align: right;
+	border-bottom: 1px solid #999;
+}

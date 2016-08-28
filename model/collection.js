@@ -45,6 +45,21 @@ var clienter = new database.Schema({
 		type:String,
 		validate:/.+/
 	},
+	realname:{
+		type:String,
+	},
+	gender:{
+		type:Number,
+	},
+	mail:{
+		type:String,
+	},
+	city:{
+		type:Number,
+	},
+	company:{
+		type:String,
+	},
 	created_at:{
 		type:Date,
 		default: Date.now
@@ -71,6 +86,21 @@ var vendorer = new database.Schema({
 	psw:{
 		type:String,
 		validate:/.+/
+	},
+	realname:{
+		type:String,
+	},
+	gender:{
+		type:Number,
+	},
+	mail:{
+		type:String,
+	},
+	city:{
+		type:Number,
+	},
+	company:{
+		type:String,
 	},
 	created_at:{
 		type:Date,

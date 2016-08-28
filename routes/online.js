@@ -36,7 +36,14 @@ router.get('/quicksign', function(req, res, next) {
   });
 });
 
-
+router.get('/profile/:id', function(req, res, next) {
+  res.render('./online/profile', { 
+    nav:'首页',
+    path:'online/profile',
+    uid: req.params.id,
+    title: '建正会展--用户中心' 
+  });
+});
 
 router.get('/client/creat', function(req, res, next) {
   res.render('./online/client/request/creat', { 

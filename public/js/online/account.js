@@ -11,23 +11,7 @@ require(['/js/public/base.js'],function(Base){
         <%})%>';
       var view = Backbone.View.extend({
         initialize:function(){
-          if(Helper.islogin()){
-            this.user = Helper.getlogin();
-            var temp = _.template(Helper.template.onlineLoginTemplate);
-            $(".toplink").html(temp(this.user));
-            $("#exit").bind("click",function(e){
-              e.preventDefault();
-              Helper.deletelogin();
-              location.href="/online/index";
-            });
-            if(this.user.type=="client"){
-              $(".nav .vendor").remove();
-            }else if(this.user.type=="vendor"){
-              $(".nav .client").remove();
-            }
-          }else{
-            $(".nav .client,.nav .vendor").remove();
-          }
+          _.bind(Helper.initHead, this)(Helper);
         },
         el:$("#main"),
         events:{
