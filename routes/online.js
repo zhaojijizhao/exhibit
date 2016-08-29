@@ -339,4 +339,62 @@ router.get('/account', function(req, res, next) {
   });
 });
 
+router.get('/push', function(req, res, next) {
+  res.render('./online/push', {
+    nav:'会议推',
+    path: 'online/push',
+    title: '建正会展--会议推'
+  });
+});
+
+router.get('/flightinfo', function(req, res, next) {
+  res.render('./online/flightinfo', {
+    nav:'会议推',
+    path: 'online/flightinfo',
+    title: '建正会展--会议推'
+  });
+});
+
+router.get('/flightassist', function(req, res, next) {
+  res.render('./online/flightassist', {
+    nav:'会议推',
+    path: 'online/flightassist',
+    title: '建正会展--会议推'
+  });
+});
+
+router.get('/hotelassist', function(req, res, next) {
+  res.render('./online/hotelassist', {
+    nav:'会议推',
+    path: 'online/hotelassist',
+    title: '建正会展--会议推'
+  });
+});
+
+router.get('/hotelinfo', function(req, res, next) {
+  res.render('./online/hotelinfo', {
+    nav:'会议推',
+    path: 'online/hotelinfo',
+    title: '建正会展--会议推'
+  });
+});
+
+router.get('/confinfo', function(req, res, next) {
+  res.render('./online/confinfo', {
+    nav:'会议推',
+    path: 'online/confinfo',
+    title: '建正会展--会议推'
+  });
+});
+
+router.get('/confresource', function(req, res, next) {
+  res.render('./online/confresource', {
+    nav:'会议推',
+    path: 'online/confresource',
+    title: '建正会展--会议推'
+  });
+});
+
+
+
 module.exports = router;
