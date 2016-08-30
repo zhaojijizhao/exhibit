@@ -2,14 +2,49 @@
 <div class="main" id="main">
   <div class="out">
     <div class="in">
-        <ul class="conf-nav">
-            <li><a class="on" href="/online/flightinfo">航班信息</a></li>
-            <li><a href="/online/flightassist">接送</a></li>
-            <li><a href="/online/hotelassist">酒店接待</a></li>
-            <li><a href="/online/hotelinfo">酒店信息</a></li>
-            <li><a href="/online/confinfo">会议信息</a></li>
-            <li><a href="/online/confresource">会议资料</a></li>
-        </ul>
+        <div class="conf">
+            <ul class="conf-nav">
+                <li><a class="on" href="/online/flightinfo">航班信息</a></li>
+                <li><a href="/online/flightassist">接送</a></li>
+                <li><a href="/online/hotelassist">酒店接待</a></li>
+                <li><a href="/online/hotelinfo">酒店信息</a></li>
+                <li><a href="/online/confinfo">会议信息</a></li>
+                <li><a href="/online/confresource">会议资料</a></li>
+            </ul>
+            <div class="conf-detail">
+                <div class="intput-line">
+                    <input type="text" id="inputflightsearch" placeholder="输入航班号" /><button id="flightsearch">查询航班</button>
+                </div>
+                <div class="result hide" id="s1">
+                    <div class="l1">
+                        <p class="title">南方航空CZ6172</p>
+                        <p class="sub">计划机型：738(中)</p>
+                    </div>
+                    <div class="l2">
+                        <p class="title">06:45</p>
+                        <p class="sub">浦东国际机场T2</p>
+                    </div>
+                    <div class="l3">
+                        <p class="title">08:55</p>
+                        <p class="sub">天河国际机场T2</p>
+                    </div>
+                </div>
+                <div class="intput-line">
+                    <input type="text" id="inpulate" placeholder="输入航班号" /><button id="late">晚点查询</button>
+                </div>
+                <div class="result hide" id="s2">
+                    <p class="title">起飞时间2016-09-10 06:45</p>
+                    <p class="sub">原起飞时间2016-09-10 04:45</p>
+                    <p class="text">航班因故将晚点2小时</p>
+                </div>
+                <div class="titileline">
+                   变更通知
+                </div>
+                <div class="result">
+                    <p class="text">尊敬的顾客由于暴风雨的原因，航班因故将晚点2小时，请各位乘客谅解</p>
+                </div>
+            </div>
+        </div>
     </div>
   </div>
 </div>

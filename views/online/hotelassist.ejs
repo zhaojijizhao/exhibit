@@ -2,14 +2,42 @@
 <div class="main" id="main">
   <div class="out">
     <div class="in">
-        <ul class="conf-nav">
-            <li><a href="/online/flightinfo">航班信息</a></li>
-            <li><a href="/online/flightassist">接送</a></li>
-            <li><a class="on" href="/online/hotelassist">酒店接待</a></li>
-            <li><a href="/online/hotelinfo">酒店信息</a></li>
-            <li><a href="/online/confinfo">会议信息</a></li>
-            <li><a href="/online/confresource">会议资料</a></li>
-        </ul>
+        <div class="conf">
+            <ul class="conf-nav">
+                <li><a href="/online/flightinfo">航班信息</a></li>
+                <li><a href="/online/flightassist">接送</a></li>
+                <li><a class="on" href="/online/hotelassist">酒店接待</a></li>
+                <li><a href="/online/hotelinfo">酒店信息</a></li>
+                <li><a href="/online/confinfo">会议信息</a></li>
+                <li><a href="/online/confresource">会议资料</a></li>
+            </ul>
+            <div class="conf-detail">
+                <div class="titileline">
+                    快捷签到入住 <button id="show1">一键入住</button>
+                </div>
+                <div class="result hide" id="s1">
+                    <p>尊敬的客户您已经成功入驻汉庭酒店！</p>
+                </div>
+                <div class="titileline">
+                    房间号 <button id="show2">获取房间号</button>
+                </div>
+                <div class="result hide" id="s2">
+                    <p>尊敬的客户您的房间号 C012</p>
+                    <img src="/img/online/hotel.png" />
+                </div>
+                <div class="titileline">
+                    酒店智能系统 
+                </div>
+                <div class="result" id="s3">
+                    <div class="intput-line">
+                        <button id="lunch">呼叫午餐</button>
+                        <button id="bed">叫床服务</button>
+                        <button id="ding">定时提醒</button>
+                        <button id="wip">打扫房间</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
   </div>
 </div>

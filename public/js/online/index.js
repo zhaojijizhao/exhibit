@@ -64,6 +64,8 @@ require(['/js/public/base.js'],function(Base){
 						$("#main .in").addClass('three-part');
 						$("#main .in").prepend('<div class="quicklink">\
 							<a href="/online/quicksign">一键注册,</br>快速发布需求</a>\
+							<a class="small" href="/online/sign">注册</a>\
+							<a class="small" href="/online/login">登录</a>\
 						</div>');
 					}
 				}

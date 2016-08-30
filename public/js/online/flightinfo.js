@@ -8,8 +8,18 @@ require(['/js/public/base.js'],function(Base){
         },
         el:$("#main"),
         events:{
+          'click #flightsearch':'search',
+          'click #late':'late'
         },
         render:function(){
+        },
+        search:function(e){
+          e.preventDefault();
+          $('#s1').removeClass('hide');
+        },
+        late:function(e){
+          e.preventDefault();
+          $('#s2').removeClass('hide');
         }
       });
       var page = new view();

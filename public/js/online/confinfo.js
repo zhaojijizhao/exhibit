@@ -8,8 +8,12 @@ require(['/js/public/base.js'],function(Base){
         },
         el:$("#main"),
         events:{
+          'click #check':'check'
         },
         render:function(){
+        },
+        check: function(){
+          alert('签到成功');
         }
       });
       var page = new view();

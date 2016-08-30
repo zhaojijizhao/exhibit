@@ -96,7 +96,6 @@ a{text-decoration: none;color: #666;}
 }
 .nav li a{
 	display: block;
-	margin-right: 10px;
 	width: 85px;
 	text-align: center;
 	line-height: 36px;
@@ -122,8 +121,8 @@ a{text-decoration: none;color: #666;}
 .bannerin{
 	width: 1000%;
 	overflow: hidden;
-	-webkit-animation:slide 30s ease infinite;
-	animation: slide 30s ease infinite;
+	-webkit-animation:slide 70s ease infinite;
+	animation: slide 70s ease infinite;
 }
 .bannerin a{
 	display: block;
@@ -1055,8 +1054,8 @@ a{text-decoration: none;color: #666;}
 	overflow: hidden;
 }
 .roll-area .roll{
-	-webkit-animation: roll 30s ease infinite;
-	animation: roll 30s ease infinite;
+	-webkit-animation: roll 70s ease infinite;
+	animation: roll 70s ease infinite;
 }
 .roll-area .roll li{
 	height: 65px;
@@ -1172,6 +1171,7 @@ a{text-decoration: none;color: #666;}
 	height: 531px;
 }
 .three-part .quicklink a{
+	margin-bottom: 20px;
 	display: block;
 	padding: 15px 0;
 	box-sizing: border-box;
@@ -1186,6 +1186,9 @@ a{text-decoration: none;color: #666;}
 	background-image: linear-gradient(top,#fc8b00,#d50303);
 	border: 1px solid #f60;
 	border-radius: 5px;
+}
+.three-part .quicklink a.small{
+	height: 60px;
 }
 .three-part .quicklink a:hover{
   background-image: -webkit-linear-gradient(top,#ffb55a,#d13939);
@@ -1224,4 +1227,304 @@ a{text-decoration: none;color: #666;}
 	font-weight: bold;
 	text-align: right;
 	border-bottom: 1px solid #999;
+}
+.push {
+	padding: 20px 40px;
+}
+.push a{
+	display: block;
+	margin-bottom: 20px;
+	padding: 20px;
+	border: 1px solid #999;
+	cursor: pointer;
+	border-radius: 5px;
+	font-size: 14px;
+}
+.push a:hover{
+	background-color: #eee;
+}
+.push a .title{
+	font-size: 18px;
+}
+.push a .time{
+	color: #999;
+}
+
+.conf{
+	position: relative;
+	z-index: 1;
+	padding-left: 220px;
+	background-color: #eee;
+	min-height: 300;
+	overflow: hidden;
+}
+.conf-nav,.conf-detail{
+	padding: 20px 0;
+}
+.conf-nav{
+	position: absolute;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 200px;
+	height: 100%;
+	box-sizing: border-box;
+	background-color: #333;
+}
+.conf-nav li a{
+	display: block;
+	padding: 10px 20px;
+	line-height: 20px;
+	font-size: 14px;
+	color:#ccc;
+	cursor: pointer;
+}
+.conf-nav li a:hover,
+.conf-nav li a.on{
+	background-color: #666;
+	color: #fff;
+}
+.conf-detail{
+	float: right;
+	width: 100%;
+	box-sizing: border-box;
+	padding-right:20px;
+}
+
+.conf-detail .intput-line{
+	margin-bottom:10px;
+}
+.conf-detail .intput-line input{
+	height: 28px;
+	width: 200px;
+	padding: 0 5px;
+	border:1px solid #ccc;
+}
+.conf-detail .intput-line button{
+	margin-left: 20px;
+	height: 28px;
+	width: 80px;
+	cursor: pointer;
+}
+.conf-detail .titileline{
+	margin-bottom: 10px;
+	font-size: 16px;
+	line-height: 20px;
+}
+.conf-detail .result{
+	padding: 20px;
+	margin-bottom: 20px;
+	font-size:12px;
+	line-height: 16px;
+	background-color: #fff;
+	overflow: hidden;
+}
+.conf-detail .l1{
+	vertical-align: top;
+	display: inline-block;
+	width: 120px;
+}
+.conf-detail .l2{
+	display: inline-block;
+	width: 200px;
+	text-align: right;
+}
+.conf-detail .l3{
+	margin-left: 20px;
+	display: inline-block;
+	width: 200px;
+	text-align: left;
+}
+.conf-detail .l2 .title,
+.conf-detail .l3 .title{
+	font-size: 30px;
+	font-weight: bold;
+	line-height: 36px;
+}
+.conf-detail .l1 .sub{
+	color: #999;
+}
+.conf-detail .result .title{
+	font-size: 20px;
+	line-height: 30px;
+}
+.conf-detail .result .sub{
+	line-height: 24px;
+	color: #999;
+}
+.conf-detail .result .text{
+	line-height: 24px;
+}
+.conf-detail .result .road{
+	box-sizing: border-box;
+	padding: 10px;
+	float: left;
+	width: 30%;
+}
+.conf-detail .result .road li{
+	margin-bottom: 5px;
+	border:1px solid #ccc;
+	background-color: #eee;
+	cursor: pointer;
+}
+.conf-detail .result .road li.on,
+.conf-detail .result .road li:hover{
+	background-color: #ebf1fb;
+}
+.conf-detail .result .road li.on .tip,
+.conf-detail .result .road li:hover .tip{
+	background-color: #0c88e8;
+}
+.conf-detail .result .road .tip{
+	display: inline-block;
+	line-height: 20px;
+	width: 60px;
+	background-color: #999;
+	text-align: center;
+	color: #fff;
+}
+.conf-detail .result .road .state{
+	display: inline-block;
+	line-height: 20px;
+	width: 60px;
+	background-color: green;
+	text-align: center;
+	color: #fff;
+}
+.conf-detail .result .road .state.r{
+	background-color: red;
+}
+.conf-detail .result .road .title{
+	padding: 0 10px;
+	font-size: 14px;
+}
+.conf-detail .result .road .sub{
+	padding: 0 10px;
+	font-size: 12px;
+	line-height: 20px;
+}
+.conf-detail .result .rightimg{
+	box-sizing: border-box;
+	padding:10px;
+	float: left;
+	width: 70%;
+}
+.conf-detail .result .rightimg img{
+	display: block;
+	width: 100%;
+	height: 380px;
+}
+.conf-detail button{
+	height: 28px;
+	width: 80px;
+	cursor: pointer;
+}
+.conf-detail img{
+	width: 100%;
+}
+.result table td{
+	height: 32px;
+	padding: 0 10px;
+}
+.result table thead td{
+	background-color: #ddd;
+}
+.result table tr:nth-child(even) td{
+	background-color: #eee;
+}
+.result img.pp{
+	width: 40px;
+	float: left;
+	margin-right: 10px;
+}
+.result.cc p{
+	margin: 10px 0;
+}
+.result .bl{
+	margin-bottom: 20px;
+}
+.result .n{
+	font-weight: bold;
+	font-size: 14px;
+}
+.result .t{
+	color: #999;
+}
+
+.result .file{
+	display: inline-block;
+	width: 100px;
+	text-align: center;
+}
+.result .file img{
+	margin: 0 auto;
+	display: block;
+	width: 50px;
+}
+.tpop{
+	position: fixed;
+	z-index: 99;
+	right: 0;
+	bottom:0;
+	text-align: right;
+}
+.tpop .chat{
+	display: inline-block;
+	padding: 10px;
+	width: 30px;
+	height: 30px;
+	line-height: 15px;
+	text-align: center;
+	color: #fff;
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: #2880b3;
+}
+.tpop .chat:hover{
+	opacity: 0.5;
+}
+.tpop .chatbox{
+	text-align: left;
+	width: 300px;
+	background-color: #fff;
+	border:1px solid #999;
+}
+.tpop .chatbox .top{
+	padding: 0 10px;
+	line-height: 24px;
+	background-color: #2880b3;
+	color: #fff;
+}
+.tpop .chatbox .top .close{
+	font-size: 14px;
+}
+.tpop .chatbox .content{
+	padding: 10px;
+	height: 260px;
+	word-break:break-all;
+	overflow-y: auto;
+}
+.tpop .chatbox .content .bl{
+	margin-bottom: 10px;
+}
+.tpop .chatbox .content .bl .n{
+	font-weight: block;
+}
+.tpop .chatbox .content .bl .t{
+	color: #999;
+}
+.tpop .chatbox .bottom{
+	text-align: right;
+	padding: 2px;
+	background-color: #eee;
+}
+.tpop .chatbox .bottom textarea{
+	width: 100%;
+	display: block;
+	resize:none;
+	border:1px solid #ccc;
+}
+.tpop .chatbox .bottom button{
+	width: 40px;
+	height: 24px;
 }

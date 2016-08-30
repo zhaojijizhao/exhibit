@@ -8,8 +8,23 @@ require(['/js/public/base.js'],function(Base){
         },
         el:$("#main"),
         events:{
+          'click #show1':'show1',
+          'click #show2':'show2',
+          'click #send':'send'
         },
         render:function(){
+        },
+        show1:function(e){
+          e.preventDefault();
+          $("#s1").removeClass('hide');
+        },
+        show2:function(e){
+          e.preventDefault();
+          $("#s2").removeClass('hide');
+        },
+        send:function(e){
+          e.preventDefault();
+          alert('已发送消息');
         }
       });
       var page = new view();

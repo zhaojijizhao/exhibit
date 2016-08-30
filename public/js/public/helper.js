@@ -1305,6 +1305,12 @@ define(['jquery','underscore','backbone'],
 			requestUrl:"http://121.43.62.242:3000/api/",
 			city: city,
 			initHead:function(helper){
+				$("#chat").on('click',function(){
+					$("#chatbox").removeClass('hide');
+				});
+				$("#chatbox .close").on('click',function(){
+					$("#chatbox").addClass('hide');
+				});
 				if(helper.islogin()){
 					this.user = helper.getlogin();
 					var temp = _.template(helper.template.onlineLoginTemplate);
@@ -1324,6 +1330,12 @@ define(['jquery','underscore','backbone'],
 				}
 			},
 			initUnloginHead:function(helper){
+				$("#chat").on('click',function(){
+					$("#chatbox").removeClass('hide');
+				});
+				$("#chatbox .close").on('click',function(){
+					$("#chatbox").addClass('hide');
+				});
 				helper.deletelogin();
 				$(".nav .client,.nav .vendor").remove();
 				$('.toptab li').bind("click",function(){
