@@ -127,13 +127,13 @@
 					</div>
 					<div class="form-pit">
 						<div class="form-subpit">
-							<label>用餐开始日期</label>
-							<input class="date_start" type="date" placeholder="请选择开始日期" readonly />
+							<label>用餐日期</label>
+							<input class="date_start" type="date" placeholder="请选择日期" readonly />
 						</div>
-						<div class="form-subpit">
+						<!--<div class="form-subpit">
 							<label>用餐结束日期</label>
 							<input class="date_end" type="date" placeholder="请选择结束日期" readonly />
-						</div>
+						</div>-->
 						<div class="form-subpit">
 							<label>选择餐厅形式</label>
 							<select class="type" disable>
@@ -147,8 +147,11 @@
 							<input class="people" type="tel" placeholder="请输入人数" readonly />
 						</div>
 						<div class="form-subpit">
-							<label>次数</label>
-							<input class="days" type="tel" placeholder="请输入次数" readonly />
+							<label>午餐或晚餐</label>
+							<select class="days">
+								<option value="0" checked>午餐</option>
+								<option value="1">晚餐</option>
+							</select>
 						</div>
 					</div>
 					<div class="memoup">备注</div>
@@ -172,12 +175,19 @@
 							</select>
 						</div>
 						<div class="form-subpit">
-							<label>人数</label>
-							<input class="people" type="tel" placeholder="请输入人数" readonly />
+							<label>用车车辆</label>
+							<input class="people" type="tel" placeholder="请输入车辆" readonly />
 						</div>
 						<div class="form-subpit">
 							<label>次数</label>
 							<input class="days" type="tel" placeholder="请输入次数" readonly />
+						</div>
+						<div class="form-subpit">
+							<label>用车形式</label>
+							<select class="usage" readonly>
+								<option type_id="0" checked >接送机</option>
+								<option type_id="1">全天用车</option>
+							</select>
 						</div>
 					</div>
 					<div class="memoup">备注</div>
@@ -227,6 +237,10 @@
 						<div class="form-subpit">	
 							<label>陪同天数</label>
 							<input class="with_people" type="tel" placeholder="请填写陪同天数" readonly />
+						</div>
+						<div class="form-subpit">	
+							<label>陪同人数</label>
+							<input class="with_people_num" type="tel" placeholder="请填写陪同人数" />
 						</div>
 						<div class="form-subpit">	
 							<label>是否需要地接</label>
@@ -414,13 +428,13 @@
 			</div>
 			<div class="form-pit">
 				<div class="form-subpit">
-					<label>用餐开始日期</label>
-					<input class="date_start" type="date" placeholder="请选择开始日期" />
+					<label>用餐日期</label>
+					<input class="date_start" type="date" placeholder="请选择日期" />
 				</div>
-				<div class="form-subpit">
+				<!--<div class="form-subpit">
 					<label>用餐结束日期</label>
 					<input class="date_end" type="date" placeholder="请选择结束日期" />
-				</div>
+				</div>-->
 				<div class="form-subpit">
 					<label>选择餐厅形式</label>
 					<select class="type">
@@ -434,8 +448,11 @@
 					<input class="people" type="tel" placeholder="请输入人数" />
 				</div>
 				<div class="form-subpit">
-					<label>天数</label>
-					<input class="days" type="tel" placeholder="请输入天数" />
+					<label>午餐或晚餐</label>
+					<select class="days">
+						<option value="0" checked>午餐</option>
+						<option value="1">晚餐</option>
+					</select>
 				</div>
 			</div>
 			<div class="memoup">备注</div>
@@ -467,12 +484,19 @@
 					</select>
 				</div>
 				<div class="form-subpit">
-					<label>人数</label>
-					<input class="people" type="tel" placeholder="请输入人数" />
+					<label>用车车辆</label>
+					<input class="people" type="tel" placeholder="请输入车辆" />
 				</div>
 				<div class="form-subpit">
-					<label>天数</label>
-					<input class="days" type="tel" placeholder="请输入天数" />
+					<label>次数</label>
+					<input class="days" type="tel" placeholder="请输入次数" />
+				</div>
+				<div class="form-subpit">
+					<label>用车形式</label>
+					<select class="usage">
+						<option type_id="0" checked >接送机</option>
+						<option type_id="1">全天用车</option>
+					</select>
 				</div>
 			</div>
 			<div class="memoup">备注</div>
@@ -540,6 +564,10 @@
 				<div class="form-subpit">	
 					<label>陪同天数</label>
 					<input class="with_people" type="tel" placeholder="请填写陪同天数" />
+				</div>
+				<div class="form-subpit">	
+					<label>陪同人数</label>
+					<input class="with_people_num" type="tel" placeholder="请填写陪同人数" />
 				</div>
 				<div class="form-subpit">	
 					<label>是否需要地接</label>

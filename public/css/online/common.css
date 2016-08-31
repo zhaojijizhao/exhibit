@@ -56,7 +56,7 @@ a{text-decoration: none;color: #666;}
 }
 .header{
 	margin-top: 10px;
-	height: 80px;
+	height: 100px;
 	overflow: hidden;
 }
 .header .logo{
@@ -69,6 +69,8 @@ a{text-decoration: none;color: #666;}
 .header .hotline{
 	padding: 5px 0;
 	width: 300px;
+	position: relative;
+	z-index: 1;
 }
 .header .hotline-n{
 	display: block;
@@ -79,7 +81,7 @@ a{text-decoration: none;color: #666;}
 .header .hotline-p{
 	display: block;
 	font-size: 16px;
-	line-height: 24px;
+	line-height: 36px;
 	color: #333;
 }
 .header .highlight{
@@ -1142,7 +1144,7 @@ a{text-decoration: none;color: #666;}
 }
 .account-table{
 	margin: 20px 0;
-	width: 300px;
+	width: 480px;
 	border-collapse: collapse;
 }
 .account-table td{
@@ -1527,4 +1529,38 @@ a{text-decoration: none;color: #666;}
 .tpop .chatbox .bottom button{
 	width: 40px;
 	height: 24px;
+}
+.account-save{
+	font-size: 14px;
+	color:#999;
+	cursor: pointer;
+}
+.client_sp1,.client_sp2{
+	display: inline-block;
+	width: 100px;
+	height: 26px;
+	font-size:14px;
+	line-height: 26px;
+	border-radius: 3px;
+	background-color: #f66;
+	color:#fff;
+	border:2px solid #f60;
+	cursor: pointer;
+}
+.client_sp1 a ,.client_sp2 a{
+	color:#fff;
+}
+.client_sp1:hover,.client_sp2:hover{
+	background-color:#d13631;
+	border-color: #d13631;
+}
+.client_sp{
+	position: absolute;
+  z-index: 1;
+  top: 40px;
+  right: 0;
+  left:0;
+  height: 30px;
+  text-align: center;
+  background: #fff;
 }

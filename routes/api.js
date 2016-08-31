@@ -5,12 +5,147 @@ var excel = require('node-excel-export');
 
 /* api listing. */
 
+//cms接口
+router.get('/cmsgetclientuser', function(req, res, next) {
+	collection.clienter.find({},function(err,data){
+			this.todo = data;
+			if(err){
+				res.json(err,500);
+			}else{
+				if(data.length>0){
+					res.json(this.todo);
+				}else{
+					res.json(err,500);
+				}
+			}
+		}
+	);
+});
+
+router.post('/cmssetclientuser', function(req, res, next) {
+	collection.clienter.findById(req.body.user._id,
+		function(err,data){
+			var todo = data;
+			if(err){
+				res.json(err,500);
+			}else{
+				todo.set(req.body.user);
+				todo.save(function(err){
+					if(err){
+						res.json(err,500);
+					}else{
+						res.json(todo);
+					}
+				});
+			}
+		}
+	);
+});
+
+router.post('/cmsdeleteclientuser', function(req, res, next) {
+	collection.clienter.findById(req.body.user._id,
+		function(err,data){
+			var todo = data;
+			if(err){
+				res.json(err,500);
+			}else{
+				todo.remove(function(err){
+					if(err){
+						res.json(err,500);
+					}else{
+						res.json(todo);
+					}
+				});
+			}
+		}
+	);
+});
+
+router.post('/cmsaddclientuser', function(req, res, next) {
+	this.todo = new collection.clienter(req.body.user);
+	this.todo.save(function(err){
+		if(err){
+			res.json(err,500);
+		}else{
+			res.json(this.todo);
+		}
+	});
+});
+
+router.get('/cmsgetvendoruser', function(req, res, next) {
+	collection.vendorer.find({},function(err,data){
+			this.todo = data;
+			if(err){
+				res.json(err,500);
+			}else{
+				if(data.length>0){
+					res.json(this.todo);
+				}else{
+					res.json(err,500);
+				}
+			}
+		}
+	);
+});
+
+router.post('/cmssetvendoruser', function(req, res, next) {
+	collection.vendorer.findById(req.body.user._id,
+		function(err,data){
+			var todo = data;
+			if(err){
+				res.json(err,500);
+			}else{
+				todo.set(req.body.user);
+				todo.save(function(err){
+					if(err){
+						res.json(err,500);
+					}else{
+						res.json(todo);
+					}
+				});
+			}
+		}
+	);
+});
+
+router.post('/cmsdeletevendoruser', function(req, res, next) {
+	collection.vendorer.findById(req.body.user._id,
+		function(err,data){
+			var todo = data;
+			if(err){
+				res.json(err,500);
+			}else{
+				todo.remove(function(err){
+					if(err){
+						res.json(err,500);
+					}else{
+						res.json(todo);
+					}
+				});
+			}
+		}
+	);
+});
+
+router.post('/cmsaddvendoruser', function(req, res, next) {
+	this.todo = new collection.vendorer(req.body.user);
+	this.todo.save(function(err){
+		if(err){
+			res.json(err,500);
+		}else{
+			res.json(this.todo);
+		}
+	});
+});
+
+
 //user api
 //用户登录
 router.post('/login', function(req, res, next) {
 	var name = req.body.user.name,
-		psw = req.body.user.psw;
-	collection.user.find({name:name,psw:psw},function(err,data){
+		psw = req.body.user.psw,
+		cell = req.body.user.cell;
+	collection.user.find({name:name,psw:psw,cell:cell},function(err,data){
 			this.todo = data;
 			if(err){
 				res.json(err,500);
@@ -27,8 +162,9 @@ router.post('/login', function(req, res, next) {
 
 router.post('/clientlogin', function(req, res, next) {
 	var name = req.body.user.name,
-		psw = req.body.user.psw;
-	collection.clienter.find({name:name,psw:psw},function(err,data){
+		psw = req.body.user.psw,
+		cell = req.body.user.cell;
+	collection.clienter.find({name:name,psw:psw,cell:cell},function(err,data){
 			this.todo = data;
 			if(err){
 				res.json(err,500);
@@ -45,8 +181,9 @@ router.post('/clientlogin', function(req, res, next) {
 
 router.post('/vendorlogin', function(req, res, next) {
 	var name = req.body.user.name,
-		psw = req.body.user.psw;
-	collection.vendorer.find({name:name,psw:psw},function(err,data){
+		psw = req.body.user.psw,
+		cell = req.body.user.cell;
+	collection.vendorer.find({name:name,psw:psw,cell:cell},function(err,data){
 			this.todo = data;
 			if(err){
 				res.json(err,500);
@@ -63,34 +200,67 @@ router.post('/vendorlogin', function(req, res, next) {
 
 //用户注册
 router.post('/user', function(req, res, next) {
-	this.todo = new collection.user(req.body.user);
-	this.todo.save(function(err){
+	var todo = new collection.user(req.body.user);
+	var cell = req.body.user.cell;
+	collection.user.find({cell:cell},function(err,data){
 		if(err){
 			res.json(err,500);
 		}else{
-			res.json(this.todo);
+			if(data.length>0){
+				res.json(err,500);
+			}else{
+				todo.save(function(err){
+					if(err){
+						res.json(err,500);
+					}else{
+						res.json(todo);
+					}
+				});
+			}
 		}
 	});
 });
 
 router.post('/clientuser', function(req, res, next) {
-	this.todo = new collection.clienter(req.body.user);
-	this.todo.save(function(err){
+	var todo = new collection.clienter(req.body.user);
+	var cell = req.body.user.cell;
+	collection.clienter.find({cell:cell},function(err,data){
 		if(err){
 			res.json(err,500);
 		}else{
-			res.json(this.todo);
+			if(data.length>0){
+				res.json(err,500);
+			}else{
+				todo.save(function(err){
+					if(err){
+						res.json(err,500);
+					}else{
+						res.json(todo);
+					}
+				});
+			}
 		}
 	});
 });
 
 router.post('/vendoruser', function(req, res, next) {
-	this.todo = new collection.vendorer(req.body.user);
-	this.todo.save(function(err){
+	var todo = new collection.vendorer(req.body.user);
+	var cell = req.body.user.cell;
+	collection.vendorer.find({cell:cell},function(err,data){
 		if(err){
 			res.json(err,500);
 		}else{
-			res.json(this.todo);
+			if(data.length>0){
+				res.json(err,500);
+			}else{
+				todo.save(function(err){
+					if(err){
+						res.json(err,500);
+					}else{
+						res.json(todo);
+					}
+				});
+			}
 		}
 	});
 });
@@ -117,7 +287,7 @@ router.post('/clientupdate', function(req, res, next) {
 });
 
 router.post('/vendorupdate', function(req, res, next) {
-	collection.clienter.findById(req.body.user._id,
+	collection.vendorer.findById(req.body.user._id,
 		function(err,data){
 			var todo = data;
 			if(err){

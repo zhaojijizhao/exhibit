@@ -1302,6 +1302,16 @@ define(['jquery','underscore','backbone'],
 				}
 			];
 		var helper={
+			geidByCity:function(id){
+			  for(var i =0;i<city.length;i++){
+			    for(var j=0; j<city[i].cities.length;j++){
+			      var item =city[i].cities[j];
+			      if(item.id == id){
+			        return item.name;
+			      }
+			    }
+			  }
+			},
 			requestUrl:"http://121.43.62.242:3000/api/",
 			city: city,
 			initHead:function(helper){
@@ -1321,12 +1331,12 @@ define(['jquery','underscore','backbone'],
 						location.href="/online/index";
 					});
 					if(this.user.type=="client"){
-						$(".nav .vendor").remove();
+						$(".vendor").remove();
 					}else if(this.user.type=="vendor"){
-						$(".nav .client").remove();
+						$(".client").remove();
 					}
 				}else{
-					$(".nav .client,.nav .vendor").remove();
+					$(".client,.vendor").remove();
 				}
 			},
 			initUnloginHead:function(helper){

@@ -63,7 +63,7 @@ require(['/js/public/base.js'],function(Base){
 						var price = parseFloat($(this).find('.price').val()||0),
 							people = parseInt($(this).find('.people').val()||0),
 							days = parseInt($(this).find('.days').val()||0);
-						var total = price*people*days;
+						var total = price*people;
 						$(this).find(".total").val(total.toFixed(2));
 						dinnerall += total;
 						totalall += total;
@@ -73,7 +73,8 @@ require(['/js/public/base.js'],function(Base){
 					this.$el.find('#car .form-pit').each(function(){
 						var price = parseFloat($(this).find('.price').val()||0),
 							people = parseInt($(this).find('.people').val()||0),
-							days = parseInt($(this).find('.days').val()||0);
+							days = parseInt($(this).find('.days').val()||0),
+							usage = parseInt($(v).find(".usage").val()||0);
 						var total = price*people*days;
 						$(this).find(".total").val(total.toFixed(2));
 						carall += total;
@@ -170,6 +171,7 @@ require(['/js/public/base.js'],function(Base){
 									price:parseFloat($(v).find(".price").val()||0),
 									people:parseInt($(v).find(".people").val()||0),
 									days:parseInt($(v).find(".days").val()||0),
+									usage:parseInt($(v).find(".usage").val()||0),
 									total:parseFloat($(v).find(".total").val()||0)
 								}
 							}),
@@ -202,6 +204,7 @@ require(['/js/public/base.js'],function(Base){
 							with:{
 								with_need:self.find("#with .with_need option:selected").attr("need")==0?false:true,
 								with_people:parseInt(self.find("#with .with_people").val()||0),
+								with_people_num:parseInt(self.find("#with .with_people_num").val()||0),
 								with_price:parseFloat(self.find("#with .with_price").val()||0),
 								with_total:parseFloat(self.find("#with .with_total").val()||0),
 								catch_need:self.find("#with .catch_need option:selected").attr("need")==0?false:true,

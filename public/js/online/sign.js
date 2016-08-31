@@ -42,7 +42,7 @@ require(['/js/public/base.js'],function(Base){
 						user:{
 							name:this.$el.find("#vendorName").val(),
 							cell:this.$el.find("#vendorCell").val(),
-							psw:this.$el.find("#vendorPsw").val()							
+							psw:this.$el.find("#vendorPsw").val()
 						}
 					};
 					$.ajax({

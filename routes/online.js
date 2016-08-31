@@ -36,6 +36,22 @@ router.get('/quicksign', function(req, res, next) {
   });
 });
 
+router.get('/clientlogin', function(req, res, next) {
+  res.render('./online/clientlogin', {
+    nav:'首页',
+    path:'online/clientlogin',
+    title: '建正会展--企业入口'
+  });
+});
+
+router.get('/vendorlogin', function(req, res, next) {
+  res.render('./online/vendorlogin', {
+    nav:'首页',
+    path:'online/vendorlogin',
+    title: '建正会展--签约商入口'
+  });
+});
+
 router.get('/profile/:id', function(req, res, next) {
   res.render('./online/profile', { 
     nav:'首页',

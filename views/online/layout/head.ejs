@@ -18,6 +18,7 @@
 <meta name="x5-page-mode" content="app">
 <meta name="msapplication-tap-highlight" content="no">
 <link rel="stylesheet" href="/css/online/common.css">
+<link rel="stylesheet" href="/fontawesome/css/font-awesome.min.css">
 </head>
 <body>
 	<div class="tpop">
@@ -71,6 +72,10 @@
 			<p class="hotline fr tc">
 				<span class="hotline-n">400-806-9277</span>
 				<span class="hotline-p">24小时咨询热线</span>
+				<span class="client_sp">
+				<span class="client_sp1 client <%if(nav=="发布需求"){%>on<%}%>" ><a href="/online/client/creat"><span class="icon-pencil"></span> 发布需求</a></span>
+				<span class="client_sp2 client <%if(nav=="我的需求"){%>on<%}%>" ><a href="/online/client/request"><span class="icon-book"></span> 我的需求</a></span>
+				</span>
 				<a href="tencent://message/?uin=1564111627&amp;Site=有事Q我&amp;Menu=yes">
 					<span class="hotline-p highlight">在线咨询</span>
 				</a>
@@ -82,9 +87,6 @@
 			<ul class="nav">
 				<li class="<%if(nav=="首页"){%>on<%}%>" ><a href="/online/index">首页</a></li>
 				<li class="<%if(nav=="展示"){%>on<%}%>" ><a href="/online/show">展示</a></li>
-				<li class="client <%if(nav=="发布需求"){%>on<%}%>" ><a href="/online/client/creat">发布需求</a></li>
-
-				<li class="client <%if(nav=="我的需求"){%>on<%}%>" ><a href="/online/client/request">我的需求</a></li>
 				<li class="client <%if(nav=="收到报价"){%>on<%}%>" ><a href="/online/client/response">收到报价</a></li>
 				<li class="vendor <%if(nav=="所有需求"){%>on<%}%>" ><a href="/online/vendor/request">所有需求</a></li>
 				<li class="vendor <%if(nav=="我的报价"){%>on<%}%>" ><a href="/online/vendor/response">我的报价</a></li>
@@ -92,10 +94,9 @@
 				<li class="<%if(nav=="热门区域"){%>on<%}%>" ><a href="/online/hot">热门区域</a></li>
 				<li class="<%if(nav=="定制"){%>on<%}%>" ><a href="/online/design">定制</a></li>
 				<li class="<%if(nav=="视频会议"){%>on<%}%>" ><a href="/online/video">视频会议</a></li>
-				<li class="<%if(nav=="虚拟会议室"){%>on<%}%>" ><a href="/online/room">虚拟会议室</a></li>
 				<li class="<%if(nav=="关于我们"){%>on<%}%>" ><a href="/online/about">关于我们</a></li>
 				<li class="client <% if(nav=="子账号"){%>on<%}%>" ><a href="/online/account">子账号</a></li>
-				<li class="<% if(nav=="会议推"){%>on<%}%>" ><a href="/online/push">会议推</a></li>
+				<li class="<% if(nav=="会议推"){%>on<%}%>" ><a href="/online/push">会议推送</a></li>
 			</ul>
 		</div>
 	</div>

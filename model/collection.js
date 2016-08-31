@@ -60,6 +60,9 @@ var clienter = new database.Schema({
 	company:{
 		type:String,
 	},
+	state:{
+		type:String
+	},
 	created_at:{
 		type:Date,
 		default: Date.now
@@ -88,19 +91,22 @@ var vendorer = new database.Schema({
 		validate:/.+/
 	},
 	realname:{
-		type:String,
+		type:String
 	},
 	gender:{
-		type:Number,
+		type:Number
 	},
 	mail:{
-		type:String,
+		type:String
 	},
 	city:{
-		type:Number,
+		type:Number
 	},
 	company:{
-		type:String,
+		type:String
+	},
+	state:{
+		type:String
 	},
 	created_at:{
 		type:Date,
@@ -222,6 +228,10 @@ var exhibitCar = new database.Schema({
 	days:{
 		type:Number,
 		validate:/.+/
+	},
+	usage:{
+		type:Number,
+		validate:/.+/
 	}
 });
 //会场服务
@@ -284,6 +294,9 @@ var exhibitWith = new database.Schema({
 		default:false
 	},
 	with_people:{
+		type:Number
+	},
+	with_people_num:{
 		type:Number
 	},
 	catch_need:{
@@ -479,6 +492,10 @@ var offerCar = new database.Schema({
 		type:Number,
 		validate:/.+/
 	},
+	usage:{
+		type:Number,
+		validate:/.+/
+	},
 	total:{
 		type:Number
 	}
@@ -558,6 +575,9 @@ var offerWith = new database.Schema({
 		default:false
 	},
 	with_people:{
+		type:Number
+	},
+	with_people_num:{
 		type:Number
 	},
 	with_price:{

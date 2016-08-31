@@ -168,13 +168,13 @@
 						var v=detail.dinner[i];%>
 						<div class="form-pit">
 							<div class="form-subpit">
-								<label>用餐开始日期</label>
-								<input class="date_start" type="date" placeholder="请选择开始日期" value="<%=new Date(v.date_start).toLocaleDateString()%>" readonly />
+								<label>用餐日期</label>
+								<input class="date_start" type="date" placeholder="请选择日期" value="<%=new Date(v.date_start).toLocaleDateString()%>" readonly />
 							</div>
-							<div class="form-subpit">
+							<!--<div class="form-subpit">
 								<label>用餐结束日期</label>
 								<input class="date_end" type="date" placeholder="请选择结束日期" value="<%=new Date(v.date_end).toLocaleDateString()%>" readonly />
-							</div>
+							</div>-->
 							<div class="form-subpit">
 								<label>选择餐厅形式</label>
 								<select class="type" disabled >
@@ -192,8 +192,11 @@
 								<input class="people" type="tel" placeholder="请输入人数" value="<%=v.people%>" readonly />
 							</div>
 							<div class="form-subpit">
-								<label>次数</label>
-								<input class="days" type="tel" placeholder="请输入次数" value="<%=v.days%>" readonly />
+								<label>午餐或晚餐</label>
+								<select class="days" value="<%=v.days%>" readonly>
+									<option value="0">午餐</option>
+									<option value="1">晚餐</option>
+								</select>
 							</div>
 							<div class="form-subpit">
 								<label>&nbsp;</label>
@@ -236,16 +239,19 @@
 								<input class="price" type="tel" placeholder="请输入单价"  value="<%=v.price%>" />
 							</div>
 							<div class="form-subpit">
-								<label>人数</label>
-								<input class="people" type="tel" placeholder="请输入人数" value="<%=v.people%>" readonly />
+								<label>用车车辆</label>
+								<input class="people" type="tel" placeholder="请输入车辆" value="<%=v.people%>" readonly />
 							</div>
 							<div class="form-subpit">
 								<label>次数</label>
 								<input class="days" type="tel" placeholder="请输入次数" value="<%=v.days%>" readonly />
 							</div>
 							<div class="form-subpit">
-								<label>&nbsp;</label>
-								<input readonly/>
+								<label>用车形式</label>
+								<select class="usage" value="<%=v.usage%>" readonly>
+									<option type_id="0">接送机</option>
+									<option type_id="1">全天用车</option>
+								</select>
 							</div>
 							<div class="form-subpit">
 								<label>&nbsp;</label>
@@ -341,6 +347,10 @@
 						<div class="form-subpit">	
 							<label>陪同天数</label>
 							<input class="with_people" type="tel" placeholder="请填写陪同天数" value="<%=detail.with.with_people%>" readonly />
+						</div>
+						<div class="form-subpit">	
+							<label>陪同人数</label>
+							<input class="with_people_num" type="tel" placeholder="请填写陪同人数" value="<%=detail.with.with_people_num%>" readonly/>
 						</div>
 						<div class="form-subpit">
 							<label>单价</label>

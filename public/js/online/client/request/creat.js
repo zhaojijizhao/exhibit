@@ -165,7 +165,8 @@ require(['/js/public/base.js'],function(Base){
 									type_id:parseInt($(v).find(".type  option:selected").attr("type_id")),
 									type_name:$(v).find(".type").val(),
 									people:parseInt($(v).find(".people").val()||0),
-									days:parseInt($(v).find(".days").val()||0)
+									days:parseInt($(v).find(".days").val()||0),
+									usage:parseInt($(v).find(".usage").val()||0)
 								}
 							}),
 							car_memo:self.find("#car .memo").val(),
@@ -191,6 +192,7 @@ require(['/js/public/base.js'],function(Base){
 							with:{
 								with_need:self.find("#with .with_need option:selected").attr("need")==0?false:true,
 								with_people:parseInt(self.find("#with .with_people").val()||0),
+								with_people_num:parseInt(self.find("#with .with_people_num").val()||0),
 								catch_need:self.find("#with .catch_need option:selected").attr("need")==0?false:true,
 								catch_people:parseInt(self.find("#with .catch_people").val()||0)
 							},

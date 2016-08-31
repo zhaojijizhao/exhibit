@@ -10,7 +10,7 @@ require(['/js/public/base.js'],function(Base){
 								<span class="roll-cname"><%=v.info.cname%></span>\
 								<span class="roll-name"><%=v.info.name%></span>\
 								<span class="roll-detail">\
-									<a class="detail" href="/online/vendor/request/detail/<%=v._id%>">查看详情</a>\
+									<!--<a class="detail" href="/online/vendor/request/detail/<%=v._id%>">查看详情</a>-->\
 									<span><%=v.timeabout%>前发布</span>\
 								</span>\
 							</li>\
@@ -64,8 +64,11 @@ require(['/js/public/base.js'],function(Base){
 						$("#main .in").addClass('three-part');
 						$("#main .in").prepend('<div class="quicklink">\
 							<a href="/online/quicksign">一键注册,</br>快速发布需求</a>\
-							<a class="small" href="/online/sign">注册</a>\
-							<a class="small" href="/online/login">登录</a>\
+							<a class="small" href="/online/login">个人用户入口</a>\
+							<a class="small" href="/online/clientlogin">企业用户入口</a>\
+							<a class="small" href="/online/vendorlogin">签约商入口</a>\
+							<!--<a class="small" href="/online/sign">注册</a>-->\
+							<!--<a class="small" href="/online/login">登录</a>-->\
 						</div>');
 					}
 				}

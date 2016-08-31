@@ -11,6 +11,7 @@ var vendor = require('./routes/vendor');
 var api = require('./routes/api');
 var online = require('./routes/online');
 var mobile = require('./routes/mobile');
+var cms = require('./routes/cms');
 
 var app = express();
 
@@ -43,6 +44,7 @@ app.use('/vendor', vendor);
 app.use('/api', api);
 app.use('/online', online);
 app.use('/mobile', mobile);
+app.use('/cms', cms);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

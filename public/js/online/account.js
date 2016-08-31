@@ -3,10 +3,11 @@ require(['/js/public/base.js'],function(Base){
   require(['jquery','underscore','backbone','helper'],
     function($,_,Backbone,Helper){
       var tabletemp = '<%_.each(list,function(v,k){%>\
-          <tr>\
-            <td><%=v.name%></td>\
-            <!--<td><%=v.cell%></td>-->\
-            <td><%=v.psw%></td>\
+          <tr id="<%=v._id%>">\
+            <td class="name"><%=v.name%></td>\
+            <td class="cell"><input type="tel" value="<%=v.cell%>" /></td>-->\
+            <td class="psw"><%=v.psw%></td>\
+            <td><span class="account-save save">保存</span></td>\
           </tr>\
         <%})%>';
       var view = Backbone.View.extend({
@@ -28,6 +29,26 @@ require(['/js/public/base.js'],function(Base){
                 _this.$el.find('#tablelist').html(_.template(tabletemp)({list:data}));
               }
             }
+          });
+          $(document).on('click','.save',function(){
+            var tr = $(this).closest('tr');
+            $.ajax({
+              url: '/api/vendorupdate',
+              type: 'post',
+              data:{
+                user:{
+                  _id:tr.attr('id'),
+                  name:tr.find('.name').html(),
+                  cell:tr.find('.cell input').val(),
+                  psw:tr.find('.psw').html()
+                }
+              },
+              dataType: 'json',
+              success:function(data){
+                alert('更新手机成功');
+                location.reload();
+              }
+            });
           });
         },
         creat: function() {
