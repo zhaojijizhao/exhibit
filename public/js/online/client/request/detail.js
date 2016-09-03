@@ -21,6 +21,52 @@ require(['/js/public/base.js'],function(Base){
 					'click #save':'save'
 				},
 				render:function(){
+					//date计算
+					$(document).on('change','input[type=date]',function(){
+					  var input = $(this);
+					  var inputclass = input.attr('class');
+					  var formpit = input.closest('.form-pit');
+					  var startinput,endinput;
+					  function gettheother(type) {
+					    var theinput,theother;
+					    theinput = input;
+					    if(type == 1){
+					      inputclass = inputclass.replace('start','end');
+					    }else if(type == 2){
+					      inputclass = inputclass.replace('end','start');
+					    }
+					    var chooseinput = formpit.find('.'+inputclass);
+					    if(chooseinput.length>0){
+					      theother = $(chooseinput[0]);
+					    }
+					    if(type == 1){
+					      startinput = theinput;
+					      endinput = theother;
+					    }else if(type == 2){
+					      endinput = theinput;
+					      startinput = theother;
+					    }
+					  }
+					  if(inputclass.indexOf('start')>-1){
+					    gettheother(1);
+					  }
+					  if(inputclass.indexOf('end')>-1){
+					    gettheother(2);
+					  }
+					  var dayinput = formpit.find('.days');
+					  if(startinput && endinput && startinput.val() && endinput.val()){
+					    if(dayinput.length>0){
+					      dayinput = $(dayinput[0]);
+					      if(dayinput.prev('label').html() == '天数' ){
+					        var minus = new Date(endinput.val()) - new Date(startinput.val());
+					        if(minus > 0) {
+					          minus = Math.ceil(minus/1000/60/60/24)+1;
+					          dayinput.val(minus)
+					        }
+					      }
+					    }
+					  }
+					});
 				},
 				change:function(e){
 					e.preventDefault();

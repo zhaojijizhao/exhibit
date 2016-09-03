@@ -18,7 +18,6 @@ require(['/js/public/base.js'],function(Base){
 					var data ={
 						user:{
 							name:this.$el.find("#clientName").val(),
-							cell:this.$el.find("#clientCell").val(),
 							psw:this.$el.find("#clientPsw").val()
 						}
 					};
@@ -42,7 +41,6 @@ require(['/js/public/base.js'],function(Base){
 					var data ={
 						user:{
 							name:this.$el.find("#vendorName").val(),
-							cell:this.$el.find("#vendorCell").val(),
 							psw:this.$el.find("#vendorPsw").val()
 						}
 					};
@@ -61,7 +59,6 @@ require(['/js/public/base.js'],function(Base){
 						}
 					});
 				}
-				
 			});
 			var page = new view();
 			page.render();

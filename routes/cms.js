@@ -19,6 +19,22 @@ router.get('/uservendor', function(req, res, next) {
   });
 });
 
+router.get('/exhibitlist', function(req, res, next) {
+  res.render('./cms/exhibitList', {
+    nav:'需求列表',
+    path:'cms/exhibitList',
+    title: '需求列表'
+  });
+});
+
+router.get('/exhibitdetail', function(req, res, next) {
+  res.render('./cms/exhibitDetail', {
+    nav:'需求详情',
+    path:'cms/exhibitDetail',
+    title: '需求详情'
+  });
+});
+
 router.get('/', function(req, res, next) {
   res.render('./cms/userClient', {
     nav:'商户账号管理',

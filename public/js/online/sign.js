@@ -31,8 +31,8 @@ require(['/js/public/base.js'],function(Base){
 							alert("注册成功");
 							location.href = "/online/login"
 						},
-						error:function(){
-							alert("注册失败");
+						error:function(e){
+							alert(e.responseJSON.msg ? e.responseJSON.msg : "注册失败");
 						}
 					});
 				},
@@ -55,7 +55,7 @@ require(['/js/public/base.js'],function(Base){
 							location.href = "/online/login"
 						},
 						error:function(){
-							alert("注册失败");
+							alert(e.responseJSON.msg ? e.responseJSON.msg : "注册失败");
 						}
 					});
 				}

@@ -217,8 +217,8 @@ require(['/js/public/base.js'],function(Base){
                 alert('添加成功');
                 location.reload();
               },
-              error:function(){
-                alert('添加失败');
+              error:function(e){
+                 alert(e.responseJSON.msg ? e.responseJSON.msg :'添加失败');
               }
             });
           });

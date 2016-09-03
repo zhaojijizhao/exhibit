@@ -134,7 +134,8 @@ require(['/js/public/base.js'],function(Base){
             data: {
               user:{
                 name: this.user.name,
-                psw: this.user.psw
+                psw: this.user.psw,
+                cell: this.user.cell
               }
             },
             dataType:"json",

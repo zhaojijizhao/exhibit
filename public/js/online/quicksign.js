@@ -31,8 +31,8 @@ require(['/js/public/base.js'],function(Base){
               Helper.setlogin(data);
               location.href = "/online/client/creat";
             },
-            error:function(){
-              alert("注册失败");
+            error:function(e){
+              alert(e.responseJSON.msg ? e.responseJSON.msg : "注册失败");
             }
           });
         }

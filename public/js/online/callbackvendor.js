@@ -8,30 +8,28 @@ require(['/js/public/base.js'],function(Base){
         },
         el:$("#main"),
         events:{
-          'click #loginVendor':'loginVendor'
+          'click #callback':'callback'
         },
         render:function(){
         },
-        loginVendor:function(e){
+        callback:function(e){
           e.preventDefault();
           var data ={
             user:{
               name:this.$el.find("#vendorName").val(),
-              psw:this.$el.find("#vendorPsw").val()
+              cell:this.$el.find("#vendorCell").val()
             }
           };
           $.ajax({
-            url: "/api/vendorlogin",
+            url: "/api/vendorcallback",
             type: "post",
             data: data,
             dataType:"json",
             success:function(data){
-              alert("登录成功");
-              Helper.setlogin(data[0]);
-              location.href = "/online/index";
+              alert("密码已经发送到您的手机，请查收！测试数据："+data[0].psw);
             },
             error:function(){
-              alert("登录失败");
+              alert("密码找回失败！");
             }
           });
         }

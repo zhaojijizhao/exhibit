@@ -1418,6 +1418,12 @@ define(['jquery','underscore','backbone'],
 												<span class="f1 red">已确认</span>\
 												<span class="fr w80 tc"><a class="orange" href="/online/result/<%=v.offer_id%>">查看报表</a></span>\
 											<%}%>\
+											<%if(v.state==0){%>\
+												<span class="f1 blue">待审核</span>\
+											<%}%>\
+											<%if(v.state==1){%>\
+												<span class="f1 green">待报价</span>\
+											<%}%>\
 											<span class="fr w80 tc"><a class="detail" href="/online/client/request/detail/<%=v._id%>">查看详情</a></span>\
 										</li>\
 									<%});%>\
@@ -1547,6 +1553,12 @@ define(['jquery','underscore','backbone'],
 												<%if(v.state==2){%>\
 													<span class="f1 red">已确认</span>\
 													<span class="fr w80 tc"><a class="orange" href="/online/result/<%=v._id%>">查看报表</a></span>\
+												<%}%>\
+												<%if(v.state==0){%>\
+													<span class="f1 blue">待审核</span>\
+												<%}%>\
+												<%if(v.state==1){%>\
+													<span class="f1 green">待报价</span>\
 												<%}%>\
 												<span class="fr w80 tc"><a class="response" href="/online/vendor/response/detail/<%=v._id%>" >查看详情</a></span>\
 											</li>\

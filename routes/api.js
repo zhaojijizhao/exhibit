@@ -62,12 +62,34 @@ router.post('/cmsdeleteclientuser', function(req, res, next) {
 });
 
 router.post('/cmsaddclientuser', function(req, res, next) {
-	this.todo = new collection.clienter(req.body.user);
-	this.todo.save(function(err){
+	var todo = new collection.clienter(req.body.user);
+	var name = req.body.user.name;
+	var cell = req.body.user.cell;
+	collection.clienter.find({cell:cell},function(err,databycell){
 		if(err){
 			res.json(err,500);
 		}else{
-			res.json(this.todo);
+			if(databycell.length>0){
+				res.json({msg:"手机号已经存在"},500);
+			}else{
+				collection.clienter.find({name:name},function(err,databyname){
+					if(err){
+						res.json(err,500);
+					}else{
+						if(databyname.length>0){
+							res.json({msg:"用户名已经存在"},500);
+						}else{
+							todo.save(function(err){
+								if(err){
+									res.json(err,500);
+								}else{
+									res.json(todo);
+								}
+							});
+						}
+					}
+				});
+			}
 		}
 	});
 });
@@ -128,16 +150,96 @@ router.post('/cmsdeletevendoruser', function(req, res, next) {
 });
 
 router.post('/cmsaddvendoruser', function(req, res, next) {
-	this.todo = new collection.vendorer(req.body.user);
-	this.todo.save(function(err){
+	var todo = new collection.vendorer(req.body.user);
+	var name = req.body.user.name;
+	var cell = req.body.user.cell;
+	collection.vendorer.find({cell:cell},function(err,databycell){
 		if(err){
 			res.json(err,500);
 		}else{
-			res.json(this.todo);
+			if(databycell.length>0){
+				res.json({msg:"手机号已经存在"},500);
+			}else{
+				collection.vendorer.find({name:name},function(err,databyname){
+					if(err){
+						res.json(err,500);
+					}else{
+						if(databyname.length>0){
+							res.json({msg:"用户名已经存在"},500);
+						}else{
+							todo.save(function(err){
+								if(err){
+									res.json(err,500);
+								}else{
+									res.json(todo);
+								}
+							});
+						}
+					}
+				});
+			}
 		}
 	});
 });
 
+router.get('/cmsexhibitlist', function(req, res, next) {
+	collection.exhibit.find().sort('-created_at').exec(function(err,data){
+		if(err){
+			res.json(err,500);
+		}else{
+			res.json(data);
+		}
+	});
+});
+
+router.get('/cmsexhibitdetail/:id', function(req, res, next) {
+	var id = req.params.id;
+	collection.exhibit.find({_id:id},function(err,data){
+		if(err){
+			res.json(err,500);
+		}else{
+			res.json(data);
+		}
+	});
+});
+
+router.post('/cmsexhibitpass/:id', function(req, res, next) {
+	var id = req.params.id;
+	collection.exhibit.findById(id,function(err,data){
+		var todo = data;
+		if(err){
+			res.json(err,500);
+		}else{
+			todo.set(req.body.exhibit);
+			todo.save(function(err){
+				if(err){
+					res.json(err,500);
+				}else{
+					res.json(todo);
+				}
+			});
+		}
+	});
+});
+
+router.post('/cmsexhibitfail/:id', function(req, res, next) {
+	var id = req.params.id;
+	collection.exhibit.findById(id,function(err,data){
+		var todo = data;
+		if(err){
+			res.json(err,500);
+		}else{
+			todo.set(req.body.exhibit);
+			todo.save(function(err){
+				if(err){
+					res.json(err,500);
+				}else{
+					res.json(todo);
+				}
+			});
+		}
+	});
+});
 
 //user api
 //用户登录
@@ -162,40 +264,89 @@ router.post('/login', function(req, res, next) {
 
 router.post('/clientlogin', function(req, res, next) {
 	var name = req.body.user.name,
-		psw = req.body.user.psw,
-		cell = req.body.user.cell;
-	collection.clienter.find({name:name,psw:psw,cell:cell},function(err,data){
-			this.todo = data;
-			if(err){
-				res.json(err,500);
+		psw = req.body.user.psw;
+	collection.clienter.find({name:name,psw:psw},function(err,databyname){
+		if(err){
+			res.json(err,500);
+		}else{
+			if(databyname.length>0){
+				res.json(databyname);
 			}else{
-				if(data.length>0){
-					res.json(this.todo);
-				}else{
-					res.json(err,500);
-				}
+				collection.clienter.find({psw:psw,cell:name},function(err,databycell){
+					if(err){
+						res.json(err,500);
+					}else{
+						if(databycell.length>0){
+							res.json(databycell);
+						}else{
+							res.json(err,500);
+						}
+					}
+				});
 			}
 		}
-	);
+	});
 });
 
 router.post('/vendorlogin', function(req, res, next) {
 	var name = req.body.user.name,
-		psw = req.body.user.psw,
-		cell = req.body.user.cell;
-	collection.vendorer.find({name:name,psw:psw,cell:cell},function(err,data){
-			this.todo = data;
-			if(err){
-				res.json(err,500);
+		psw = req.body.user.psw;
+	collection.vendorer.find({name:name,psw:psw},function(err,databyname){
+		if(err){
+			res.json(err,500);
+		}else{
+			if(databyname.length>0){
+				res.json(databyname);
 			}else{
-				if(data.length>0){
-					res.json(this.todo);
-				}else{
-					res.json(err,500);
-				}
+				collection.clienter.find({psw:psw,cell:name},function(err,databycell){
+					if(err){
+						res.json(err,500);
+					}else{
+						if(databycell.length>0){
+							res.json(databycell);
+						}else{
+							res.json(err,500);
+						}
+					}
+				});
 			}
 		}
-	);
+	});
+});
+
+//找回密码
+router.post('/clientcallback', function(req, res, next) {
+	var todo = new collection.clienter(req.body.user);
+	var cell = req.body.user.cell;
+	var name = req.body.user.name;
+	collection.clienter.find({cell:cell,name:name},function(err,data){
+		if(err){
+			res.json(err,500);
+		}else{
+			if(data.length>0){
+				res.json(data);
+			}else{
+				res.json(err,500);
+			}
+		}
+	});
+});
+
+router.post('/vendorcallback', function(req, res, next) {
+	var todo = new collection.vendorer(req.body.user);
+	var cell = req.body.user.cell;
+	var name = req.body.user.name;
+	collection.vendorer.find({cell:cell,name:name},function(err,data){
+		if(err){
+			res.json(err,500);
+		}else{
+			if(data.length>0){
+				res.json(data);
+			}else{
+				res.json(err,500);
+			}
+		}
+	});
 });
 
 //用户注册
@@ -224,18 +375,29 @@ router.post('/user', function(req, res, next) {
 router.post('/clientuser', function(req, res, next) {
 	var todo = new collection.clienter(req.body.user);
 	var cell = req.body.user.cell;
-	collection.clienter.find({cell:cell},function(err,data){
+	var name = req.body.user.name;
+	collection.clienter.find({cell:cell},function(err,databycell){
 		if(err){
 			res.json(err,500);
 		}else{
-			if(data.length>0){
-				res.json(err,500);
+			if(databycell.length>0){
+				res.json({msg:"手机号已经存在"},500);
 			}else{
-				todo.save(function(err){
+				collection.clienter.find({name:name},function(err,databyname){
 					if(err){
 						res.json(err,500);
 					}else{
-						res.json(todo);
+						if(databyname.length>0){
+							res.json({msg:"用户名已经存在"},500);
+						}else{
+							todo.save(function(err){
+								if(err){
+									res.json(err,500);
+								}else{
+									res.json(todo);
+								}
+							});
+						}
 					}
 				});
 			}
@@ -246,18 +408,29 @@ router.post('/clientuser', function(req, res, next) {
 router.post('/vendoruser', function(req, res, next) {
 	var todo = new collection.vendorer(req.body.user);
 	var cell = req.body.user.cell;
-	collection.vendorer.find({cell:cell},function(err,data){
+	var name = req.body.user.name;
+	collection.vendorer.find({cell:cell},function(err,databycell){
 		if(err){
 			res.json(err,500);
 		}else{
-			if(data.length>0){
-				res.json(err,500);
+			if(databycell.length>0){
+				res.json({msg:"手机号已经存在"},500);
 			}else{
-				todo.save(function(err){
+				collection.vendorer.find({name:name},function(err,databyname){
 					if(err){
 						res.json(err,500);
 					}else{
-						res.json(todo);
+						if(databyname.length>0){
+							res.json({msg:"用户名已经存在"},500);
+						}else{
+							todo.save(function(err){
+								if(err){
+									res.json(err,500);
+								}else{
+									res.json(todo);
+								}
+							});
+						}
 					}
 				});
 			}

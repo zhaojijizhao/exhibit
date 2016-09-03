@@ -36,6 +36,22 @@ router.get('/quicksign', function(req, res, next) {
   });
 });
 
+router.get('/callback/client', function(req, res, next) {
+  res.render('./online/callbackclient', { 
+    nav:'首页',
+    path:'online/callbackclient',
+    title: '建正会展--找回密码' 
+  });
+});
+
+router.get('/callback/vendor', function(req, res, next) {
+  res.render('./online/callbackvendor', { 
+    nav:'首页',
+    path:'online/callbackvendor',
+    title: '建正会展--找回密码' 
+  });
+});
+
 router.get('/clientlogin', function(req, res, next) {
   res.render('./online/clientlogin', {
     nav:'首页',
