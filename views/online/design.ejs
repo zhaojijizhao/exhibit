@@ -1,0 +1,44 @@
+<% include ./layout/head.ejs %>
+<div class="main" id="main">
+  <div class="out">
+    <div class="in">
+      <div class="all-form">
+        <div class="form login-form design-form">
+          <p class="title">请填写定制内容</p>
+          <div class="form-line">
+            <label>会议城市</label>
+            <select id="city">
+              <% for(var i=0;i<city.length;i++){%>
+                <optgroup label="<%=city[i].label%>">
+                  <% for(var j=0;j<city[i].cities.length;j++){%>
+                    <option value="<%=city[i].cities[j].id%>">
+                      <%=city[i].cities[j].name%>
+                    </option>
+                  <%}%>
+                </optgroup>
+              <%}%>
+            </select>
+          </div>
+          <div class="form-line">
+             <label>会议人数</label>
+             <input id="people" type="text" placeholder="请输入会议人数" />
+          </div>
+          <div class="form-line">
+             <label>会议日期</label>
+             <input id="date" type="date" placeholder="请输入会议日期" />
+          </div>
+          <div class="form-line">
+             <label>酒店标准</label>
+             <input id="hotel" type="text" placeholder="请输入酒店标准" />
+          </div>
+          <div class="form-line">
+             <label>预算</label>
+             <input id="price" type="text" placeholder="请输入您的预算" />
+          </div>
+          <button id="submit">提交</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% include ./layout/foot.ejs %>

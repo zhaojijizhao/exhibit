@@ -28,6 +28,14 @@ router.get('/sign', function(req, res, next) {
   });
 });
 
+router.get('/join', function(req, res, next) {
+  res.render('./online/join', { 
+    nav:'首页',
+    path:'online/join',
+    title: '建正会展--加入我们' 
+  });
+});
+
 router.get('/quicksign', function(req, res, next) {
   res.render('./online/quicksign', { 
     nav:'首页',
@@ -163,6 +171,9 @@ router.get('/vendor/request', function(req, res, next) {
     nav:'所有需求',
     path:'online/vendor/request/list',
     title: '建正会展--所有需求',
+    cityid: '',
+    word: '',
+    city:staticmodel.city,
     page: 1
   });
 });
@@ -172,6 +183,21 @@ router.get('/vendor/request/:page', function(req, res, next) {
     nav:'所有需求',
     path:'online/vendor/request/list',
     title: '建正会展--所有需求',
+    cityid: '',
+    word: '',
+    city:staticmodel.city,
+    page: req.params.page
+  });
+});
+
+router.get('/vendor/request/:page/:cityid/:word', function(req, res, next) {
+  res.render('./online/vendor/request/list', { 
+    nav:'所有需求',
+    path:'online/vendor/request/list',
+    title: '建正会展--所有需求',
+    cityid: req.params.cityid,
+    city:staticmodel.city,
+    word: req.params.word,
     page: req.params.page
   });
 });
@@ -426,6 +452,16 @@ router.get('/confresource', function(req, res, next) {
     title: '建正会展--会议推'
   });
 });
+
+router.get('/design', function(req, res, next) {
+  res.render('./online/design', {
+    nav:'定制',
+    path: 'online/design',
+    city:staticmodel.city,
+    title: '建正会展--定制'
+  });
+});
+
 
 
 

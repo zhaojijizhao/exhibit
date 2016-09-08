@@ -9,7 +9,7 @@ require(['/js/public/base.js'],function(Base){
 						location.href = "/online/login";
 					}
 					this.user = Helper.getlogin();
-					if(this.user.type!="client"){
+					if(this.user.type!="client"  && this.user.type!="personal"){
 						alert('请先登录客户账号');
 						location.href = "/online/login";
 					}

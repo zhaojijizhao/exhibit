@@ -19,7 +19,8 @@ require(['/js/public/base.js'],function(Base){
 						user:{
 							name:this.$el.find("#clientName").val(),
 							cell:this.$el.find("#clientCell").val(),
-							psw:this.$el.find("#clientPsw").val()
+							psw:this.$el.find("#clientPsw").val(),
+							type:'personal'
 						}
 					};
 					$.ajax({

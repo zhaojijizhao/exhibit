@@ -6,8 +6,98 @@ var excel = require('node-excel-export');
 /* api listing. */
 
 //cms接口
+router.get('/cmsgetpersonaluser', function(req, res, next) {
+	collection.clienter.find({type:'personal'},function(err,data){
+			this.todo = data;
+			if(err){
+				res.json(err,500);
+			}else{
+				if(data.length>0){
+					res.json(this.todo);
+				}else{
+					res.json(err,500);
+				}
+			}
+		}
+	);
+});
+
+router.post('/cmssetpersonaluser', function(req, res, next) {
+	collection.clienter.findById(req.body.user._id,
+		function(err,data){
+			var todo = data;
+			if(err){
+				res.json(err,500);
+			}else{
+				req.body.user.type = "personal";
+				todo.set(req.body.user);
+				todo.save(function(err){
+					if(err){
+						res.json(err,500);
+					}else{
+						res.json(todo);
+					}
+				});
+			}
+		}
+	);
+});
+
+router.post('/cmsdeletepersonaluser', function(req, res, next) {
+	collection.clienter.findById(req.body.user._id,
+		function(err,data){
+			var todo = data;
+			if(err){
+				res.json(err,500);
+			}else{
+				todo.remove(function(err){
+					if(err){
+						res.json(err,500);
+					}else{
+						res.json(todo);
+					}
+				});
+			}
+		}
+	);
+});
+
+router.post('/cmsaddpersonaluser', function(req, res, next) {
+	req.body.user.type = "personal";
+	var todo = new collection.clienter(req.body.user);
+	var name = req.body.user.name;
+	var cell = req.body.user.cell;
+	collection.clienter.find({cell:cell},function(err,databycell){
+		if(err){
+			res.json(err,500);
+		}else{
+			if(databycell.length>0){
+				res.json({msg:"手机号已经存在"},500);
+			}else{
+				collection.clienter.find({name:name},function(err,databyname){
+					if(err){
+						res.json(err,500);
+					}else{
+						if(databyname.length>0){
+							res.json({msg:"用户名已经存在"},500);
+						}else{
+							todo.save(function(err){
+								if(err){
+									res.json(err,500);
+								}else{
+									res.json(todo);
+								}
+							});
+						}
+					}
+				});
+			}
+		}
+	});
+});
+
 router.get('/cmsgetclientuser', function(req, res, next) {
-	collection.clienter.find({},function(err,data){
+	collection.clienter.find({type:'client'},function(err,data){
 			this.todo = data;
 			if(err){
 				res.json(err,500);
@@ -241,6 +331,94 @@ router.post('/cmsexhibitfail/:id', function(req, res, next) {
 	});
 });
 
+//apply申请
+router.get('/apply', function(req, res, next) {
+	var type = req.query.type;
+	collection.applyer.find({type:type,state:0},function(err,data){
+			var todo = data;
+			if(err){
+				res.json(err,500);
+			}else{
+				res.json(todo);
+			}
+		}
+	);
+});
+
+router.post('/apply', function(req, res, next) {
+	var todo = new collection.applyer(req.body.apply);
+	todo.save(function(err){
+		if(err){
+			res.json(err,500);
+		}else{
+			res.json(todo);
+		}
+	});
+});
+
+router.post('/applyset', function(req, res, next) {
+	collection.applyer.findById(req.body.apply._id,function(err,data){
+			var todo = data;
+			if(err){
+				res.json(err,500);
+			}else{
+				todo.set(req.body.apply);
+				todo.save(function(err){
+					if(err){
+						res.json(err,500);
+					}else{
+						res.json(todo);
+					}
+				});
+			}
+		}
+	);
+});
+
+//design定制
+router.get('/design', function(req, res, next) {
+	collection.design.find({state:0},function(err,data){
+			var todo = data;
+			if(err){
+				res.json(err,500);
+			}else{
+				res.json(todo);
+			}
+		}
+	);
+});
+
+router.post('/design', function(req, res, next) {
+	var todo = new collection.design(req.body.design);
+	todo.save(function(err){
+		if(err){
+			res.json(err,500);
+		}else{
+			res.json(todo);
+		}
+	});
+});
+
+router.post('/designset', function(req, res, next) {
+	collection.design.findById(req.body.design._id,function(err,data){
+			var todo = data;
+			if(err){
+				res.json(err,500);
+			}else{
+				todo.set(req.body.design);
+				todo.save(function(err){
+					if(err){
+						res.json(err,500);
+					}else{
+						res.json(todo);
+					}
+				});
+			}
+		}
+	);
+});
+
+
 //user api
 //用户登录
 router.post('/login', function(req, res, next) {
@@ -264,8 +442,9 @@ router.post('/login', function(req, res, next) {
 
 router.post('/clientlogin', function(req, res, next) {
 	var name = req.body.user.name,
-		psw = req.body.user.psw;
-	collection.clienter.find({name:name,psw:psw},function(err,databyname){
+		psw = req.body.user.psw,
+		type = req.body.user.type || "client";
+	collection.clienter.find({name:name,psw:psw,type:type},function(err,databyname){
 		if(err){
 			res.json(err,500);
 		}else{
@@ -316,7 +495,6 @@ router.post('/vendorlogin', function(req, res, next) {
 
 //找回密码
 router.post('/clientcallback', function(req, res, next) {
-	var todo = new collection.clienter(req.body.user);
 	var cell = req.body.user.cell;
 	var name = req.body.user.name;
 	collection.clienter.find({cell:cell,name:name},function(err,data){
@@ -333,7 +511,6 @@ router.post('/clientcallback', function(req, res, next) {
 });
 
 router.post('/vendorcallback', function(req, res, next) {
-	var todo = new collection.vendorer(req.body.user);
 	var cell = req.body.user.cell;
 	var name = req.body.user.name;
 	collection.vendorer.find({cell:cell,name:name},function(err,data){
@@ -373,6 +550,7 @@ router.post('/user', function(req, res, next) {
 });
 
 router.post('/clientuser', function(req, res, next) {
+	req.body.user.type = req.body.user.type || "personal";
 	var todo = new collection.clienter(req.body.user);
 	var cell = req.body.user.cell;
 	var name = req.body.user.name;
@@ -550,11 +728,20 @@ router.get('/exhibit/list/:page', function(req, res, next) {
 	var page = req.params.page;
 	var limit = 20;
 	var skip = (page-1)*limit;
-	collection.exhibit.count(function(err,count){
+	var cityid = req.query.cityid;
+	var word = req.query.word;
+	findobj = {};
+	if(cityid>0){
+		findobj['info.cid'] = cityid;
+	}
+	if(word){
+		findobj['info.name'] = new RegExp(word);
+	}
+	collection.exhibit.find(findobj).count(function(err,count){
 		if(err){
 			res.json(err,500);
 		}else{
-			collection.exhibit.find().sort('-created_at').skip(skip).limit(limit).exec(function(err,data){
+			collection.exhibit.find(findobj).sort('-created_at').skip(skip).limit(limit).exec(function(err,data){
 				if(err){
 					res.json(err,500);
 				}else{
@@ -563,7 +750,6 @@ router.get('/exhibit/list/:page', function(req, res, next) {
 			});
 		}
 	});
-	
 });
 
 //获取需求列表

@@ -115,6 +115,67 @@ var vendorer = new database.Schema({
 	receive:[String]
 });
 
+//申请信息
+var applyer = new database.Schema({
+	company:{
+		type:String,
+		validate:/.+/
+	},
+	address:{
+		type:String,
+		validate:/.+/
+	},
+	field:{
+		type:String,
+		validate:/.+/
+	},
+	name:{
+		type:String,
+		validate:/.+/
+	},
+	cell:{
+		type:Number,
+		validate:/.+/
+	},
+	type:{
+		type:String,
+		validate:/.+/
+	},
+	state:{
+		type:Number,
+		default: 0
+	}
+});
+
+//定制服务
+var design = new database.Schema({
+	user:{
+		type:Object
+	},
+	cid:{
+		type:Number,
+		validate:/.+/
+	},
+	people:{
+		type:String
+	},
+	date:{
+		type:Date,
+		default: Date.now
+	},
+	hotel:{
+		type:String
+	},
+	price:{
+		type:String
+	},
+	state:{
+		type:Number,
+		default: 0
+	}
+});
+
+
 //展会需求
 //展会信息
 var exhibitInfo = new database.Schema({
@@ -698,6 +759,8 @@ var offer = new database.Schema({
 var userModel = database.mongoose.model('user',user);
 var clienterModel = database.mongoose.model('clienter',clienter);
 var vendorerModel = database.mongoose.model('vendorer',vendorer);
+var applyerModel = database.mongoose.model('applyer',applyer);
+var designModel = database.mongoose.model('design',design);
 var exhibitModel = database.mongoose.model('exhibit',exhibit);
 var offerModel = database.mongoose.model('offer',offer);
 
@@ -705,6 +768,8 @@ var collection = {
 	user:userModel,
 	clienter:clienterModel,
 	vendorer:vendorerModel,
+	applyer:applyerModel,
+	design:designModel,
 	exhibit:exhibitModel,
 	offer:offerModel
 }

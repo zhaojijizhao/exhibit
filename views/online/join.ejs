@@ -1,0 +1,32 @@
+<% include ./layout/head.ejs %>
+<div class="main" id="main">
+  <div class="out">
+    <div class="in">
+        <ul class="toptab">
+            <li class="on">申请成为企业客户</li>
+            <li>申请成为签约商</li>
+        </ul>
+        <div class="all-form">
+            <div class="form login-form">
+                <p>注册成为企业客户</p>
+                <input type="text" id="clientcompany" placeholder="请输入公司名称"/>
+                <input type="text" id="clientaddress" placeholder="请输入公司地址"/>
+                <input type="text" id="clientfield" placeholder="请输入所属行业" />
+                <input type="text" id="clientname" placeholder="请输入联系人姓名" />
+                <input type="tel" id="clientcell" placeholder="请输入联系方式" />
+                <button id="applyclient">申请成为企业客户</button>
+            </div>
+            <div class="form login-form hide">
+                <p>注册成为签约商</p>
+                <input type="text" id="vendorcompany" placeholder="请输入公司名称"/>
+                <input type="text" id="vendoraddress" placeholder="请输入公司地址"/>
+                <input type="text" id="vendorfield" placeholder="请输入所属行业" />
+                <input type="text" id="vendorname" placeholder="请输入联系人姓名" />
+                <input type="tel" id="vendorcell" placeholder="请输入联系方式" />
+                <button id="applyvendor">申请成为签约商</button>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+<% include ./layout/foot.ejs %>

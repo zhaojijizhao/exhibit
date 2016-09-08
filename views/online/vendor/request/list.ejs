@@ -3,6 +3,28 @@
 <div class="out">
 	<div class="in">
 		<div class="main" id="main">
+      <div class="hotsearch">
+        <label for="">
+          城市：
+          <select id="city" value="<%=cityid%>">
+            <% for(var i=0;i<city.length;i++){ %>
+              <option value="-1">请选择</option>
+              <optgroup label="<%=city[i].label%>">
+                <% for(var j=0;j<city[i].cities.length;j++){%>
+                  <option value="<%=city[i].cities[j].id%>">
+                    <%=city[i].cities[j].name%>
+                  </option>
+                <%}%>
+              </optgroup>
+            <%}%>
+          </select>
+        </label>
+        <label for="">
+          关键字搜索：
+          <input id="word" value="<%=word%>" />
+        </label>
+        <button id="search">搜索</button>
+      </div>
 			<div id="list"></div>
 			<div id="page"></div>
 		</div>

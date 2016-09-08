@@ -4,36 +4,36 @@ require(['/js/public/base.js'],function(Base){
     function($,_,Backbone,Helper){
       var view = Backbone.View.extend({
         initialize:function(){
-          _.bind(Helper.initUnloginHead, this)(Helper);
+          _.bind(Helper.initHead, this)(Helper);
         },
         el:$("#main"),
         events:{
-          'click #signClient':'signClient'
+          'click #submit':'submit'
         },
         render:function(){
         },
-        signClient:function(e){
+        submit:function(e){
           e.preventDefault();
           var data ={
-            user:{
-              name:this.$el.find("#clientName").val(),
-              cell:this.$el.find("#clientCell").val(),
-              psw:this.$el.find("#clientPsw").val(),
-              type:'personal'
+            design:{
+              user:Helper.getlogin(),
+              cid:this.$el.find("#city").val(),
+              people:this.$el.find("#people").val(),
+              date:this.$el.find("#date").val(),
+              hotel:this.$el.find("#hotel").val(),
+              price:this.$el.find("#price").val()
             }
           };
           $.ajax({
-            url: "/api/clientuser",
+            url: "/api/design",
             type: "post",
             data: data,
             dataType:'json',
             success:function(data){
-              alert("注册成功");
-              Helper.setlogin(data);
-              location.href = "/online/client/creat";
+              alert("提交定制成功");
             },
             error:function(e){
-              alert(e.responseJSON.msg ? e.responseJSON.msg : "注册失败");
+              alert(e.responseJSON.msg ? e.responseJSON.msg : "提交定制失败");
             }
           });
         }

@@ -1330,7 +1330,7 @@ define(['jquery','underscore','backbone'],
 						helper.deletelogin();
 						location.href="/online/index";
 					});
-					if(this.user.type=="client"){
+					if(this.user.type=="client" || this.user.type=="personal"){
 						$(".vendor").remove();
 					}else if(this.user.type=="vendor"){
 						$(".client").remove();
@@ -1604,7 +1604,7 @@ define(['jquery','underscore','backbone'],
 									<a href="<%=baseurl%>?page=<%=(page+v)%>" class="<%if(v==0){%>on<%}%>" ><%=(page+v)%></a>\
 								<%}});%>\
 								<%if(max-page>3){%>...<%}%>\
-								<a <%if(page<max){%>href="<%=baseurl%>?page=<%=(page+1)%>"<%}%> class="<%if(page==max){%>off<%}%>" >下一页</a>\
+								<a <%if(page<max){%>href="<%=baseurl%>/<%=(page+1)%><%=(apdurl||\'\')%>"<%}%> class="<%if(page==max){%>off<%}%>" >下一页</a>\
 							</div>'
 			}
 		};
