@@ -2,57 +2,77 @@
 <div class="out">
 	<div class="in">
 		<div class="main" id="main">
-			<table class="form result-table">
+			<table class="form result-table" width="100%" data-id="<%=detail._id%>" data-state="<%=detail.state%>">
 				<tr>
 					<td colspan="5">
 						<img src='/img/online/ll.png' />
 					</td>
+					<td class=""></td>
+					<td class="dd hide"></td>
 				</tr>
 				<tr class="b">
 					<td>TO:</td>
 					<td></td>
 					<td>From:</td>
 					<td colspan='2'></td>
+					<td class=""></td>
+					<td class="dd hide"></td>
 				</tr>
 				<tr class="b">
 					<td>收件人:</td>
 					<td><%=vendor[0].name%></td>
 					<td>发送:</td>
 					<td colspan='2'></td>
+					<td class=""></td>
+					<td class="dd hide"></td>
 				</tr>
 				<tr class="b">
 					<td>Tel:</td>
 					<td><%=vendor[0].cell%></td>
 					<td>Tel:</td>
 					<td colspan='2'></td>
+					<td class=""></td>
+					<td class="dd hide"></td>
 				</tr>
 				<tr class="b">
 					<td>Fax:</td>
 					<td></td>
 					<td>Fax:</td>
 					<td colspan='2'></td>
+					<td class=""></td>
+					<td class="dd hide"></td>
 				</tr>
 				<tr class="b">
 					<td>E-mail:</td>
 					<td></td>
 					<td>E-mail:</td>
 					<td colspan='2'></td>
+					<td class=""></td>
+					<td class="dd hide"></td>
 				</tr>
 				<tr>
 					<td width='10%'>&nbsp;</td>
-					<td width='50%'></td>
-					<td width='12%'></td>
-					<td width='14%'></td>
-					<td width='14%'></td>
+					<td width='40%'></td>
+					<td width='10%'></td>
+					<td width='10%'></td>
+					<td width='10%'></td>
+					<td class="" width='14%'></td>
+					<td class="dd hide" width='14%'></td>
 				</tr>
 				<tr>
 					<td colspan="5">您好！！</td>
+					<td class=""></td>
+					<td class="dd hide"></td>
 				</tr>
 				<tr>
 					<td colspan="5">感谢您对我公司的大力支持。</td>
+					<td class=""></td>
+					<td class="dd hide"></td>
 				</tr>
 				<tr>
 					<td colspan="5">根据贵公司的要求，我公司制定的会议结算单分列如后，请查阅，如有问题，请随时与我联系。</td>
+					<td class=""></td>
+					<td class="dd hide"></td>
 				</tr>
 				<tr class="b">
 					<td></td>
@@ -60,6 +80,8 @@
 					<td class="tc">单价</td>
 					<td class="tc">人数/数量</td>
 					<td class="tc">总价</td>
+					<td class="tc dd">状态</td>
+					<td class="tc dd hide">操作</td>
 				</tr>
 				<tr class="b">
 					<td class="tc">1</td>
@@ -67,22 +89,28 @@
 					<td></td>
 					<td></td>
 					<td></td>
+					<td class=""></td>
+					<td class="dd hide"></td>
 				</tr>
 				<%if(detail.hotel.length>0){
 					for(var i = 0; i < detail.hotel.length; i++){
 					var v=detail.hotel[i];%>
-					<tr>
+					<tr data-id="<%=v._id%>" data-type="hotel">
 						<td></td>
 						<td><%=new Date(v.date_start).toLocaleDateString()%>-<%=new Date(v.date_end).toLocaleDateString()%><%=v.type_name%></td>
 						<td class="tr"><%=v.price%></td>
 						<td class="tr"><%=v.room%></td>
 						<td class="tr"><%=v.total%></td>
+						<td class=""><%if(v.checked || detail.state==3){%><span class="check">(已经确认)</span><%}%></td>
+						<td class="dd hide"><%if(!v.checked){%><button>确认</button><%}%></td>
 					</tr>
 				<%}}%>
 				<tr class="b">
 					<td></td>
 					<td class="tr">小计</td>
 					<td colspan="3" class="tr sky"><%=detail.hotel_all%></td>
+					<td class=""></td>
+					<td class="dd hide"></td>
 				</tr>
 				<tr class="b">
 					<td class="tc">2</td>
@@ -90,22 +118,28 @@
 					<td></td>
 					<td></td>
 					<td></td>
+					<td class=""></td>
+					<td class="dd hide"></td>
 				</tr>
 				<%if(detail.area.length>0){
 					for(var i = 0; i < detail.area.length; i++){
 					var v=detail.area[i];%>
-					<tr>
+					<tr data-id="<%=v._id%>" data-type="area">
 						<td></td>
 						<td><%=new Date(v.date_start).toLocaleDateString()%>-<%=new Date(v.date_end).toLocaleDateString()%><%=v.type_name%></td>
 						<td class="tr"><%=v.price%></td>
 						<td class="tr"><%=v.people%></td>
 						<td class="tr"><%=v.total%></td>
+						<td class=""><%if(v.checked || detail.state==3){%><span class="check">(已经确认)</span><%}%></td>
+						<td class="dd hide"><%if(!v.checked){%><button>确认</button><%}%></td>
 					</tr>
 				<%}}%>
 				<tr class="b">
 					<td></td>
 					<td class="tr">小计</td>
 					<td colspan="3" class="tr sky"><%=detail.area_all%></td>
+					<td class=""></td>
+					<td class="dd hide"></td>
 				</tr>
 				<tr class="b">
 					<td class="tc">3</td>
@@ -113,22 +147,28 @@
 					<td></td>
 					<td></td>
 					<td></td>
+					<td class=""></td>
+					<td class="dd hide"></td>
 				</tr>
 				<%if(detail.dinner.length>0){
 					for(var i = 0; i < detail.dinner.length; i++){
 					var v=detail.dinner[i];%>
-					<tr>
+					<tr data-id="<%=v._id%>" data-type="dinner">
 						<td></td>
 						<td><%=new Date(v.date_start).toLocaleDateString()%>-<%=new Date(v.date_end).toLocaleDateString()%><%=v.type_name%></td>
 						<td class="tr"><%=v.price%></td>
 						<td class="tr"><%=v.people%></td>
 						<td class="tr"><%=v.total%></td>
+						<td class=""><%if(v.checked || detail.state==3){%><span class="check">(已经确认)</span><%}%></td>
+						<td class="dd hide"><%if(!v.checked){%><button>确认</button><%}%></td>
 					</tr>
 				<%}}%>
 				<tr class="b">
 					<td></td>
 					<td class="tr">小计</td>
 					<td colspan="3" class="tr sky"><%=detail.dinner_all%></td>
+					<td class=""></td>
+					<td class="dd hide"></td>
 				</tr>
 				<tr class="b">
 					<td class="tc">4</td>
@@ -136,22 +176,28 @@
 					<td></td>
 					<td></td>
 					<td></td>
+					<td class=""></td>
+					<td class="dd hide"></td>
 				</tr>
 				<%if(detail.car.length>0){
 					for(var i = 0; i < detail.car.length; i++){
 					var v=detail.car[i];%>
-					<tr>
+					<tr data-id="<%=v._id%>" data-type="car">
 						<td></td>
-						<td><%=new Date(v.date_start).toLocaleDateString()%>-<%=new Date(v.date_end).toLocaleDateString()%><%=v.type_name%></td>
+						<td><%=v.type_name%></td>
 						<td class="tr"><%=v.price%></td>
 						<td class="tr"><%=v.people%></td>
 						<td class="tr"><%=v.total%></td>
+						<td class=""><%if(v.checked || detail.state==3){%><span class="check">(已经确认)</span><%}%></td>
+						<td class="dd hide"><%if(!v.checked){%><button>确认</button><%}%></td>
 					</tr>
 				<%}}%>
 				<tr class="b">
 					<td></td>
 					<td class="tr">小计</td>
 					<td colspan="3" class="tr sky"><%=detail.car_all%></td>
+					<td class=""></td>
+					<td class="dd hide"></td>
 				</tr>
 				<tr class="b">
 					<td class="tc">5</td>
@@ -159,23 +205,29 @@
 					<td></td>
 					<td></td>
 					<td></td>
+					<td class=""></td>
+					<td class="dd hide"></td>
 				</tr>
 				<%var items = ["摄影/摄像","胸牌制作","X展架/易拉宝","背景板","横幅","资料打印","礼品制作"];
 					if(detail.other.length>0){
 					for(var i = 0; i < detail.other.length; i++){
 					var v=detail.other[i];%>
-					<tr>
+					<tr data-id="<%=v._id%>" data-type="other">
 						<td></td>
 						<td><%=items[v.type_id]%></td>
 						<td class="tr"><%=v.total%></td>
 						<td class="tr">1</td>
 						<td class="tr"><%=v.total%></td>
+						<td class=""><%if(v.checked || detail.state==3){%><span class="check">(已经确认)</span><%}%></td>
+						<td class="dd hide"><%if(!v.checked){%><button>确认</button><%}%></td>
 					</tr>
 				<%}}%>
 				<tr class="b">
 					<td></td>
 					<td class="tr">小计</td>
 					<td colspan="3" class="tr sky"><%=detail.other_all%></td>
+					<td class=""></td>
+					<td class="dd hide"></td>
 				</tr>
 				<tr class="b">
 					<td class="tc">6</td>
@@ -183,25 +235,27 @@
 					<td></td>
 					<td></td>
 					<td></td>
+					<td class=""></td>
+					<td class="dd hide"></td>
 				</tr>
-				<%if(detail.with.with_need){%>
-					<tr>
+					<tr class="">
 						<td></td>
 						<td>陪同人员</td>
 						<td></td>
-						<td><%=detail.with.with_people%></td>
-						<td><%=detail.with.with_total%></td>
+						<td class="tr"><%=detail.with.with_people%></td>
+						<td class="tr"><%=detail.with.with_total%></td>
+						<td class=""></td>
+						<td class="dd hide"></td>
 					</tr>
-				<%}%>
-				<%if(detail.with.catch_need){%>
-					<tr>
+					<tr class="">
 						<td></td>
 						<td>地接人员</td>
 						<td></td>
-						<td><%=detail.with.catch_people%></td>
-						<td><%=detail.with.catch_total%></td>
+						<td class="tr"><%=detail.with.catch_people%></td>
+						<td class="tr"><%=detail.with.catch_total%></td>
+						<td class=""></td>
+						<td class="dd hide"></td>
 					</tr>
-				<%}%>
 				<% var with_all = 0;
 					if(detail.with.with_total){
 						with_all += detail.with.with_total;
@@ -209,10 +263,14 @@
 					if(detail.with.catch_need){
 						with_all += detail.with.catch_need;
 					}%>
-				<tr class="b">
+				<tr class="b" data-id="<%=detail.with._id%>" data-type="with">
 					<td></td>
-					<td class="tr">小计</td>
-					<td colspan="3" class="tr sky"><%=detail.with_all%></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td class=""><%if(detail.with.checked || detail.state==3){%><span class="check">(已经确认)</span><%}%></td>
+					<td class="dd hide"><%if(!detail.with.checked){%><button>确认</button><%}%></td>
 				</tr>
 				<tr class="b">
 					<td class="tc">7</td>
@@ -220,26 +278,28 @@
 					<td></td>
 					<td></td>
 					<td></td>
+					<td class=""></td>
+					<td class="dd hide"></td>
 				</tr>
 				<%var feeptype = ["不收","6%","12%"];%>
-				<tr>
+				<tr data-id="<%=detail.fee._id%>" data-type="fee">
 					<td></td>
 					<td></td>
 					<td class="tr"><%=detail.total-detail.fee.total%></td>
 					<td class="tr"><%=feeptype[detail.fee.percent]%></td>
 					<td class="tr"><%=detail.fee.total%></td>
+					<td class=""><%if(detail.fee.checked || detail.state==3){%><span class="check">(已经确认)<span><%}%></td>
+					<td class="dd hide"><%if(!detail.fee.checked){%><button>确认</button><%}%></td>
 				</tr>
 				<tr class="b">
 					<td></td>
-					<td class="tr">小计</td>
-					<td colspan="3" class="tr sky"><%=detail.fee.total%></td>
-				</tr>
-				<tr class="b">
-					<td></td>
-					<td colspan="2" class="tr">费用总计：</td>
-					<td colspan="2" class="tr sky"><%=detail.total%></td>
+					<td class="tr">费用总计：</td>
+					<td colspan="3" class="tr sky"><%=detail.total%></td>
+					<td class=""><%if(detail.state==3){%><span class="check">(已经确认)<span><%}%></td>
+					<td class="dd hide"></td>
 				</tr>
 			</table>
+			<button class="resultbtn complete hide">全部完成</button>
 		</div>
 	</div>
 </div>

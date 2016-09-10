@@ -512,7 +512,7 @@
 					<label class="final">小计</label>
 					<input class="finaltotal total full" type="tel" value="<%=detail.total%>" readonly />
 				</div>
-				<% if(detail.state!=2){%>
+				<% if(detail.state==0){%>
 					<button id="update" oid="<%=detail._id%>">确认报价</button>
 				<%}%>
 			</form>

@@ -6,12 +6,12 @@ require(['/js/public/base.js'],function(Base){
 				initialize:function(){
 					if(!Helper.islogin()){
 						alert('请先登录');
-						location.href = "/online/login";
+						location.href = "/online/index";
 					}
 					this.user = Helper.getlogin();
 					if(this.user.type!="client"  && this.user.type!="personal"){
 						alert('请先登录客户账号');
-						location.href = "/online/login";
+						location.href = "/online/index";
 					}
 					_.bind(Helper.initHead, this)(Helper);
 				},
@@ -49,8 +49,7 @@ require(['/js/public/base.js'],function(Base){
 					  }
 					  if(inputclass.indexOf('start')>-1){
 					    gettheother(1);
-					  }
-					  if(inputclass.indexOf('end')>-1){
+					  }else if(inputclass.indexOf('end')>-1){
 					    gettheother(2);
 					  }
 					  var dayinput = formpit.find('.days');
@@ -118,6 +117,9 @@ require(['/js/public/base.js'],function(Base){
 							});
 							formline.find(".line-title").after(temp);
 						});
+						if(target.find('.memo').length>0){
+							formline.find('.memo').val(target.find('.memo').val());
+						}
 					}
 				},
 				edit:function(e){
@@ -218,6 +220,7 @@ require(['/js/public/base.js'],function(Base){
 							}
 						}
 					};
+					data.exhibit.state = 0;
 					$.ajax({
 						url: "/api/exhibit/"+self.find("#eid").val(),
 						type: "put",

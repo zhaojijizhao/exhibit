@@ -7,7 +7,7 @@
 				<div class="form-line" id="info">
 					<div class="line-title">
 						会议基本信息
-						<button class="addbtn">修改</button>
+						<%if(detail.state == 0){%><button class="addbtn">修改</button><%}%>
 					</div>
 					<div class="form-pit">
 						<div class="form-subpit">
@@ -49,7 +49,7 @@
 				<div class="form-line" id="hotel">
 					<div class="line-title">
 						酒店信息
-						<button class="addbtn">修改</button>
+						<%if(detail.state == 0){%><button class="addbtn">修改</button><%}%>
 					</div>
 					<%if(detail.hotel.length>0){
 						for(var i = 0; i < detail.hotel.length; i++){
@@ -92,7 +92,7 @@
 				<div class="form-line" id="area">
 					<div class="line-title">
 						会场信息
-						<button class="addbtn">修改</button>
+						<%if(detail.state == 0){%><button class="addbtn">修改</button><%}%>
 					</div>
 					<%if(detail.area.length>0){
 						for(var i = 0; i < detail.area.length; i++){
@@ -132,7 +132,7 @@
 				<div class="form-line" id="dinner">
 					<div class="line-title">
 						用餐信息
-						<button class="addbtn">修改</button>
+						<%if(detail.state == 0){%><button class="addbtn">修改</button><%}%>
 					</div>
 					<%if(detail.dinner.length>0){
 						for(var i = 0; i < detail.dinner.length; i++){
@@ -173,7 +173,7 @@
 				<div class="form-line" id="car">
 					<div class="line-title">
 						用车信息
-						<button class="addbtn">修改</button>
+						<%if(detail.state == 0){%><button class="addbtn">修改</button><%}%>
 					</div>
 					<%if(detail.car.length>0){
 						for(var i = 0; i < detail.car.length; i++){
@@ -213,7 +213,7 @@
 				<div class="form-line" id="other">
 					<div class="line-title">
 						其他
-						<button class="addbtn">修改</button>
+						<%if(detail.state == 0){%><button class="addbtn">修改</button><%}%>
 					</div>
 					<%if(detail.other.length>0){
 						for(var i = 0; i < detail.other.length; i++){
@@ -293,7 +293,7 @@
 						</div>
 					</div>
 				</div>
-				<button id="save">更新</button>
+				<%if(detail.state == 0){%><button id="save">更新</button><%}%>
 			</form>
 		</div>
 	</div>
@@ -527,7 +527,6 @@
 		<div class="form pop-line">
 			<div class="line-title">
 				其他<div class="close">X</div>
-				<!--<button class="addbtn">修改</button>-->
 			</div>
 			<div class="form-pit">
 				<div class="form-subpit">

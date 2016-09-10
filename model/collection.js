@@ -497,6 +497,10 @@ var offerHotel = new database.Schema({
 	},
 	total:{
 		type:Number
+	},
+	checked:{
+		type:Boolean,
+		default:false
 	}
 });
 //展会用餐
@@ -530,6 +534,10 @@ var offerDinner = new database.Schema({
 	},
 	total:{
 		type:Number
+	},
+	checked:{
+		type:Boolean,
+		default:false
 	}
 });
 //展会用车
@@ -559,6 +567,10 @@ var offerCar = new database.Schema({
 	},
 	total:{
 		type:Number
+	},
+	checked:{
+		type:Boolean,
+		default:false
 	}
 });
 //服务类型
@@ -607,6 +619,10 @@ var offerArea = new database.Schema({
 	},
 	total:{
 		type:Number
+	},
+	checked:{
+		type:Boolean,
+		default:false
 	}
 });
 //展会物料
@@ -627,6 +643,10 @@ var offerOther = new database.Schema({
 	},
 	total:{
 		type:Number
+	},
+	checked:{
+		type:Boolean,
+		default:false
 	}
 });
 //展会陪同
@@ -659,6 +679,10 @@ var offerWith = new database.Schema({
 	},
 	catch_total:{
 		type:Number
+	},
+	checked:{
+		type:Boolean,
+		default:false
 	}
 });
 //展会服务费
@@ -672,6 +696,10 @@ var offerFee = new database.Schema({
 	},
 	total:{
 		type:Number
+	},
+	checked:{
+		type:Boolean,
+		default:false
 	}
 });
 //展会发票
@@ -685,6 +713,10 @@ var offerInvoice = new database.Schema({
 	},
 	type_name:{
 		type:String
+	},
+	checked:{
+		type:Boolean,
+		default:false
 	}
 });
 //汇总

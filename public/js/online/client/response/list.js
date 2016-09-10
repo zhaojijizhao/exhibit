@@ -6,12 +6,12 @@ require(['/js/public/base.js'],function(Base){
 				initialize:function(){
 					if(!Helper.islogin()){
 						alert('请先登录');
-						location.href = "/online/login";
+						location.href = "/online/index";
 					}
 					this.user = Helper.getlogin();
 					if(this.user.type!="client"  && this.user.type!="personal"){
 						alert('请先登录客户账号');
-						location.href = "/online/login";
+						location.href = "/online/index";
 					}
 					_.bind(Helper.initHead, this)(Helper);
 				},

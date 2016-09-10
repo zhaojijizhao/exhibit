@@ -315,16 +315,16 @@ router.get('/room', function(req, res, next) {
   });
 });
 
-router.get('/hot', function(req, res, next) {
-  res.render('./online/hot', { 
-    nav:'热门区域',
-    path: 'online/hot',
-    title: '建正会展--热门区域',
-    page:1,
-    clientname:'',
-    projectname:''
-  });
-});
+// router.get('/hot', function(req, res, next) {
+//   res.render('./online/hot', { 
+//     nav:'热门区域',
+//     path: 'online/hot',
+//     title: '建正会展--热门区域',
+//     page:1,
+//     clientname:'',
+//     projectname:''
+//   });
+// });
 
 router.get('/hot/:page', function(req, res, next) {
   res.render('./online/hot', { 
@@ -362,7 +362,7 @@ router.get('/result/:id', function(req, res, next) {
       if(err){
         res.json(err,500);
       }else{
-        if(data.state!=2){
+        if(data.state!=2 && data.state!=3){
           res.json(err,500);
         }else{
           collection.vendorer.find({_id:data.uid},function(usererr,userdata){

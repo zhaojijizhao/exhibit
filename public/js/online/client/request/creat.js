@@ -6,12 +6,12 @@ require(['/js/public/base.js'],function(Base){
 				initialize:function(){
 					if(!Helper.islogin()){
 						alert('请先登录');
-						location.href = "/online/login";
+						location.href = "/online/index";
 					}
 					this.user = Helper.getlogin();
 					if(this.user.type!="client"  && this.user.type!="personal"){
 						alert('请先登录客户账号');
-						location.href = "/online/login";
+						location.href = "/online/index";
 					}
 					_.bind(Helper.initHead, this)(Helper);
 				},
@@ -49,8 +49,7 @@ require(['/js/public/base.js'],function(Base){
 					  }
 					  if(inputclass.indexOf('start')>-1){
 					    gettheother(1);
-					  }
-					  if(inputclass.indexOf('end')>-1){
+					  }else if(inputclass.indexOf('end')>-1){
 					    gettheother(2);
 					  }
 					  var dayinput = formpit.find('.days');
@@ -59,7 +58,7 @@ require(['/js/public/base.js'],function(Base){
 					      dayinput = $(dayinput[0]);
 					      if(dayinput.prev('label').html() == '天数' ){
 					        var minus = new Date(endinput.val()) - new Date(startinput.val());
-					        if(minus > 0) {
+					        if(minus >= 0) {
 					          minus = Math.ceil(minus/1000/60/60/24)+1;
 					          dayinput.val(minus)
 					        }
@@ -157,6 +156,9 @@ require(['/js/public/base.js'],function(Base){
 							});
 							formline.find(".line-title").after(temp);
 						});
+						if(target.find('.memo').length>0){
+							formline.find('.memo').val(target.find('.memo').val());
+						}
 					}
 				},
 				edit:function(){
@@ -249,6 +251,7 @@ require(['/js/public/base.js'],function(Base){
 							}
 						}
 					};
+					data.exhibit.state = 0;
 					$.ajax({
 						url: "/api/exhibit",
 						type: "post",
@@ -258,7 +261,6 @@ require(['/js/public/base.js'],function(Base){
 							selfthis.data = data;
 							alert("创建需求成功");
 							_.bind(selfthis.renderPeople,selfthis)();
-							
 						},
 						error:function(){
 							alert("创建需求失败");

@@ -70,7 +70,7 @@ require(['/js/public/base.js'],function(Base){
                   <option <%if(v.type_id==3){%>selected<%}%> type_id="3">行政房</option>\
                   <option <%if(v.type_id==4){%>selected<%}%> type_id="4">套房</option>\
                 </select>\
-              </div\
+              </div>\
               <div class="form-subpit">\
                 <label>房间数</label>\
                 <input class="room" type="tel" placeholder="请输入房间数" value="<%=v.room%>" readonly/>\

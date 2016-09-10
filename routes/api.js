@@ -737,6 +737,7 @@ router.get('/exhibit/list/:page', function(req, res, next) {
 	if(word){
 		findobj['info.name'] = new RegExp(word);
 	}
+	findobj.state = 1;
 	collection.exhibit.find(findobj).count(function(err,count){
 		if(err){
 			res.json(err,500);
@@ -1095,6 +1096,73 @@ router.put('/offer/:id', function(req, res, next) {
 						res.json(err,500);
 					}else{
 						res.json(data);
+					}
+				});
+			}
+		}
+	);
+});
+
+//完成一项
+router.put('/offercheck/:id', function(req, res, next) {
+	var type = req.body.type;
+	var id = req.body.id;
+	collection.offer.findById(req.params.id,
+		function(err,data){
+			if(err){
+				res.json(err,500);
+			}else{
+				var obj = data;
+				if(type == "fee" || type == "with"){
+					obj[type].checked = true;
+				}else{
+					for(var i = 0; i < obj[type].length; i++){
+						if(obj[type][i]._id == id){
+							obj[type][i].checked = true;
+						}
+					}
+				}
+				data.set(obj);
+				data.save(function(err){
+					if(err){
+						res.json(err,500);
+					}else{
+						res.json(data);
+					}
+				});
+			}
+		}
+	);
+});
+
+//完成所有
+router.put('/offerall/:id', function(req, res, next) {
+	collection.offer.findById(req.params.id,
+		function(err,data){
+			if(err){
+				res.json(err,500);
+			}else{
+				data.set({state:3});
+				data.save(function(err){
+					if(err){
+						res.json(err,500);
+					}else{
+						collection.exhibit.findById(data.exhibit_id,
+							function(eerr,edata){
+								if(eerr){
+									res.json(eerr,500);
+								}else{
+									edata.set({state:3});
+									edata.save(function(err){
+										if(err){
+											res.json(err,500);
+										}else{
+											res.json(data);
+										}
+									});
+								}
+							}
+						);
 					}
 				});
 			}

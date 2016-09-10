@@ -6,12 +6,12 @@ require(['/js/public/base.js'],function(Base){
 				initialize:function(){
 					if(!Helper.islogin()){
 						alert('请先登录');
-						location.href = "/online/login";
+						location.href = "/online/index";
 					}
 					this.user = Helper.getlogin();
 					if(this.user.type!="vendor"){
 						alert('请先登录供应商账号');
-						location.href = "/online/login";
+						location.href = "/online/index";
 					}
 					_.bind(Helper.initHead, this)(Helper);
 				},
@@ -74,7 +74,7 @@ require(['/js/public/base.js'],function(Base){
 						var price = parseFloat($(this).find('.price').val()||0),
 							people = parseInt($(this).find('.people').val()||0),
 							days = parseInt($(this).find('.days').val()||0),
-							usage = parseInt($(v).find(".usage").val()||0);
+							usage = parseInt($(this).find(".usage").val()||0);
 						var total = price*people*days;
 						$(this).find(".total").val(total.toFixed(2));
 						carall += total;
@@ -88,7 +88,6 @@ require(['/js/public/base.js'],function(Base){
 						otherall += total;
 						totalall += total;
 					});
-					
 					this.$el.find('#other .all').text(otherall.toFixed(2));
 
 					with_total = parseFloat(this.$el.find("#with .with_price").val()||0)*parseFloat(this.$el.find("#with .with_people").val()||0);
@@ -149,7 +148,7 @@ require(['/js/public/base.js'],function(Base){
 								}
 							}),
 							hotel_memo:self.find("#hotel .memo").val(),
-							hotel_all:parseFloat(self.find("#hotel .all").val()||0),
+							hotel_all:parseFloat(self.find("#hotel .all").html()||0),
 							dinner:_.map(self.find("#dinner .form-pit"),function(v,k){
 								return {
 									date_start:new Date($(v).find(".date_start").val()||Date.now()),
@@ -163,7 +162,7 @@ require(['/js/public/base.js'],function(Base){
 								}
 							}),
 							dinner_memo:self.find("#dinner .memo").val(),
-							dinner_all:parseFloat(self.find("#dinner .all").val()||0),
+							dinner_all:parseFloat(self.find("#dinner .all").html()||0),
 							car:_.map(self.find("#car .form-pit"),function(v,k){
 								return {
 									type_id:parseInt($(v).find(".type  option:selected").attr("type_id")),
@@ -176,7 +175,7 @@ require(['/js/public/base.js'],function(Base){
 								}
 							}),
 							car_memo:self.find("#car .memo").val(),
-							car_all:parseFloat(self.find("#car .all").val()||0),
+							car_all:parseFloat(self.find("#car .all").html()||0),
 							area:_.map(self.find("#area .form-pit"),function(v,k){
 								return {
 									date_start:new Date($(v).find(".date_start").val()||Date.now()),
@@ -190,7 +189,7 @@ require(['/js/public/base.js'],function(Base){
 								}
 							}),
 							area_memo:self.find("#area .memo").val(),
-							area_all:parseFloat(self.find("#area .all").val()||0),
+							area_all:parseFloat(self.find("#area .all").html()||0),
 							other:_.map(self.find("#other .form-pit"),function(v,k){
 								return {
 									type_id:parseInt($(v).find(".type  option:selected").attr("type_id")),
@@ -200,7 +199,7 @@ require(['/js/public/base.js'],function(Base){
 								}
 							}),
 							other_memo:self.find("#other .memo").val(),
-							other_all:parseFloat(self.find("#other .all").val()||0),
+							other_all:parseFloat(self.find("#other .all").html()||0),
 							with:{
 								with_need:self.find("#with .with_need option:selected").attr("need")==0?false:true,
 								with_people:parseInt(self.find("#with .with_people").val()||0),
@@ -215,7 +214,7 @@ require(['/js/public/base.js'],function(Base){
 							fee:{
 								percent:parseInt(self.find("#fee .percent option:selected").attr("percent")),
 								memo:self.find("#fee .memo").val(),
-								total:parseFloat(self.find("#fee .total").val()||0)
+								total:parseFloat(self.find("#fee .total").html()||0)
 							},
 							inv:{
 								need:self.find("#invoice .need option:selected").attr("need")==0?false:true,
