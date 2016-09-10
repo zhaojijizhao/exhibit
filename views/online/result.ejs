@@ -101,8 +101,18 @@
 						<td class="tr"><%=v.price%></td>
 						<td class="tr"><%=v.room%></td>
 						<td class="tr"><%=v.total%></td>
-						<td class=""><%if(v.checked || detail.state==3){%><span class="check">(已经确认)</span><%}%></td>
-						<td class="dd hide"><%if(!v.checked){%><button>确认</button><%}%></td>
+						<td class="checkbtn"><%if(v.checked || detail.state==3){%>
+							<%if(v.checked==1){%>
+							<span class="check">(已经确认)</span>
+							<%}%>
+							<%if(v.checked==2){%>
+								<span class="deny">(有异议)</span>
+							<%}%>
+						<%}%></td>
+						<td class="dd hide">
+							<%if(!v.checked){%><button class="surebtn">确认</button><%}%>
+							<%if(!v.checked){%><button class="diffbtn">有异议</button><%}%>
+						</td>
 					</tr>
 				<%}}%>
 				<tr class="b">
@@ -130,8 +140,18 @@
 						<td class="tr"><%=v.price%></td>
 						<td class="tr"><%=v.people%></td>
 						<td class="tr"><%=v.total%></td>
-						<td class=""><%if(v.checked || detail.state==3){%><span class="check">(已经确认)</span><%}%></td>
-						<td class="dd hide"><%if(!v.checked){%><button>确认</button><%}%></td>
+						<td class="checkbtn"><%if(v.checked || detail.state==3){%>
+							<%if(v.checked==1){%>
+							<span class="check">(已经确认)</span>
+							<%}%>
+							<%if(v.checked==2){%>
+								<span class="deny">(有异议)</span>
+							<%}%>
+						<%}%></td>
+						<td class="dd hide">
+							<%if(!v.checked){%><button class="surebtn">确认</button><%}%>
+							<%if(!v.checked){%><button class="diffbtn">有异议</button><%}%>
+						</td>
 					</tr>
 				<%}}%>
 				<tr class="b">
@@ -159,8 +179,18 @@
 						<td class="tr"><%=v.price%></td>
 						<td class="tr"><%=v.people%></td>
 						<td class="tr"><%=v.total%></td>
-						<td class=""><%if(v.checked || detail.state==3){%><span class="check">(已经确认)</span><%}%></td>
-						<td class="dd hide"><%if(!v.checked){%><button>确认</button><%}%></td>
+						<td class="checkbtn"><%if(v.checked || detail.state==3){%>
+							<%if(v.checked==1){%>
+							<span class="check">(已经确认)</span>
+							<%}%>
+							<%if(v.checked==2){%>
+								<span class="deny">(有异议)</span>
+							<%}%>
+						<%}%></td>
+						<td class="dd hide">
+							<%if(!v.checked){%><button class="surebtn">确认</button><%}%>
+							<%if(!v.checked){%><button class="diffbtn">有异议</button><%}%>
+						</td>
 					</tr>
 				<%}}%>
 				<tr class="b">
@@ -188,8 +218,18 @@
 						<td class="tr"><%=v.price%></td>
 						<td class="tr"><%=v.people%></td>
 						<td class="tr"><%=v.total%></td>
-						<td class=""><%if(v.checked || detail.state==3){%><span class="check">(已经确认)</span><%}%></td>
-						<td class="dd hide"><%if(!v.checked){%><button>确认</button><%}%></td>
+						<td class="checkbtn"><%if(v.checked || detail.state==3){%>
+							<%if(v.checked==1){%>
+							<span class="check">(已经确认)</span>
+							<%}%>
+							<%if(v.checked==2){%>
+								<span class="deny">(有异议)</span>
+							<%}%>
+						<%}%></td>
+						<td class="dd hide">
+							<%if(!v.checked){%><button class="surebtn">确认</button><%}%>
+							<%if(!v.checked){%><button class="diffbtn">有异议</button><%}%>
+						</td>
 					</tr>
 				<%}}%>
 				<tr class="b">
@@ -218,8 +258,18 @@
 						<td class="tr"><%=v.total%></td>
 						<td class="tr">1</td>
 						<td class="tr"><%=v.total%></td>
-						<td class=""><%if(v.checked || detail.state==3){%><span class="check">(已经确认)</span><%}%></td>
-						<td class="dd hide"><%if(!v.checked){%><button>确认</button><%}%></td>
+						<td class="checkbtn"><%if(v.checked || detail.state==3){%>
+							<%if(v.checked==1){%>
+							<span class="check">(已经确认)</span>
+							<%}%>
+							<%if(v.checked==2){%>
+								<span class="deny">(有异议)</span>
+							<%}%>
+						<%}%></td>
+						<td class="dd hide">
+							<%if(!v.checked){%><button class="surebtn">确认</button><%}%>
+							<%if(!v.checked){%><button class="diffbtn">有异议</button><%}%>
+						</td>
 					</tr>
 				<%}}%>
 				<tr class="b">
@@ -231,6 +281,45 @@
 				</tr>
 				<tr class="b">
 					<td class="tc">6</td>
+					<td>额外项目</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td class=""></td>
+					<td class="dd hide"></td>
+				</tr>
+				<%if(detail.sth.length>0){
+					for(var i = 0; i < detail.sth.length; i++){
+					var v=detail.sth[i];%>
+					<tr data-id="<%=v._id%>" data-type="sth">
+						<td></td>
+						<td><%=v.name%></td>
+						<td class="tr"><%=v.price%></td>
+						<td class="tr"><%=v.people%></td>
+						<td class="tr"><%=v.total%></td>
+						<td class="checkbtn"><%if(v.checked || detail.state==3){%>
+							<%if(v.checked==1){%>
+							<span class="check">(已经确认)</span>
+							<%}%>
+							<%if(v.checked==2){%>
+								<span class="deny">(有异议)</span>
+							<%}%>
+						<%}%></td>
+						<td class="dd hide">
+							<%if(!v.checked){%><button class="surebtn">确认</button><%}%>
+							<%if(!v.checked){%><button class="diffbtn">有异议</button><%}%>
+						</td>
+					</tr>
+				<%}}%>
+				<tr class="b">
+					<td></td>
+					<td class="tr">小计</td>
+					<td colspan="3" class="tr sky"><%=detail.sth_all%></td>
+					<td class=""></td>
+					<td class="dd hide"></td>
+				</tr>
+				<tr class="b">
+					<td class="tc">7</td>
 					<td>陪同费用</td>
 					<td></td>
 					<td></td>
@@ -269,11 +358,21 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td class=""><%if(detail.with.checked || detail.state==3){%><span class="check">(已经确认)</span><%}%></td>
-					<td class="dd hide"><%if(!detail.with.checked){%><button>确认</button><%}%></td>
+					<td class="checkbtn"><%if(detail.with.checked || detail.state==3){%>
+						<%if(detail.with.checked==1){%>
+						<span class="check">(已经确认)</span>
+						<%}%>
+						<%if(detail.with.checked==2){%>
+							<span class="deny">(有异议)</span>
+						<%}%>
+					<%}%></td>
+					<td class="dd hide">
+						<%if(!detail.with.checked){%><button class="surebtn">确认</button><%}%>
+						<%if(!detail.with.checked){%><button class="diffbtn">有异议</button><%}%>
+					</td>
 				</tr>
 				<tr class="b">
-					<td class="tc">7</td>
+					<td class="tc">8</td>
 					<td>服务费:按照总活动金额%计算</td>
 					<td></td>
 					<td></td>
@@ -288,18 +387,29 @@
 					<td class="tr"><%=detail.total-detail.fee.total%></td>
 					<td class="tr"><%=feeptype[detail.fee.percent]%></td>
 					<td class="tr"><%=detail.fee.total%></td>
-					<td class=""><%if(detail.fee.checked || detail.state==3){%><span class="check">(已经确认)<span><%}%></td>
-					<td class="dd hide"><%if(!detail.fee.checked){%><button>确认</button><%}%></td>
+					<td class="checkbtn"><%if(detail.fee.checked || detail.state==3){%>
+						<%if(detail.fee.checked==1){%>
+						<span class="check">(已经确认)</span>
+						<%}%>
+						<%if(detail.fee.checked==2){%>
+							<span class="deny">(有异议)</span>
+						<%}%>
+						<%}%>
+					</td>
+					<td class="dd hide">
+						<%if(!detail.fee.checked){%><button class="surebtn">确认</button><%}%>
+						<%if(!detail.fee.checked){%><button class="diffbtn">有异议</button><%}%>
+					</td>
 				</tr>
 				<tr class="b">
 					<td></td>
 					<td class="tr">费用总计：</td>
 					<td colspan="3" class="tr sky"><%=detail.total%></td>
-					<td class=""><%if(detail.state==3){%><span class="check">(已经确认)<span><%}%></td>
+					<td><%if(detail.state==3){%><span class="check">(已经确认)<span><%}%></td>
 					<td class="dd hide"></td>
 				</tr>
 			</table>
-			<button class="resultbtn complete hide">全部完成</button>
+			<%if(detail.state!=3){%><button class="resultbtn complete hide">全部完成</button><%}%>
 		</div>
 	</div>
 </div>

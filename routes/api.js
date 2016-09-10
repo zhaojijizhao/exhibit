@@ -451,7 +451,7 @@ router.post('/clientlogin', function(req, res, next) {
 			if(databyname.length>0){
 				res.json(databyname);
 			}else{
-				collection.clienter.find({psw:psw,cell:name},function(err,databycell){
+				collection.clienter.find({psw:psw,cell:name,type:type},function(err,databycell){
 					if(err){
 						res.json(err,500);
 					}else{
@@ -1107,6 +1107,7 @@ router.put('/offer/:id', function(req, res, next) {
 router.put('/offercheck/:id', function(req, res, next) {
 	var type = req.body.type;
 	var id = req.body.id;
+	var val = req.body.val;
 	collection.offer.findById(req.params.id,
 		function(err,data){
 			if(err){
@@ -1114,15 +1115,19 @@ router.put('/offercheck/:id', function(req, res, next) {
 			}else{
 				var obj = data;
 				if(type == "fee" || type == "with"){
-					obj[type].checked = true;
+					if(type=="fee"){
+						data.set({'fee.checked':val});
+					}else if(type == "with"){
+						data.set({'with.checked':val});
+					}
 				}else{
 					for(var i = 0; i < obj[type].length; i++){
 						if(obj[type][i]._id == id){
-							obj[type][i].checked = true;
+							obj[type][i].checked = val;
 						}
 					}
+					data.set(obj);
 				}
-				data.set(obj);
 				data.save(function(err){
 					if(err){
 						res.json(err,500);

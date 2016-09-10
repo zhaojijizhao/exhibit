@@ -196,7 +196,6 @@
 				<div class="form-line" id="other">
 					<div class="line-title">
 						其他
-						<!--<button class="addbtn">修改</button>-->
 					</div>
 					<div class="form-pit">
 						<div class="form-subpit">
@@ -217,6 +216,23 @@
 								<option need="0">否</option>
 								<option need="1">是</option>
 							</select>
+						</div>
+					</div>
+					<div class="memoup">备注</div>
+					<textarea class="memo" placeholder="请输入备注信息" readonly></textarea>
+				</div>
+				<div class="form-line" id="sth">
+					<div class="line-title">
+						额外项目
+					</div>
+					<div class="form-pit">
+						<div class="form-subpit">
+							<label>名称</label>
+							<input class="name" type="text" placeholder="请输入名称" readonly />
+						</div>
+						<div class="form-subpit">
+							<label>数量</label>
+							<input class="people" type="text" placeholder="请输入数量" readonly />
 						</div>
 					</div>
 					<div class="memoup">备注</div>
@@ -540,6 +556,32 @@
 			<div class="memoup">备注</div>
 			<textarea class="memo" placeholder="请输入备注信息"></textarea>
 			<button class="plusbtn">添加物料</button>
+			<div class="btns">
+				<button class="prev">上一步</button>
+				<button class="next">下一步</button>
+			</div>
+		</div>
+	</div>
+</script>
+<script type="text/template" id="sthpop">
+	<div class="pop" name="sthpop">
+		<div class="form pop-line">
+			<div class="line-title">
+				额外项目<div class="close">X</div>
+			</div>
+			<div class="form-pit">
+				<div class="form-subpit">
+					<label>名称</label>
+					<input class="name" type="text" placeholder="请输入名称" />
+				</div>
+				<div class="form-subpit">
+					<label>数量</label>
+					<input class="people" type="text" placeholder="请输入数量" />
+				</div>
+			</div>
+			<div class="memoup">备注</div>
+			<textarea class="memo" placeholder="请输入备注信息"></textarea>
+			<button class="plusbtn">添加项目</button>
 			<div class="btns">
 				<button class="prev">上一步</button>
 				<button class="next">下一步</button>

@@ -25,6 +25,7 @@ require(['/js/public/base.js'],function(Base){
                 <%if(item.state==0){%><span class="blue">待审核</span><%}%>\
                 <%if(item.state==1){%><span class="green">待报价</span><%}%>\
                 <%if(item.state==2){%><span class="red">已确认</span><%}%>\
+                <%if(item.state==3){%><span class="orange">已完成</span><%}%>\
                 <%if(item.state==4){%><span class="blue">审核未通过</span><%}%>\
               </td>\
               <td><a href="/cms/exhibitdetail?eid=<%=item._id%>">查看详情</a></td>\

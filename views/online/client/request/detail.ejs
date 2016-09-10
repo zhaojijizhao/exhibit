@@ -243,6 +243,28 @@
 					<div class="memoup">备注</div>
 					<textarea class="memo" placeholder="请输入备注信息" readonly><%=detail.other_memo%></textarea>
 				</div>
+				<div class="form-line" id="sth">
+					<div class="line-title">
+						额外项目
+						<%if(detail.state == 0){%><button class="addbtn">修改</button><%}%>
+					</div>
+					<%if(detail.other.length>0){
+						for(var i = 0; i < detail.sth.length; i++){
+						var v=detail.sth[i];%>
+					<div class="form-pit">
+						<div class="form-subpit">
+							<label>名称</label>
+							<input class="name" type="text" placeholder="请输入名称" value="<%=v.name%>" readonly />
+						</div>
+						<div class="form-subpit">
+							<label>数量</label>
+							<input class="people" type="text" placeholder="请输入数量" value="<%=v.people%>" readonly />
+						</div>
+					</div>
+					<%}%>
+					<div class="memoup">备注</div>
+					<textarea class="memo" placeholder="请输入备注信息" readonly><%=detail.sth_memo%></textarea>
+				</div>
 				<div class="form-line" id="with">
 					<div class="line-title">陪同人员</div>
 					<div class="form-pit">
@@ -554,6 +576,32 @@
 			<button class="plusbtn">添加物料</button>
 			<div class="btns">
 				<button class="change">修改</button>
+			</div>
+		</div>
+	</div>
+</script>
+<script type="text/template" id="sthpop">
+	<div class="pop" name="sthpop">
+		<div class="form pop-line">
+			<div class="line-title">
+				额外项目<div class="close">X</div>
+			</div>
+			<div class="form-pit">
+				<div class="form-subpit">
+					<label>名称</label>
+					<input class="name" type="text" placeholder="请输入名称" />
+				</div>
+				<div class="form-subpit">
+					<label>数量</label>
+					<input class="people" type="text" placeholder="请输入数量" />
+				</div>
+			</div>
+			<div class="memoup">备注</div>
+			<textarea class="memo" placeholder="请输入备注信息"></textarea>
+			<button class="plusbtn">添加项目</button>
+			<div class="btns">
+				<button class="prev">上一步</button>
+				<button class="next">下一步</button>
 			</div>
 		</div>
 	</div>

@@ -36,11 +36,12 @@ require(['/js/public/base.js'],function(Base){
 						dinnerall = 0,
 						carall = 0,
 						otherall = 0,
+						sthall = 0,
 						with_total = 0,
 						catch_total = 0,
 						feeall=0;
 					this.$el.find('#hotel .form-pit').each(function(){
-						var price = parseFloat($(this).find('.price').val()||0).toFixed(2),
+						var price = parseFloat($(this).find('.price').val()||0),
 							room = parseInt($(this).find('.room').val()||0),
 							days = parseInt($(this).find('.days').val()||0);
 						var total = price*room*days;
@@ -92,6 +93,16 @@ require(['/js/public/base.js'],function(Base){
 					});
 
 					this.$el.find('#other .all').text(otherall.toFixed(2));
+
+					this.$el.find('#sth .form-pit').each(function(){
+						var price = parseFloat($(this).find('.price').val()||0),
+							people = parseInt($(this).find('.people').val()||0);
+						var total = price*people;
+						$(this).find(".total").val(total.toFixed(2));
+						sthall += total;
+						totalall += total;
+					});
+					this.$el.find('#sth .all').text(sthall.toFixed(2));
 
 					with_total = parseFloat(this.$el.find("#with .with_price").val()||0)*parseFloat(this.$el.find("#with .with_people").val()||0);
 					this.$el.find("#with .with_total").val(with_total.toFixed(2));
@@ -204,6 +215,16 @@ require(['/js/public/base.js'],function(Base){
 							}),
 							other_memo:self.find("#other .memo").val(),
 							other_all:parseFloat(self.find("#other .all").html()||0),
+							sth:_.map(self.find("#sth .form-pit"),function(v,k){
+								return {
+									name:$(v).find(".name").val(),
+									people:parseFloat($(v).find(".people").val()||0),
+									price:parseFloat($(v).find(".price").val()||0),
+									total:parseFloat($(v).find(".total").val()||0),
+								}
+							}),
+							sth_memo:self.find("#sth .memo").val(),
+							sth_all:parseFloat(self.find("#sth .all").html()||0),
 							with:{
 								with_need:self.find("#with .with_need option:selected").attr("need")==0?false:true,
 								with_people:parseInt(self.find("#with .with_people").val()||0),

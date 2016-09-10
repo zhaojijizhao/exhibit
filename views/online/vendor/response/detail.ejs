@@ -334,10 +334,55 @@
 					<div class="memoup">备注</div>
 					<textarea class="memo" placeholder="请输入备注信息" readonly><%=detail.other_memo%></textarea>
 				</div>
+				<div class="form-line" id="sth">
+					<div class="line-title">
+						额外项目
+					</div>
+					<%if(detail.sth.length>0){
+						for(var i = 0; i < detail.sth.length ; i++){
+						var v=detail.sth[i];%>
+						<div class="form-pit">
+							<div class="form-subpit">
+								<label>名称</label>
+								<input class="name" type="name" placeholder="请输入名称" value="<%=v.name%>" readonly />
+							</div>
+							<div class="form-subpit">
+								<label>数量</label>
+								<input class="people" type="tel" placeholder="请输入数量" value="<%=v.people%>" readonly />
+							</div>
+							<div class="form-subpit">
+								<label>单价</label>
+								<input class="price" type="tel" placeholder="请输入单价" value="<%=v.price%>" />
+							</div>
+							<div class="form-subpit">
+								<label>&nbsp;</label>
+								<input readonly/>
+							</div>
+							<div class="form-subpit">
+								<label>&nbsp;</label>
+								<input readonly/>
+							</div>
+							<div class="form-subpit">
+								<label>&nbsp;</label>
+								<input readonly/>
+							</div>
+							<div class="form-subpit">
+								<label>&nbsp;</label>
+								<input readonly/>
+							</div>
+							<div class="form-subpit">
+								<label>合计</label>
+								<input class="total" type="tel" placeholder="请输入合计价格" value="<%=v.total%>" />
+							</div>
+						</div>
+					<%}}%>
+					<div class="memoup">备注</div>
+					<textarea class="memo" placeholder="请输入备注信息" readonly><%=detail.sth_memo%></textarea>
+				</div>
 				<div class="form-line" id="with">
 					<div class="line-title">陪同人员</div>
 					<div class="form-pit">
-						<div class="form-subpit">	
+						<div class="form-subpit">
 							<label>是否需要陪同</label>
 							<select class="with_need" disabled>
 								<option <%if(!detail.with.with_need){%>selected<%}%> need="0">否</option>
@@ -355,10 +400,6 @@
 						<div class="form-subpit">
 							<label>单价</label>
 							<input class="with_price" type="tel" value="<%=detail.with.with_price%>" placeholder="请输入单价" />
-						</div>
-						<div class="form-subpit">
-							<label>&nbsp;</label>
-							<input readonly/>
 						</div>
 						<div class="form-subpit">
 							<label>&nbsp;</label>

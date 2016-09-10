@@ -17,16 +17,27 @@ require(['/js/public/base.js'],function(Base){
 					var user =Helper.getlogin();
 					if((user.type == "client" || user.type == "personal") && $('.result-table').attr('data-state')==2){
 						$(".dd").removeClass('hide');
+						//$(".complete").removeClass('hide');
+					}
+					var all = true;
+					for(var i = 0;i< $('.checkbtn').length;i++){
+						if(!$($('.checkbtn')[i]).html()){
+							all = false;
+						}
+					}
+					if(all){
 						$(".complete").removeClass('hide');
 					}
 					$(document).on('click','.dd button',function(e){
 						e.preventDefault();
+						type = $(this).attr('class');
 						var tr = $(this).closest('tr');
 						$.ajax({
 							url:'/api/offercheck/'+$('.result-table').attr('data-id'),
 							data:{
 								id: tr.attr('data-id'),
-								type: tr.attr('data-type')
+								type: tr.attr('data-type'),
+								val: type=="surebtn"? 1: 2
 							},
 							type:'put',
 							dataType:'json',

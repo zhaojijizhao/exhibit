@@ -344,7 +344,19 @@ var exhibitOther = new database.Schema({
 		type:String,
 		validate:/.+/
 	},
+	need:{
+		type:Boolean
+	},
 	num:{
+		type:Number
+	}
+});
+//展会补充
+var exhibitSth = new database.Schema({
+	name:{
+		type:String
+	},
+	people:{
 		type:Number
 	}
 });
@@ -406,6 +418,10 @@ var exhibit = new database.Schema({
 	},
 	other:[exhibitOther],
 	other_memo:{
+		type:String
+	},
+	sth:[exhibitSth],
+	sth_memo:{
 		type:String
 	},
 	with:exhibitWith,
@@ -499,8 +515,8 @@ var offerHotel = new database.Schema({
 		type:Number
 	},
 	checked:{
-		type:Boolean,
-		default:false
+		type:Number,
+		default:0
 	}
 });
 //展会用餐
@@ -536,8 +552,8 @@ var offerDinner = new database.Schema({
 		type:Number
 	},
 	checked:{
-		type:Boolean,
-		default:false
+		type:Number,
+		default:0
 	}
 });
 //展会用车
@@ -569,8 +585,8 @@ var offerCar = new database.Schema({
 		type:Number
 	},
 	checked:{
-		type:Boolean,
-		default:false
+		type:Number,
+		default:0
 	}
 });
 //服务类型
@@ -621,8 +637,8 @@ var offerArea = new database.Schema({
 		type:Number
 	},
 	checked:{
-		type:Boolean,
-		default:false
+		type:Number,
+		default:0
 	}
 });
 //展会物料
@@ -641,12 +657,34 @@ var offerOther = new database.Schema({
 	num:{
 		type:Number
 	},
+	need:{
+		type:Boolean
+	},
 	total:{
 		type:Number
 	},
 	checked:{
-		type:Boolean,
-		default:false
+		type:Number,
+		default:0
+	}
+});
+//展会补充
+var offerSth = new database.Schema({
+	name:{
+		type:String
+	},
+	people:{
+		type:Number
+	},
+	price:{
+		type:Number
+	},
+	total:{
+		type:Number
+	},
+	checked:{
+		type:Number,
+		default:0
 	}
 });
 //展会陪同
@@ -681,8 +719,8 @@ var offerWith = new database.Schema({
 		type:Number
 	},
 	checked:{
-		type:Boolean,
-		default:false
+		type:Number,
+		default:0
 	}
 });
 //展会服务费
@@ -698,8 +736,8 @@ var offerFee = new database.Schema({
 		type:Number
 	},
 	checked:{
-		type:Boolean,
-		default:false
+		type:Number,
+		default:0
 	}
 });
 //展会发票
@@ -715,8 +753,8 @@ var offerInvoice = new database.Schema({
 		type:String
 	},
 	checked:{
-		type:Boolean,
-		default:false
+		type:Number,
+		default:0
 	}
 });
 //汇总
@@ -763,6 +801,13 @@ var offer = new database.Schema({
 		type:Number
 	},
 	other_memo:{
+		type:String
+	},
+	sth:[offerSth],
+	sth_all:{
+		type:Number
+	},
+	sth_memo:{
 		type:String
 	},
 	with:offerWith,

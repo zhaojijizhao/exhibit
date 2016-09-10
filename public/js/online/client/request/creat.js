@@ -237,6 +237,13 @@ require(['/js/public/base.js'],function(Base){
 								}
 							}),
 							other_memo:self.find("#other .memo").val(),
+							sth:_.map(self.find("#sth .form-pit"),function(v,k){
+								return {
+									name:$(v).find(".name").val(),
+									people:parseInt($(v).find(".people").val()||0)
+								}
+							}),
+							sth_memo:self.find("#sth .memo").val(),
 							with:{
 								with_need:self.find("#with .with_need option:selected").attr("need")==0?false:true,
 								with_people:parseInt(self.find("#with .with_people").val()||0),

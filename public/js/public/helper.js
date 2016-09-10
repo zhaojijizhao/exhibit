@@ -1315,6 +1315,18 @@ define(['jquery','underscore','backbone'],
 			requestUrl:"http://121.43.62.242:3000/api/",
 			city: city,
 			initHead:function(helper){
+				$(document).on('keypress','input,select,textarea',function(e){
+						if(e.keyCode == 13){
+							e.preventDefault();
+							var all = $('input:not([readonly],[disabled],[type=hidden]),\
+							            select:not([readonly],[disabled],[type=hidden]),\
+							            textarea:not([readonly],[disabled],[type=hidden])');
+							var n = all.index($(this));
+							if($(all[n+1])){
+								$(all[n+1]).focus()
+							}
+						}
+					});
 				$("#chat").on('click',function(){
 					$("#chatbox").removeClass('hide');
 				});
@@ -1340,6 +1352,18 @@ define(['jquery','underscore','backbone'],
 				}
 			},
 			initUnloginHead:function(helper){
+				$(document).on('keypress','input,select,textarea',function(e){
+						if(e.keyCode == 13){
+							e.preventDefault();
+							var all = $('input:not([readonly],[disabled],[type=hidden]),\
+							            select:not([readonly],[disabled],[type=hidden]),\
+							            textarea:not([readonly],[disabled],[type=hidden])');
+							var n = all.index($(this));
+							if($(all[n+1])){
+								$(all[n+1]).focus()
+							}
+						}
+					});
 				$("#chat").on('click',function(){
 					$("#chatbox").removeClass('hide');
 				});
@@ -1416,7 +1440,7 @@ define(['jquery','underscore','backbone'],
 											<span class="f1"><%=v.info.name%></span>\
 											<%if(v.state==2){%>\
 												<span class="f1 red">已确认</span>\
-												<span class="fr w80 tc"><a class="orange" href="/online/result/<%=v.offer_id%>">查看报表</a></span>\
+												<span class="fr w80 tc"><a class="orange" href="/online/result/<%=v.offer_id%>">查看结算表</a></span>\
 											<%}%>\
 											<%if(v.state==0){%>\
 												<span class="f1 blue">待审核</span>\
@@ -1426,6 +1450,7 @@ define(['jquery','underscore','backbone'],
 											<%}%>\
 											<%if(v.state==3){%>\
 												<span class="f1 orange">已完成</span>\
+												<span class="fr w80 tc"><a class="orange" href="/online/result/<%=v.offer_id%>">查看结算表</a></span>\
 											<%}%>\
 											<%if(v.state==4){%>\
 												<span class="f1 blue">审核未通过</span>\
@@ -1558,13 +1583,14 @@ define(['jquery','underscore','backbone'],
 												<span class="f1">报价：<%=v.total%>元</span>\
 												<%if(v.state==2){%>\
 													<span class="f1 red">已确认</span>\
-													<span class="fr w80 tc"><a class="orange" href="/online/result/<%=v._id%>">查看报表</a></span>\
+													<span class="fr w80 tc"><a class="orange" href="/online/result/<%=v._id%>">查看结算表</a></span>\
 												<%}%>\
 												<%if(v.state==0){%>\
 													<span class="f1 blue">已报价</span>\
 												<%}%>\
 												<%if(v.state==3){%>\
 													<span class="f1 orange">已完成</span>\
+													<span class="fr w80 tc"><a class="orange" href="/online/result/<%=v._id%>">查看结算表</a></span>\
 												<%}%>\
 												<%if(v.state==4){%>\
 													<span class="f1 blue">审核未通过</span>\

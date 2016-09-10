@@ -44,7 +44,7 @@ a{text-decoration: none;color: #666;}
 	color:red !important;
 	font-size: 16px;
 }
-.orange{
+span.orange{
 	color:orange !important;
 	font-size: 16px;
 }
@@ -1613,9 +1613,15 @@ a{text-decoration: none;color: #666;}
 .result-table button{
 	width: 80px;
 }
-.result-table td span.check{
+.result-table td span.deny{
 	display: block;
 	background-color: #f60;
+	color: #fff ;
+	text-align: center;
+}
+.result-table td span.check{
+	display: block;
+	background-color: green;
 	color: #fff ;
 	text-align: center;
 }

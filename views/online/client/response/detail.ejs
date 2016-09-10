@@ -142,7 +142,7 @@
 				</tr>
 				<tr class="sky">
 					<td></td>
-					<td>日期</td>
+					<td></td>
 					<td>车型</td>
 					<td></td>
 					<td></td>
@@ -154,7 +154,7 @@
 					var v=detail.car[i];%>
 					<tr class="yellow">
 						<td></td>
-						<td><%=new Date(v.date_start).toLocaleDateString()%>-<%=new Date(v.date_end).toLocaleDateString()%></td>
+						<td></td>
 						<td><%=v.type_name%></td>
 						<td><%=v.price%></td>
 						<td><%=v.people%></td>
@@ -215,6 +215,46 @@
 				</tr>
 				<tr class="sky">
 					<td>6</td>
+					<td colspan="2">额外项目</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr class="sky">
+					<td></td>
+					<td>名称</td>
+					<td>数量</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<%if(detail.sth.length>0){
+					for(var i = 0; i < detail.sth.length; i++){
+					var v=detail.sth[i];%>
+					<tr class="yellow">
+						<td></td>
+						<td><%=v.name%></td>
+						<td><%=v.people%></td>
+						<td><%=v.price%></td>
+						<td></td>
+						<td></td>
+						<td><%=v.total%></td>
+					</tr>
+				<%}}%>
+				<tr class="yellow">
+					<td></td>
+					<td>备注</td>
+					<td colspan="5"><%=detail.sth_memo%></td>
+				</tr>
+				<tr class="mud">
+					<td></td>
+					<td>小计</td>
+					<td colspan="5" class="tr"><%=detail.sth_all%></td>
+				</tr>
+				<tr class="sky">
+					<td>7</td>
 					<td colspan="2">陪同人员</td>
 					<td></td>
 					<td></td>
@@ -258,7 +298,7 @@
 					<td><%=detail.with.catch_total%></td>
 				</tr>
 				<tr class="sky">
-					<td>7</td>
+					<td>8</td>
 					<td colspan="2">服务费:按照总活动金额%计算（增值税发票，可抵扣6%）</td>
 					<td></td>
 					<td></td>
@@ -290,7 +330,7 @@
 					<td colspan="5"><%=detail.fee.memo%></td>
 				</tr>
 				<tr class="sky">
-					<td>8</td>
+					<td>9</td>
 					<td colspan="2">发票</td>
 					<td></td>
 					<td></td>
