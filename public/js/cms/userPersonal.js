@@ -58,7 +58,7 @@ require(['/js/public/base.js'],function(Base){
           <%}%>\
         </tbody>\
       </table>\
-      <p class="title">创建新用户(此处添加用户为企业用户)</p>\
+      <p class="title">创建新用户(此处添加用户为个人用户)</p>\
       <table class="cmstable">\
         <thead>\
            <tr>\
@@ -122,7 +122,7 @@ require(['/js/public/base.js'],function(Base){
               $('#list').html(_.template(tpl)({users:data,city:Helper.city}));
             },
             error:function(){
-              alert('获取信息失败');
+              $('#list').html(_.template(tpl)({users:{},city:Helper.city}));
             }
           });
           $(document).on('click','.act',function(){

@@ -76,6 +76,7 @@ require(['/js/public/base.js'],function(Base){
                 alert('完成失败');
               }
             });
+          });
         }
       });
       var page = new view();
