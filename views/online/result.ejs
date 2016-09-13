@@ -1,7 +1,7 @@
 <% include ./layout/head.ejs %>
-<div class="out">
+<div class="out white">
 	<div class="in">
-		<div class="main" id="main">
+		<div class="main" id="main" name="main">
 			<table class="form result-table" width="100%" data-id="<%=detail._id%>" data-state="<%=detail.state%>">
 				<tr>
 					<td colspan="5">
@@ -411,6 +411,7 @@
 			</table>
 			<%if(detail.state!=3){%><button class="resultbtn complete hide">全部完成</button><%}%>
 		</div>
+		<button class="resultbtn" id="pdf">生成pdf</button>
 	</div>
 </div>
 <% include ./layout/foot.ejs %>

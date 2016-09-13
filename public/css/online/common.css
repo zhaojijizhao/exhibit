@@ -1113,9 +1113,9 @@ span.orange{
 }
 
 .result-table{
+	background-color: #fff;
 	border: 1px solid #ccc;
 	border-collapse: collapse;
-
 }
 .result-table td{
 	height: 26px;
@@ -1624,4 +1624,7 @@ span.orange{
 	background-color: green;
 	color: #fff ;
 	text-align: center;
+}
+.white{
+	background-color: #fff;
 }

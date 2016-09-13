@@ -27,7 +27,6 @@ define([],function(){
 				}
 			}
 		};
-		
 		if(type == 1){
 			config.baseUrl = "/";
 		}

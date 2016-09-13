@@ -66,6 +66,10 @@ require(['/js/public/base.js'],function(Base){
 							}
 						});
 					});
+					$(document).on('click','#pdf',function(e){
+						e.preventDefault();
+						location.href = location.href.replace('result','resultpdf');
+					})
 				}
 			});
 			var page = new view();
