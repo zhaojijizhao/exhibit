@@ -30,8 +30,7 @@ var user = new database.Schema({
 //需求商
 var clienter = new database.Schema({
 	name:{
-		type:String,
-		validate:/.+/
+		type:String
 	},
 	type:{
 		type:String,
@@ -42,8 +41,7 @@ var clienter = new database.Schema({
 		validate:/.+/
 	},
 	psw:{
-		type:String,
-		validate:/.+/
+		type:String
 	},
 	realname:{
 		type:String,
@@ -63,6 +61,9 @@ var clienter = new database.Schema({
 	state:{
 		type:String
 	},
+	code:{
+		type:Number
+	},
 	created_at:{
 		type:Date,
 		default: Date.now
@@ -72,8 +73,7 @@ var clienter = new database.Schema({
 //供应商
 var vendorer = new database.Schema({
 	name:{
-		type:String,
-		validate:/.+/
+		type:String
 	},
 	cid:{
 		type:String
@@ -87,8 +87,7 @@ var vendorer = new database.Schema({
 		validate:/.+/
 	},
 	psw:{
-		type:String,
-		validate:/.+/
+		type:String
 	},
 	realname:{
 		type:String
@@ -107,6 +106,9 @@ var vendorer = new database.Schema({
 	},
 	state:{
 		type:String
+	},
+	code:{
+		type:Number
 	},
 	created_at:{
 		type:Date,

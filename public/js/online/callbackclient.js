@@ -26,7 +26,7 @@ require(['/js/public/base.js'],function(Base){
             data: data,
             dataType:"json",
             success:function(data){
-              alert("密码已经发送到您的手机，请查收！测试数据："+data[0].psw);
+              alert("密码已经发送到您的手机，请查收!");
             },
             error:function(){
               alert("密码找回失败！");

@@ -1,9 +1,55 @@
 var express = require('express');
 var router = express.Router();
 var collection = require('../model/collection');
-var excel = require('node-excel-export');
+var http = require('http');
+var qs = require('querystring');
+//var excel = require('node-excel-export');
 
 /* api listing. */
+
+//短信接口
+var site = 'http://112.74.77.61:3000/';
+function sendmsg(cell,msg){
+	var post_data = {
+		uid: 80972,
+	  auth: '931dcbe18d7f424c61115d0fe991c87d',
+	  mobile: cell,
+	  msg: msg,
+	  expid: 0
+	};
+	var content = qs.stringify(post_data);
+	var options = {
+	  hostname: '114.55.5.4',
+	  port: 80,
+	  path: '/hy/',
+	  method: 'POST',
+	  headers: {
+	    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+	  }
+	};
+	var req = http.request(options, function (res) {
+    res.setEncoding('utf8');
+    res.on('data', function (chunk) {
+       console.log('BODY: ' + chunk);
+    });
+	});
+	req.on('error', function (e) {
+	    console.log('problem with request: ' + e.message);
+	});
+	req.write(content);
+	req.end();
+}
+function randomcode(){
+	var result= [];
+	for(var i = 0; i<6; i++){
+		result.push(parseInt(Math.random()*10));
+	}
+	return result.join("");
+}
+// router.get('/test',function(req, res, next){
+// 	sendmsg(13818754347,"大家好");
+// 	res.json({});
+// });
 
 //cms接口
 router.get('/cmsgetpersonaluser', function(req, res, next) {
@@ -493,6 +539,58 @@ router.post('/vendorlogin', function(req, res, next) {
 	});
 });
 
+router.post('/clientcheck', function(req, res, next) {
+	var cell = req.body.user.cell;
+	var todo;
+	var code = randomcode();
+	collection.clienter.find({cell:cell},function(err,data){
+		if(err){
+			res.json(err,500);
+		}else{
+			if(data.length <= 0){
+				todo = new collection.clienter({cell:cell,code:code});
+			}else{
+				todo = data[0];
+				todo.set({code:code});
+			}
+			todo.save(function(err){
+				if(err){
+					res.json(err,500);
+				}else{
+					sendmsg(data[0].cell,"您的验证是："+code+",请妥善保管。");
+					res.json({});
+				}
+			});
+		}
+	});
+});
+
+router.post('/vendorcheck', function(req, res, next) {
+	var cell = req.body.user.cell;
+	var todo;
+	var code = randomcode();
+	collection.vendorer.find({cell:cell},function(err,data){
+		if(err){
+			res.json(err,500);
+		}else{
+			if(data.length <= 0){
+				todo = new collection.vendorer({cell:cell,code:code});
+			}else{
+				todo = data[0];
+				todo.set({code:code});
+			}
+			todo.save(function(err){
+				if(err){
+					res.json(err,500);
+				}else{
+					sendmsg(data[0].cell,"您的验证是："+code+",请妥善保管。");
+					res.json({});
+				}
+			});
+		}
+	});
+});
+
 //找回密码
 router.post('/clientcallback', function(req, res, next) {
 	var cell = req.body.user.cell;
@@ -501,8 +599,9 @@ router.post('/clientcallback', function(req, res, next) {
 		if(err){
 			res.json(err,500);
 		}else{
-			if(data.length>0){
-				res.json(data);
+			if(data.length > 0 && data[0].psw){
+				sendmsg(cell,"您的密码是"+data[0].psw+"请妥善保管");
+				res.json({});
 			}else{
 				res.json(err,500);
 			}
@@ -517,8 +616,9 @@ router.post('/vendorcallback', function(req, res, next) {
 		if(err){
 			res.json(err,500);
 		}else{
-			if(data.length>0){
-				res.json(data);
+			if(data.length > 0 && data[0].psw){
+				sendmsg(cell,"您的密码是"+data[0].psw+"请妥善保管");
+				res.json({});
 			}else{
 				res.json(err,500);
 			}
@@ -551,31 +651,30 @@ router.post('/user', function(req, res, next) {
 
 router.post('/clientuser', function(req, res, next) {
 	req.body.user.type = req.body.user.type || "personal";
-	var todo = new collection.clienter(req.body.user);
 	var cell = req.body.user.cell;
+	var code = req.body.user.code;
 	var name = req.body.user.name;
-	collection.clienter.find({cell:cell},function(err,databycell){
+	var todo;
+	collection.clienter.find({name:name},function(err,databyname){
 		if(err){
 			res.json(err,500);
 		}else{
-			if(databycell.length>0){
-				res.json({msg:"手机号已经存在"},500);
+			if(databyname.length>0){
+				res.json({msg:"用户名已经存在"},500);
 			}else{
-				collection.clienter.find({name:name},function(err,databyname){
+				collection.clienter.find({cell:cell,code:code},function(err,databycell){
 					if(err){
 						res.json(err,500);
 					}else{
-						if(databyname.length>0){
-							res.json({msg:"用户名已经存在"},500);
-						}else{
-							todo.save(function(err){
-								if(err){
-									res.json(err,500);
-								}else{
-									res.json(todo);
-								}
-							});
-						}
+						todo = databycell[0];
+						todo.set(req.body.user);
+						todo.save(function(err){
+							if(err){
+								res.json(err,500);
+							}else{
+								res.json(databycell[0]);
+							}
+						});
 					}
 				});
 			}
@@ -584,31 +683,31 @@ router.post('/clientuser', function(req, res, next) {
 });
 
 router.post('/vendoruser', function(req, res, next) {
-	var todo = new collection.vendorer(req.body.user);
+	req.body.user.type = req.body.user.type;
 	var cell = req.body.user.cell;
+	var code = req.body.user.code;
 	var name = req.body.user.name;
-	collection.vendorer.find({cell:cell},function(err,databycell){
+	var todo;
+	collection.vendorer.find({name:name},function(err,databyname){
 		if(err){
 			res.json(err,500);
 		}else{
-			if(databycell.length>0){
-				res.json({msg:"手机号已经存在"},500);
+			if(databyname.length>0){
+				res.json({msg:"用户名已经存在"},500);
 			}else{
-				collection.vendorer.find({name:name},function(err,databyname){
+				collection.vendorer.find({cell:cell,code:code},function(err,databycell){
 					if(err){
 						res.json(err,500);
 					}else{
-						if(databyname.length>0){
-							res.json({msg:"用户名已经存在"},500);
-						}else{
-							todo.save(function(err){
-								if(err){
-									res.json(err,500);
-								}else{
-									res.json(todo);
-								}
-							});
-						}
+						todo = databycell[0];
+						todo.set(req.body.user);
+						todo.save(function(err){
+							if(err){
+								res.json(err,500);
+							}else{
+								res.json(databycell[0]);
+							}
+						});
 					}
 				});
 			}
@@ -1068,17 +1167,32 @@ router.get('/offer/byuid/:id/:page', function(req, res, next) {
 			});
 		}
 	});
-	
 });
 
 //创建offer
 router.post('/offer', function(req, res, next) {
-	this.todo = new collection.offer(req.body.offer);
-	this.todo.save(function(err){
+	var todo = new collection.offer(req.body.offer);
+	todo.save(function(err){
 		if(err){
 			res.json(err,500);
 		}else{
-			res.json(this.todo);
+			collection.exhibit.findById(req.body.offer.exhibit_id,
+			  function(err,exhibitdata){
+			  	if(err){
+			  		res.json(err,500);
+			  	}else{
+			  		collection.clienter.findById(exhibitdata.uid,
+			  		  function(err,clientdata){
+			  		  	if(err){
+			  		  		res.json(err,500);
+			  		  	}else{
+			  		  		sendmsg(clientdata.cell,"您的需求："+exhibitdata.info.name+",收到一份新的报价。\
+			  		  		        详情："+site+"online/client/response/detail/"+req.body.offer._id);
+									res.json(todo);
+			  		  	}
+			  		});
+			  	}
+			});
 		}
 	});
 });
@@ -1218,7 +1332,16 @@ router.post('/offer/confirm/:id', function(req, res, next) {
 										if(err){
 											res.json(err,500);
 										}else{
-											res.json(data);
+											collection.vendorer.findById(data.uid,
+											  function(err,vendordata){
+											  	if(err){
+											  		res.json(err,500);
+											  	}else{
+											  		sendmsg(vendordata.cell,"您的对需求："+exhibit_data.info.name+"的报价,已经被确认。\
+											  		         详情："+site+"online/vendor/response/detail/"+data._id);
+											  		res.json(data);
+											  	}
+											});
 										}
 									});
 								}
@@ -1233,91 +1356,91 @@ router.post('/offer/confirm/:id', function(req, res, next) {
 
 
 //excel
-router.get('/excel', function(req, res, next) {
-	var styles = {
-	  headerDark: {
-	    fill: {
-	      fgColor: {
-	        rgb: 'FF000000'
-	      }
-	    },
-	    font: {
-	      color: {
-	        rgb: 'FFFFFFFF'
-	      },
-	      sz: 14,
-	      bold: true,
-	      underline: true
-	    }
-	  },
-	  cellPink: {
-	    fill: {
-	      fgColor: {
-	        rgb: 'FFFFCCFF'
-	      }
-	    }
-	  },
-	  cellGreen: {
-	    fill: {
-	      fgColor: {
-	        rgb: 'FF00FF00'
-	      }
-	    }
-	  }
-	};
+// router.get('/excel', function(req, res, next) {
+// 	var styles = {
+// 	  headerDark: {
+// 	    fill: {
+// 	      fgColor: {
+// 	        rgb: 'FF000000'
+// 	      }
+// 	    },
+// 	    font: {
+// 	      color: {
+// 	        rgb: 'FFFFFFFF'
+// 	      },
+// 	      sz: 14,
+// 	      bold: true,
+// 	      underline: true
+// 	    }
+// 	  },
+// 	  cellPink: {
+// 	    fill: {
+// 	      fgColor: {
+// 	        rgb: 'FFFFCCFF'
+// 	      }
+// 	    }
+// 	  },
+// 	  cellGreen: {
+// 	    fill: {
+// 	      fgColor: {
+// 	        rgb: 'FF00FF00'
+// 	      }
+// 	    }
+// 	  }
+// 	};
 
-	var heading = [
-	  [{value: 'a1', style: styles.headerDark}, {value: 'b1', style: styles.headerDark}, {value: 'c1', style: styles.headerDark}],
-	  ['a2', 'b2', 'c2'] // <-- It can be only values 
-	];
+// 	var heading = [
+// 	  [{value: 'a1', style: styles.headerDark}, {value: 'b1', style: styles.headerDark}, {value: 'c1', style: styles.headerDark}],
+// 	  ['a2', 'b2', 'c2'] // <-- It can be only values 
+// 	];
 
-	var specification = {
-	  customer_name: { // <- the key should match the actual data key 
-	    displayName: 'Customer', // <- Here you specify the column header 
-	    headerStyle: styles.headerDark, // <- Header style 
-	    cellStyle: function(value, row) { // <- style renderer function 
-	      // if the status is 1 then color in green else color in red 
-	      // Notice how we use another cell value to style the current one 
-	      return (row.status_id == 1) ? styles.cellGreen : {fill: {fgColor: {rgb: 'FFFF0000'}}}; // <- Inline cell style is possible  
-	    },
-	    width: 120 // <- width in pixels 
-	  },
-	  status_id: {
-	    displayName: 'Status',
-	    headerStyle: styles.headerDark,
-	    cellFormat: function(value, row) { // <- Renderer function, you can access also any row.property 
-	      return (value == 1) ? 'Active' : 'Inactive';
-	    },
-	    width: '10' // <- width in chars (when the number is passed as string) 
-	  },
-	  note: {
-	    displayName: 'Description',
-	    headerStyle: styles.headerDark,
-	    cellStyle: styles.cellPink, // <- Cell style 
-	    width: 220 // <- width in pixels 
-	  }
-	}
+// 	var specification = {
+// 	  customer_name: { // <- the key should match the actual data key 
+// 	    displayName: 'Customer', // <- Here you specify the column header 
+// 	    headerStyle: styles.headerDark, // <- Header style 
+// 	    cellStyle: function(value, row) { // <- style renderer function 
+// 	      // if the status is 1 then color in green else color in red 
+// 	      // Notice how we use another cell value to style the current one 
+// 	      return (row.status_id == 1) ? styles.cellGreen : {fill: {fgColor: {rgb: 'FFFF0000'}}}; // <- Inline cell style is possible  
+// 	    },
+// 	    width: 120 // <- width in pixels 
+// 	  },
+// 	  status_id: {
+// 	    displayName: 'Status',
+// 	    headerStyle: styles.headerDark,
+// 	    cellFormat: function(value, row) { // <- Renderer function, you can access also any row.property 
+// 	      return (value == 1) ? 'Active' : 'Inactive';
+// 	    },
+// 	    width: '10' // <- width in chars (when the number is passed as string) 
+// 	  },
+// 	  note: {
+// 	    displayName: 'Description',
+// 	    headerStyle: styles.headerDark,
+// 	    cellStyle: styles.cellPink, // <- Cell style 
+// 	    width: 220 // <- width in pixels 
+// 	  }
+// 	}
 
-	var dataset = [
-	  {customer_name: 'IBM', status_id: 1, note: 'some note', misc: 'not shown'},
-	  {customer_name: 'HP', status_id: 0, note: 'some note'},
-	  {customer_name: 'MS', status_id: 0, note: 'some note', misc: 'not shown'}
-	];
+// 	var dataset = [
+// 	  {customer_name: 'IBM', status_id: 1, note: 'some note', misc: 'not shown'},
+// 	  {customer_name: 'HP', status_id: 0, note: 'some note'},
+// 	  {customer_name: 'MS', status_id: 0, note: 'some note', misc: 'not shown'}
+// 	];
 
-	var report = excel.buildExport(
-	  [ // <- Notice that this is an array. Pass multiple sheets to create multi sheet report 
-	    {
-	      name: 'Sheet name', // <- Specify sheet name (optional) 
-	      heading: heading, // <- Raw heading array (optional) 
-	      specification: specification, // <- Report specification 
-	      data: dataset // <-- Report data 
-	    }
-	  ]
-	);
+// 	var report = excel.buildExport(
+// 	  [ // <- Notice that this is an array. Pass multiple sheets to create multi sheet report 
+// 	    {
+// 	      name: 'Sheet name', // <- Specify sheet name (optional) 
+// 	      heading: heading, // <- Raw heading array (optional) 
+// 	      specification: specification, // <- Report specification 
+// 	      data: dataset // <-- Report data 
+// 	    }
+// 	  ]
+// 	);
 
-	res.attachment('report.xlsx'); // This is sails.js specific (in general you need to set headers) 
-	res.send(report);
+// 	res.attachment('report.xlsx'); // This is sails.js specific (in general you need to set headers) 
+// 	res.send(report);
 
-});
+// });
 
 module.exports = router;

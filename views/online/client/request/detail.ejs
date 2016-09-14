@@ -248,7 +248,7 @@
 						额外项目
 						<%if(detail.state == 0){%><button class="addbtn">修改</button><%}%>
 					</div>
-					<%if(detail.other.length>0){
+					<%if(detail.sth.length>0){
 						for(var i = 0; i < detail.sth.length; i++){
 						var v=detail.sth[i];%>
 					<div class="form-pit">
@@ -261,6 +261,7 @@
 							<input class="people" type="text" placeholder="请输入数量" value="<%=v.people%>" readonly />
 						</div>
 					</div>
+					<%}%>
 					<%}%>
 					<div class="memoup">备注</div>
 					<textarea class="memo" placeholder="请输入备注信息" readonly><%=detail.sth_memo%></textarea>
