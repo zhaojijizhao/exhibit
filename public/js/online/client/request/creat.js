@@ -249,7 +249,8 @@ require(['/js/public/base.js'],function(Base){
 								with_people:parseInt(self.find("#with .with_people").val()||0),
 								with_people_num:parseInt(self.find("#with .with_people_num").val()||0),
 								catch_need:self.find("#with .catch_need option:selected").attr("need")==0?false:true,
-								catch_people:parseInt(self.find("#with .catch_people").val()||0)
+								catch_people:parseInt(self.find("#with .catch_people").val()||0),
+								catch_people_num:parseInt(self.find("#with .catch_people_num").val()||0)
 							},
 							inv:{
 								need:self.find("#invoice .need option:selected").attr("need")==0?false:true,

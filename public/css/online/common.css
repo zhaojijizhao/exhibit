@@ -1628,3 +1628,12 @@ span.orange{
 .white{
 	background-color: #fff;
 }
+.form .spinput{
+	width: 80px;
+	text-align: right;
+	font-size:14px;
+	border:none;
+}
+.form .spinput[type=date]{
+	width: 150px;
+}

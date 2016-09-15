@@ -1187,7 +1187,7 @@ router.post('/offer', function(req, res, next) {
 			  		  		res.json(err,500);
 			  		  	}else{
 			  		  		sendmsg(clientdata.cell,"您的需求："+exhibitdata.info.name+",收到一份新的报价。\
-			  		  		        详情："+site+"online/client/response/detail/"+req.body.offer._id);
+			  		  		        详情："+site+"online/client/response/detail/"+todo._id);
 									res.json(todo);
 			  		  	}
 			  		});
@@ -1352,6 +1352,45 @@ router.post('/offer/confirm/:id', function(req, res, next) {
 			}
 		}
 	);
+});
+
+//获取result
+router.get('/result/:id', function(req, res, next) {
+  collection.offer.findById(req.params.id,
+    function(err,data){
+      if(err){
+        res.json(err,500);
+      }else{
+        if(data.state!=2 && data.state!=3){
+          res.json(err,500);
+        }else{
+          collection.vendorer.findById(data.uid,function(usererr,vendordata){
+            if(usererr){
+              res.json(err,500);
+            }else{
+            	collection.exhibit.findById(data.exhibit_id,function(usererr,exhibitdata){
+		            if(usererr){
+		              res.json(err,500);
+		            }else{
+		            	collection.clienter.findById(exhibitdata.uid,function(usererr,clientdata){
+				            if(usererr){
+				              res.json(err,500);
+				            }else{
+				            	res.json({
+			              		offer:data,
+			                  vendor:vendordata,
+			                  client:clientdata
+			              	});
+				            }
+				          });
+		            }
+		          });
+            }
+          });
+        }
+      }
+    }
+  );
 });
 
 

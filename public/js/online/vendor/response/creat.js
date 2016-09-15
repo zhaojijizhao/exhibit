@@ -78,7 +78,7 @@ require(['/js/public/base.js'],function(Base){
 							people = parseInt($(this).find('.people').val()||0),
 							days = parseInt($(this).find('.days').val()||0),
 							usage = parseInt($(this).find(".usage").val()||0);
-						var total = price*days;
+						var total = price*days*people;
 						$(this).find(".total").val(total.toFixed(2));
 						carall += total;
 						totalall += total;
@@ -104,11 +104,15 @@ require(['/js/public/base.js'],function(Base){
 					});
 					this.$el.find('#sth .all').text(sthall.toFixed(2));
 
-					with_total = parseFloat(this.$el.find("#with .with_price").val()||0)*parseFloat(this.$el.find("#with .with_people").val()||0);
+					with_total = parseFloat(this.$el.find("#with .with_price").val()||0)
+						* parseFloat(this.$el.find("#with .with_people").val()||0)
+						* parseFloat(this.$el.find("#with .with_people_num").val()||0);
 					this.$el.find("#with .with_total").val(with_total.toFixed(2));
 					totalall += with_total;
 
-					catch_total = parseFloat(this.$el.find("#with .catch_price").val()||0)*parseFloat(this.$el.find("#with .catch_people").val()||0);
+					catch_total = parseFloat(this.$el.find("#with .catch_price").val()||0)
+						* parseFloat(this.$el.find("#with .catch_people").val()||0)
+						* parseFloat(this.$el.find("#with .catch_people_num").val()||0);
 					this.$el.find("#with .catch_total").val(catch_total.toFixed(2));
 					totalall += catch_total;
 
@@ -233,6 +237,7 @@ require(['/js/public/base.js'],function(Base){
 								with_total:parseFloat(self.find("#with .with_total").val()||0),
 								catch_need:self.find("#with .catch_need option:selected").attr("need")==0?false:true,
 								catch_people:parseInt(self.find("#with .catch_people").val()||0),
+								catch_people_num:parseInt(self.find("#with .catch_people_num").val()||0),
 								catch_price:parseFloat(self.find("#with .catch_price").val()||0),
 								catch_total:parseFloat(self.find("#with .catch_total").val()||0)
 							},

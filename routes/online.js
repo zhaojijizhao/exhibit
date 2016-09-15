@@ -357,36 +357,41 @@ router.get('/hot/:page/:clientname/:projectname', function(req, res, next) {
 });
 
 router.get('/result/:id', function(req, res, next) {
-  collection.offer.findById(req.params.id,
-    function(err,data){
-      if(err){
-        res.json(err,500);
-      }else{
-        if(data.state!=2 && data.state!=3){
-          res.json(err,500);
-        }else{
-          collection.vendorer.find({_id:data.uid},function(usererr,userdata){
-            if(err){
-              res.json(err,500);
-            }else{
-              if(userdata.length>0){
-                res.render('./online/result', {
-                  nav:'报价报表',
-                  path: 'online/result',
-                  title: '建正会展--报价报表',
-                  detail:data,
-                  vendor:userdata,
-                  city:staticmodel.city
-                });
-              }else{
-                res.json(err,500);
-              }
-            }
-          });
-        }
-      }
-    }
-  );
+  res.render('./online/result', {
+    nav:'报价报表',
+    path: 'online/result',
+    title: '建正会展--报价报表'
+  });
+  // collection.offer.findById(req.params.id,
+  //   function(err,data){
+  //     if(err){
+  //       res.json(err,500);
+  //     }else{
+  //       if(data.state!=2 && data.state!=3){
+  //         res.json(err,500);
+  //       }else{
+  //         collection.vendorer.find({_id:data.uid},function(usererr,userdata){
+  //           if(err){
+  //             res.json(err,500);
+  //           }else{
+  //             if(userdata.length>0){
+  //               res.render('./online/result', {
+  //                 nav:'报价报表',
+  //                 path: 'online/result',
+  //                 title: '建正会展--报价报表',
+  //                 detail:data,
+  //                 vendor:userdata,
+  //                 city:staticmodel.city
+  //               });
+  //             }else{
+  //               res.json(err,500);
+  //             }
+  //           }
+  //         });
+  //       }
+  //     }
+  //   }
+  // );
 });
 
 router.get('/resultpdf/:id', function(req, res, next) {

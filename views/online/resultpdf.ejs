@@ -26,7 +26,7 @@
     <div class="main" id="main" name="main">
       <table class="form result-table" width="100%" data-id="<%=detail._id%>" data-state="<%=detail.state%>">
         <tr>
-          <td colspan="5">
+          <td colspan="6">
             <img src='/img/online/ll.png' />
           </td>
         </tr>
@@ -34,31 +34,31 @@
           <td>TO:</td>
           <td></td>
           <td>From:</td>
-          <td colspan='2'></td>
+          <td colspan='3'></td>
         </tr>
         <tr class="b">
           <td>收件人:</td>
           <td><%=vendor[0].name%></td>
           <td>发送:</td>
-          <td colspan='2'></td>
+          <td colspan='3'></td>
         </tr>
         <tr class="b">
           <td>Tel:</td>
           <td><%=vendor[0].cell%></td>
           <td>Tel:</td>
-          <td colspan='2'></td>
+          <td colspan='3'></td>
         </tr>
         <tr class="b">
           <td>Fax:</td>
           <td></td>
           <td>Fax:</td>
-          <td colspan='2'></td>
+          <td colspan='3'></td>
         </tr>
         <tr class="b">
           <td>E-mail:</td>
           <td></td>
           <td>E-mail:</td>
-          <td colspan='2'></td>
+          <td colspan='3'></td>
         </tr>
         <tr>
           <td width='10%'>&nbsp;</td>
@@ -66,20 +66,22 @@
           <td width='10%'></td>
           <td width='10%'></td>
           <td width='10%'></td>
+          <td width='10%'></td>
         </tr>
         <tr>
-          <td colspan="5">您好！！</td>
+          <td colspan="6">您好！！</td>
         </tr>
         <tr>
-          <td colspan="5">感谢您对我公司的大力支持。</td>
+          <td colspan="6">感谢您对我公司的大力支持。</td>
         </tr>
         <tr>
-          <td colspan="5">根据贵公司的要求，我公司制定的会议结算单分列如后，请查阅，如有问题，请随时与我联系。</td>
+          <td colspan="6">根据贵公司的要求，我公司制定的会议结算单分列如后，请查阅，如有问题，请随时与我联系。</td>
         </tr>
         <tr class="b">
           <td></td>
           <td class="tc">内容</td>
           <td class="tc">单价</td>
+          <td class="tc">天数/次数</td>
           <td class="tc">人数/数量</td>
           <td class="tc">总价</td>
         </tr>
@@ -89,14 +91,16 @@
           <td></td>
           <td></td>
           <td></td>
+          <td></td>
         </tr>
         <%if(detail.hotel.length>0){
           for(var i = 0; i < detail.hotel.length; i++){
           var v=detail.hotel[i];%>
           <tr data-id="<%=v._id%>" data-type="hotel">
             <td></td>
-            <td><%=new Date(v.date_start).toLocaleDateString()%>-<%=new Date(v.date_end).toLocaleDateString()%><%=v.type_name%></td>
+            <td><%=new Date(v.date_start).toLocaleDateString()%>-<%=new Date(v.date_end).toLocaleDateString()%><%=v.name%><%=v.type_name%></td>
             <td class="tr"><%=v.price%></td>
+            <td class="tr"><%=v.days%></td>
             <td class="tr"><%=v.room%></td>
             <td class="tr"><%=v.total%></td>
           </tr>
@@ -104,11 +108,12 @@
         <tr class="b">
           <td></td>
           <td class="tr">小计</td>
-          <td colspan="3" class="tr sky"><%=detail.hotel_all%></td>
+          <td colspan="4" class="tr sky"><%=detail.hotel_all%></td>
         </tr>
         <tr class="b">
           <td class="tc">2</td>
           <td>会场</td>
+          <td></td>
           <td></td>
           <td></td>
           <td></td>
@@ -120,6 +125,7 @@
             <td></td>
             <td><%=new Date(v.date_start).toLocaleDateString()%>-<%=new Date(v.date_end).toLocaleDateString()%><%=v.type_name%></td>
             <td class="tr"><%=v.price%></td>
+            <td class="tr"><%=v.days%></td>
             <td class="tr"><%=v.people%></td>
             <td class="tr"><%=v.total%></td>
           </tr>
@@ -127,11 +133,12 @@
         <tr class="b">
           <td></td>
           <td class="tr">小计</td>
-          <td colspan="3" class="tr sky"><%=detail.area_all%></td>
+          <td colspan="4" class="tr sky"><%=detail.area_all%></td>
         </tr>
         <tr class="b">
           <td class="tc">3</td>
           <td>用餐</td>
+          <td></td>
           <td></td>
           <td></td>
           <td></td>
@@ -143,6 +150,7 @@
             <td></td>
             <td><%=new Date(v.date_start).toLocaleDateString()%>-<%=new Date(v.date_end).toLocaleDateString()%><%=v.type_name%></td>
             <td class="tr"><%=v.price%></td>
+            <td class="tr"><%=v.days%></td>
             <td class="tr"><%=v.people%></td>
             <td class="tr"><%=v.total%></td>
           </tr>
@@ -150,11 +158,12 @@
         <tr class="b">
           <td></td>
           <td class="tr">小计</td>
-          <td colspan="3" class="tr sky"><%=detail.dinner_all%></td>
+          <td colspan="4" class="tr sky"><%=detail.dinner_all%></td>
         </tr>
         <tr class="b">
           <td class="tc">4</td>
           <td>用车</td>
+          <td></td>
           <td></td>
           <td></td>
           <td></td>
@@ -166,6 +175,7 @@
             <td></td>
             <td><%=v.type_name%></td>
             <td class="tr"><%=v.price%></td>
+            <td class="tr"><%=v.days%></td>
             <td class="tr"><%=v.people%></td>
             <td class="tr"><%=v.total%></td>
           </tr>
@@ -173,11 +183,12 @@
         <tr class="b">
           <td></td>
           <td class="tr">小计</td>
-          <td colspan="3" class="tr sky"><%=detail.car_all%></td>
+          <td colspan="4" class="tr sky"><%=detail.car_all%></td>
         </tr>
         <tr class="b">
           <td class="tc">5</td>
           <td>物料</td>
+          <td></td>
           <td></td>
           <td></td>
           <td></td>
@@ -190,6 +201,7 @@
             <td></td>
             <td><%=items[v.type_id]%></td>
             <td class="tr"><%=v.total%></td>
+            <td class="tr"></td>
             <td class="tr">1</td>
             <td class="tr"><%=v.total%></td>
           </tr>
@@ -197,11 +209,12 @@
         <tr class="b">
           <td></td>
           <td class="tr">小计</td>
-          <td colspan="3" class="tr sky"><%=detail.other_all%></td>
+          <td colspan="4" class="tr sky"><%=detail.other_all%></td>
         </tr>
         <tr class="b">
           <td class="tc">6</td>
           <td>额外项目</td>
+          <td></td>
           <td></td>
           <td></td>
           <td></td>
@@ -213,6 +226,7 @@
             <td></td>
             <td><%=v.name%></td>
             <td class="tr"><%=v.price%></td>
+            <td class="tr"></td>
             <td class="tr"><%=v.people%></td>
             <td class="tr"><%=v.total%></td>
           </tr>
@@ -220,7 +234,7 @@
         <tr class="b">
           <td></td>
           <td class="tr">小计</td>
-          <td colspan="3" class="tr sky"><%=detail.sth_all%></td>
+          <td colspan="4" class="tr sky"><%=detail.sth_all%></td>
         </tr>
         <tr class="b">
           <td class="tc">7</td>
@@ -228,38 +242,40 @@
           <td></td>
           <td></td>
           <td></td>
+          <td></td>
         </tr>
           <tr class="">
             <td></td>
             <td>陪同人员</td>
-            <td></td>
+            <td class="tr"><%=detail.with.with_price%></td>
             <td class="tr"><%=detail.with.with_people%></td>
+            <td class="tr"><%=detail.with.with_people_num%></td>
             <td class="tr"><%=detail.with.with_total%></td>
           </tr>
           <tr class="">
             <td></td>
             <td>地接人员</td>
-            <td></td>
+            <td class="tr"><%=detail.with.catch_price%></td>
             <td class="tr"><%=detail.with.catch_people%></td>
+            <td class="tr"><%=detail.with.catch_people_num%></td>
             <td class="tr"><%=detail.with.catch_total%></td>
           </tr>
         <% var with_all = 0;
           if(detail.with.with_total){
             with_all += detail.with.with_total;
           }
-          if(detail.with.catch_need){
-            with_all += detail.with.catch_need;
+          if(detail.with.catch_total){
+            with_all += detail.with.catch_total;
           }%>
-        <tr class="b" data-id="<%=detail.with._id%>" data-type="with">
+        <tr class="b">
           <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td class="tr">小计</td>
+          <td colspan="4" class="tr sky"><%=with_all%></td>
         </tr>
         <tr class="b">
           <td class="tc">8</td>
           <td>服务费:按照总活动金额%计算</td>
+          <td></td>
           <td></td>
           <td></td>
           <td></td>
@@ -269,13 +285,14 @@
           <td></td>
           <td></td>
           <td class="tr"><%=detail.total-detail.fee.total%></td>
+          <td></td>
           <td class="tr"><%=feeptype[detail.fee.percent]%></td>
           <td class="tr"><%=detail.fee.total%></td>
         </tr>
         <tr class="b">
           <td></td>
           <td class="tr">费用总计：</td>
-          <td colspan="3" class="tr sky"><%=detail.total%></td>
+          <td colspan="4" class="tr sky"><%=detail.total%></td>
         </tr>
       </table>
     </div>

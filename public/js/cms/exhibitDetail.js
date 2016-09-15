@@ -263,6 +263,10 @@ require(['/js/public/base.js'],function(Base){
               <label>地接天数</label>\
               <input class="catch_people" type="tel" placeholder="请填写地接天数" value="<%=detail.with.catch_people%>" readonly />\
             </div>\
+            <div class="form-subpit"> \
+              <label>地接人数</label>\
+              <input class="catch_people_num" type="tel" placeholder="请填写地接人数" value="<%=detail.with.catch_people_num%>" readonly/>\
+            </div>\
           </div>\
         </div>\
         <div class="form-line" id="invoice">\
