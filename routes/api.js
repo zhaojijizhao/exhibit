@@ -557,7 +557,7 @@ router.post('/clientcheck', function(req, res, next) {
 				if(err){
 					res.json(err,500);
 				}else{
-					sendmsg(data[0].cell,"您的验证是："+code+",请妥善保管。");
+					sendmsg(todo.cell,"您的验证是："+code+",请妥善保管。");
 					res.json({});
 				}
 			});
@@ -583,7 +583,7 @@ router.post('/vendorcheck', function(req, res, next) {
 				if(err){
 					res.json(err,500);
 				}else{
-					sendmsg(data[0].cell,"您的验证是："+code+",请妥善保管。");
+					sendmsg(todo.cell,"您的验证是："+code+",请妥善保管。");
 					res.json({});
 				}
 			});
