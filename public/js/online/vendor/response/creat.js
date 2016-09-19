@@ -55,7 +55,7 @@ require(['/js/public/base.js'],function(Base){
 						var price = parseFloat($(this).find('.price').val()||0),
 							people = parseInt($(this).find('.people').val()||0),
 							days = parseInt($(this).find('.days').val()||0);
-						var total = price*days;
+						var total = price*people*days;
 						$(this).find(".total").val(total.toFixed(2));
 						areaall += total;
 						totalall += total;
